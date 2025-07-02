@@ -1,0 +1,15 @@
+/* FbxViewer组件的CSS样式 */
+.fbx-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+    /* 可以在此处设置视差效果 */
+    will-change: transform;
+}
+
+.fbx-container:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}

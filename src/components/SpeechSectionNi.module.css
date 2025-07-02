@@ -1,0 +1,65 @@
+/* SpeechSectionNi.module.css */
+
+.speechSectionNi {
+    position: relative;
+    background-size: cover;     /* 等比铺满 */
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.sectionTitleNi {
+    position: absolute;
+    top: 8%;
+    left: 5%;
+    text-align: left;
+    z-index: 2;
+}
+
+.sectionTitleNi h2 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.sectionTitleNi h3 {
+    margin: 0;
+    margin-top: 0.25rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ddd;
+}
+
+.speechBubbleNi {
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    width: 300px;
+    height: 60vh;
+    background: rgba(31, 32, 41, 0.85);
+    padding: 1rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.bubbleContentNi {
+    flex: 1;
+    overflow-y: auto;
+    text-align: left;
+    color: #fff;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.bubbleContentNi::-webkit-scrollbar {
+    width: 6px;
+}
+.bubbleContentNi::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}

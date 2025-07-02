@@ -1,0 +1,35 @@
+.about-wrapper {
+    background: #1f2029;          /* 与全站暗色一致 */
+    padding: 4rem 1.5rem 6rem;
+    display: flex;
+    justify-content: center;
+    scroll-snap-align: start;
+}
+
+.about-container {
+    max-width: 960px;
+    color: #e6e6e6;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 16px;
+    padding: 3rem;
+    box-shadow: 0 0 20px rgba(0, 255, 247, 0.07); /* 科技感氛圍 */
+}
+
+.about-container h3 {
+    margin: 2.5rem 0 1rem;
+    font-size: 1.4rem;
+    color: #00fff7;
+}
+
+.about-list {
+    margin-left: 1.2rem;
+    list-style: disc;
+}
+
+.about-list li {
+    margin-bottom: 0.75rem;
+}

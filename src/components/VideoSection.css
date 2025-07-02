@@ -1,0 +1,34 @@
+.hero-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 半透明的黑色遮罩 */
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 确保视频适应屏幕 */
+}
+
+/* 控制音频的按钮 */
+.mute-button {
+    position: absolute;
+    bottom: 20px;  /* 距离底部 */
+    left: 20px;    /* 距离左侧 */
+    background: rgba(0, 0, 0, 0.6);  /* 按钮背景颜色 */
+    z-index: 10;
+}
+
+.mute-button:hover {
+    background: rgba(0, 0, 0, 0.8); /* 鼠标悬浮时背景加深 */
+}

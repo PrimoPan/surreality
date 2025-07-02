@@ -1,0 +1,219 @@
+:root {
+    --header-height: 48px;
+    --header-height-mobile: 56px;
+}
+
+/* ===== 全局重置 ===== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: var(--header-height);
+}
+
+body {
+    min-height: 100%;
+    overflow-y: auto;
+    background: #1f2029;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+}
+
+/* ===== 头部导航 ===== */
+.major-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background: rgba(31, 32, 41, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo img {
+    height: 32px;
+    margin-right: 0.5rem;
+}
+
+.vertical {
+    width: 1px;
+    height: 24px;
+    background: #fff;
+    opacity: 0.6;
+    margin-right: 0.5rem;
+}
+
+.nav {
+    margin-left: auto;
+}
+
+.nav__links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.nav__link {
+    cursor: pointer;
+}
+
+.nav__link a {
+    color: #fff;
+    opacity: 0.8;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.nav__link a:hover,
+.nav__link.active a {
+    opacity: 1;
+}
+
+/* 移动端汉堡按钮（默认隐藏） */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* ===== 视差区块 HeroSection ===== */
+.hero-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    scroll-snap-align: start;
+    /* 内部居中文字 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 背景图（motion div） */
+.background-image {
+    position: absolute;
+    inset: 0; /* top:0; right:0; bottom:0; left:0; */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    /* 可选：增加一点平滑过渡（不过 framer-motion 已帮你做动画） */
+    will-change: opacity;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.hero-content h2 {
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: 400;
+    opacity: 0.85;
+    margin: 0;
+}
+
+/* ===== 语言选择覆盖 ===== */
+.language-select .ant-select-selector {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #fff !important;
+}
+
+.language-select .ant-select-selection-item {
+    color: #fff !important;
+}
+
+.language-select .ant-select-arrow {
+    color: #fff !important;
+}
+
+.language-select.ant-select-focused .ant-select-selector {
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* ===== 移动端样式 ===== */
+@media (max-width: 768px) {
+    /* 更高的触控头部 */
+    .major-nav {
+        height: var(--header-height-mobile);
+        padding: 0 0.75rem;
+    }
+
+    /* 隐藏桌面链接 & Logo，显示汉堡 */
+    .nav__links { display: none; }
+    .nav-logo    { display: none; }
+    .mobile-menu-btn { display: block; }
+
+    /* 移动端区块高度 = 视口高度 - 头部高度 */
+    .hero-section {
+        height: calc(100vh - var(--header-height-mobile));
+    }
+
+    /* 移动端文字缩小 */
+    .hero-content h1 { font-size: 2.5rem; }
+    .hero-content h2 { font-size: 1.5rem; }
+}
+
+/* ===== 移动端 Drawer 菜单样式 ===== */
+.drawer-menu {
+    background-color: #1f2029;
+    padding: 20px;
+}
+
+.drawer-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.drawer-menu li {
+    padding: 10px 0;
+}
+
+.drawer-menu a {
+    color: #fff;
+    font-size: 1.2rem;
+}
