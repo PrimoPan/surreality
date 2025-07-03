@@ -31,8 +31,8 @@
 /* 底部中央云朵状气泡 */
 .speechBubbleArtist {
     position: absolute;
-    bottom: 10%;
-    right: 5%;                /* 从 50% 调整到 60%，向右移动 */
+    bottom: 25%;
+    left: 5%;                /* 从 50% 调整到 60%，向右移动 */
     transform: translateX(-50%);
     width: 320px;
     height: 55vh;
