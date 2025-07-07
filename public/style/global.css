@@ -1,12 +1,26 @@
+/* ====================================
+   Global Styles – Dark Theme (fixed)
+   ==================================== */
+
+/* Root design tokens – hard‑coded for dark UI */
 :root {
+    /* layout */
     --header-height: 48px;
     --header-height-mobile: 56px;
+
+    /* palette */
+    --bg-color: #1f2029;
+    --text-color: #ffffff;
+    --nav-bg: rgba(31, 32, 41, 0.7);
+    --nav-text: #ffffff;
+    --divider: rgba(255, 255, 255, 0.6);
+    --elevated-bg: rgba(255, 255, 255, 0.03);
+    --elevated-border: rgba(255, 255, 255, 0.09);
+    --shadow: 0 0 20px rgba(0, 255, 247, 0.07);
 }
 
-/* ===== 全局重置 ===== */
-*,
-*::before,
-*::after {
+/* ===== Reset ===== */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -15,41 +29,39 @@
 html {
     height: 100%;
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;   /* 纵向分屏吸附 */
+    scroll-snap-type: y mandatory; /* vertical snap */
     scroll-padding-top: var(--header-height);
-    /* 解决部分设备滚动问题 */
-    overscroll-behavior-y: contain;
+    overscroll-behavior-y: contain; /* avoid rubber‑band */
 }
 
 body {
     min-height: 100vh;
-    background: #1f2029;
+    background: var(--bg-color);
     font-family: 'Poppins', sans-serif;
-    color: #fff;
+    color: var(--text-color);
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-/* ===== 主分屏容器（每一大屏） ===== */
+/* ===== Main screen ===== */
 .main-section {
     height: 100vh;
     width: 100vw;
     scroll-snap-align: start;
     overflow: hidden;
     position: relative;
-    /* 可选：z-index: 0; */
 }
 
-/* ===== 头部导航 ===== */
+/* ===== Header / Nav ===== */
 .major-nav {
     position: fixed;
-    top: 0; left: 0; right: 0;
+    inset: 0 0 auto 0;
     height: var(--header-height);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;
-    background: rgba(31, 32, 41, 0.7);
+    background: var(--nav-bg);
     backdrop-filter: blur(8px);
     z-index: 1000;
 }
@@ -59,22 +71,16 @@ body {
     align-items: center;
 }
 
-.nav-logo img {
-    height: 32px;
-    margin-right: 0.5rem;
-}
+.nav-logo img { height: 32px; margin-right: 0.5rem; }
 
 .vertical {
     width: 1px;
     height: 24px;
-    background: #fff;
-    opacity: 0.6;
+    background: var(--divider);
     margin-right: 0.5rem;
 }
 
-.nav {
-    margin-left: auto;
-}
+.nav { margin-left: auto; }
 
 .nav__links {
     list-style: none;
@@ -84,34 +90,30 @@ body {
     font-size: 0.9rem;
 }
 
-.nav__link {
-    cursor: pointer;
-}
+.nav__link { cursor: pointer; }
 
 .nav__link a {
-    color: #fff;
+    color: var(--nav-text);
     opacity: 0.8;
     text-decoration: none;
     transition: opacity 0.2s;
 }
 
 .nav__link a:hover,
-.nav__link.active a {
-    opacity: 1;
-}
+.nav__link.active a { opacity: 1; }
 
-/* 移动端汉堡按钮（默认隐藏） */
+/* ===== Mobile burger ===== */
 .mobile-menu-btn {
     display: none;
     background: none;
     border: none;
     font-size: 1.5rem;
-    color: #fff;
+    color: var(--nav-text);
     cursor: pointer;
     z-index: 1001;
 }
 
-/* ===== 视差区块 HeroSection/ParallaxSection ===== */
+/* ===== Hero / Parallax ===== */
 .hero-section {
     position: relative;
     width: 100vw;
@@ -134,7 +136,7 @@ body {
 }
 
 .hero-section::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.3);
@@ -152,7 +154,6 @@ body {
     font-size: 4rem;
     font-weight: 900;
     text-transform: uppercase;
-    margin: 0;
 }
 
 .hero-content h2 {
@@ -160,68 +161,47 @@ body {
     font-size: 2rem;
     font-weight: 400;
     opacity: 0.85;
-    margin: 0;
 }
 
-/* ===== 语言选择下拉 ===== */
+/* ===== Ant Select theme tweaks ===== */
 .language-select .ant-select-selector {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
-    color: #fff !important;
+    color: var(--text-color) !important;
 }
-
-.language-select .ant-select-selection-item {
-    color: #fff !important;
-}
-.language-select .ant-select-arrow {
-    color: #fff !important;
-}
+.language-select .ant-select-selection-item { color: var(--text-color) !important; }
+.language-select .ant-select-arrow           { color: var(--text-color) !important; }
 .language-select.ant-select-focused .ant-select-selector {
     border-color: transparent !important;
     box-shadow: none !important;
 }
 
-/* ===== 移动端适配 ===== */
+/* ===== Drawer (mobile) ===== */
+.drawer-menu {
+    background-color: var(--bg-color);
+    padding: 20px;
+}
+.drawer-menu a {
+    color: var(--text-color);
+    font-size: 1.2rem;
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
-    .major-nav {
-        height: var(--header-height-mobile);
-        padding: 0 0.75rem;
-    }
-    .nav__links { display: none; }
-    .nav-logo    { display: none; }
+    .major-nav { height: var(--header-height-mobile); padding: 0 0.75rem; }
+    .nav__links, .nav-logo { display: none; }
     .mobile-menu-btn { display: block; }
 
     .main-section,
-    .hero-section {
-        height: calc(100vh - var(--header-height-mobile));
-        min-height: 350px;
-    }
+    .hero-section { height: calc(100vh - var(--header-height-mobile)); min-height: 350px; }
     .hero-content h1 { font-size: 2.5rem; }
     .hero-content h2 { font-size: 1.5rem; }
 }
 
 @media (max-width: 600px) {
     .main-section,
-    .hero-section {
-        min-height: 220px;
-    }
+    .hero-section { min-height: 220px; }
 }
 
-/* ===== 移动端 Drawer 菜单样式 ===== */
-.drawer-menu {
-    background-color: #1f2029;
-    padding: 20px;
-}
-.drawer-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.drawer-menu li {
-    padding: 10px 0;
-}
-.drawer-menu a {
-    color: #fff;
-    font-size: 1.2rem;
-}
+/* ========== END =========="}]}

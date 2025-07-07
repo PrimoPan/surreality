@@ -81,9 +81,3 @@
     pointer-events: none;
     z-index: 3;
 }
-
-/* 浅色主题兼容 */
-@media (prefers-color-scheme: light) {
-    .banner-content { color: #222; }
-    .view-news-btn { background: rgba(0, 0, 0, 0.2); color: #fff; }
-}

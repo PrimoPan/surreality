@@ -1,17 +1,62 @@
-/* src/pages/Info/Info.css */
+.main-section {
+    height: 100vh;
+    width: 100vw;
+    scroll-snap-align: start;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 第一屏 poster 区块 */
+.info-poster-full {
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    scroll-snap-align: start;
+}
+
+.info-poster {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    max-width: 1280px;
+    padding: 2rem;
+}
+
+.poster-item {
+    flex: 1 1 22%;
+    max-width: 22%;
+    transition: transform 0.3s ease;
+}
+
+.poster-item img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.poster-item:hover {
+    transform: scale(1.05);
+}
+
+/* 第二屏正文内容 */
 .info-wrapper {
     background: #1f2029;
+    height: 100%;
     padding: 4rem 1.5rem 6rem;
     display: flex;
     justify-content: center;
     scroll-snap-align: start;
+    overflow-y: auto;
 }
 
 .info-container {
     max-width: 960px;
     color: #e6e6e6;
-    font-size: 1.05rem;
-    line-height: 1.9;
+    font-size: 1.1rem;
+    line-height: 1.95;
     backdrop-filter: blur(4px);
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.09);
@@ -50,4 +95,16 @@
     height: 160px;
     object-fit: contain;
     margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .poster-item {
+        flex: 1 1 45%;
+        max-width: 45%;
+    }
+
+    .info-container {
+        padding: 2rem;
+        font-size: 1rem;
+    }
 }

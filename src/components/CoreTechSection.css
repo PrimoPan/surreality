@@ -8,4 +8,3 @@
 .coretech-list{max-width:900px;margin:0 auto;font-size:1.2rem;line-height:1.95;text-align:left;list-style:none;padding:0;}
 .coretech-list li{position:relative;margin-bottom:1.2rem;padding-left:1.6rem;}
 .coretech-list li::before{content:'';position:absolute;left:0;top:0.7em;width:0.55rem;height:0.55rem;border-radius:50%;background:#00fff7;}
-@media(prefers-color-scheme:light){.coretech-inner{color:#222;}}
