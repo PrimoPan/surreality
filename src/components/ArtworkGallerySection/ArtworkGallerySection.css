@@ -1,0 +1,200 @@
+.artwork-gallery-section {
+    width: 100vw;
+    background: #181820;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+/* 标题 */
+.gallery-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #fff;
+    margin: 0 0 2rem 0;
+    letter-spacing: 2px;
+    align-self: flex-start;
+}
+
+/* ------ Swiper 轮播必备 ------ */
+.artwork-swiper {
+    width: 100%;
+    height: auto;
+    padding-bottom: 2.5rem;
+    box-sizing: border-box;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 420px;
+    box-sizing: border-box;
+}
+
+/* 卡片样式 */
+.artwork-window-card {
+    background: #232336;
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 16px rgba(52,113,255,0.11);
+    transition: box-shadow 0.16s, transform 0.16s;
+    cursor: pointer;
+    width: 320px;
+    min-height: 360px;
+    margin-bottom: 1.2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.artwork-window-card.active {
+    box-shadow: 0 8px 36px #3cf8fa5a, 0 0 48px #39f7fa33;
+    border: 2px solid #47d8fa;
+    z-index: 2;
+}
+
+.cool-card:hover, .artwork-window-card:hover {
+    transform: translateY(-10px) scale(1.04);
+    box-shadow: 0 16px 48px #1baffa33;
+}
+
+.artwork-card-glow {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(circle at 65% 95%, #39f7fa2a 0%, #001f3f00 90%);
+    opacity: 1;
+    transition: opacity 0.24s;
+}
+
+/* 图片和文字部分 */
+.artwork-window-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 1px solid #28284d;
+    background: #181820;
+}
+
+.artwork-window-caption {
+    padding: 1.3rem 1.2rem 1.5rem 1.2rem;
+    text-align: center;
+    color: #fff;
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.artwork-window-caption h4 {
+    font-size: 1.18rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: #fff;
+    letter-spacing: 1.2px;
+}
+
+.artist-name {
+    font-size: 0.99rem;
+    opacity: 0.74;
+    margin-top: 0.2rem;
+    letter-spacing: 0.3px;
+}
+
+/* 展开内容 */
+.artwork-expand-content {
+    background: #212130;
+    border-radius: 0 0 1rem 1rem;
+    padding: 20px 16px 16px 16px;
+    margin-top: 2px;
+    border-top: 1px solid #33344f;
+    animation: fadeinExp 0.27s;
+    font-size: 15px;
+    color: #ddeaf7;
+}
+
+@keyframes fadeinExp {
+    from {opacity: 0; transform: translateY(-18px);}
+    to   {opacity: 1; transform:none;}
+}
+
+/* tab按钮 */
+.expand-tab-btns {
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 12px;
+}
+
+.expand-tab-btns button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.07rem;
+    padding: 2px 10px 3px 10px;
+    opacity: 0.7;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    border-radius: 3px 3px 0 0;
+    transition: color 0.14s, opacity 0.14s, border-color 0.17s;
+}
+
+.expand-tab-btns button.active {
+    color: #39f7fa;
+    opacity: 1;
+    border-bottom: 2px solid #39f7fa;
+    background: #20223a;
+}
+
+/* 展开内容描述 */
+.expand-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #ddeaf7;
+}
+
+.expand-desc img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 16px #0002;
+}
+
+.expand-desc h2 {
+    font-size: 1.13rem;
+    font-weight: 700;
+    margin: 0 0 7px 0;
+}
+
+.expand-desc h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0 0 10px 0;
+    color: #47d8fa;
+}
+
+/* 响应式优化 */
+@media (max-width: 900px) {
+    .artwork-gallery-section {
+        padding: 2rem 1rem 1rem;
+    }
+    .artwork-window-card {
+        width: 95vw;
+    }
+    .artwork-expand-content { font-size: 14px; }
+}
+
+@media (max-width: 600px) {
+    .artwork-window-card {
+        width: 98vw;
+        min-height: 170px;
+        box-shadow: 0 1px 8px #0002;
+    }
+    .artwork-expand-content {
+        padding: 13px 6px 10px 6px;
+        font-size: 13.5px;
+    }
+}
