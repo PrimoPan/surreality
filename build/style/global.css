@@ -15,16 +15,29 @@
 html {
     height: 100%;
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y mandatory;   /* 纵向分屏吸附 */
     scroll-padding-top: var(--header-height);
+    /* 解决部分设备滚动问题 */
+    overscroll-behavior-y: contain;
 }
 
 body {
-    min-height: 100%;
-    overflow-y: auto;
+    min-height: 100vh;
     background: #1f2029;
     font-family: 'Poppins', sans-serif;
     color: #fff;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* ===== 主分屏容器（每一大屏） ===== */
+.main-section {
+    height: 100vh;
+    width: 100vw;
+    scroll-snap-align: start;
+    overflow: hidden;
+    position: relative;
+    /* 可选：z-index: 0; */
 }
 
 /* ===== 头部导航 ===== */
@@ -98,28 +111,25 @@ body {
     z-index: 1001;
 }
 
-/* ===== 视差区块 HeroSection ===== */
+/* ===== 视差区块 HeroSection/ParallaxSection ===== */
 .hero-section {
     position: relative;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
     scroll-snap-align: start;
-    /* 内部居中文字 */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* 背景图（motion div） */
 .background-image {
     position: absolute;
-    inset: 0; /* top:0; right:0; bottom:0; left:0; */
+    inset: 0;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     z-index: 0;
-    /* 可选：增加一点平滑过渡（不过 framer-motion 已帮你做动画） */
     will-change: opacity;
 }
 
@@ -153,7 +163,7 @@ body {
     margin: 0;
 }
 
-/* ===== 语言选择覆盖 ===== */
+/* ===== 语言选择下拉 ===== */
 .language-select .ant-select-selector {
     background: transparent !important;
     border: none !important;
@@ -164,37 +174,38 @@ body {
 .language-select .ant-select-selection-item {
     color: #fff !important;
 }
-
 .language-select .ant-select-arrow {
     color: #fff !important;
 }
-
 .language-select.ant-select-focused .ant-select-selector {
     border-color: transparent !important;
     box-shadow: none !important;
 }
 
-/* ===== 移动端样式 ===== */
+/* ===== 移动端适配 ===== */
 @media (max-width: 768px) {
-    /* 更高的触控头部 */
     .major-nav {
         height: var(--header-height-mobile);
         padding: 0 0.75rem;
     }
-
-    /* 隐藏桌面链接 & Logo，显示汉堡 */
     .nav__links { display: none; }
     .nav-logo    { display: none; }
     .mobile-menu-btn { display: block; }
 
-    /* 移动端区块高度 = 视口高度 - 头部高度 */
+    .main-section,
     .hero-section {
         height: calc(100vh - var(--header-height-mobile));
+        min-height: 350px;
     }
-
-    /* 移动端文字缩小 */
     .hero-content h1 { font-size: 2.5rem; }
     .hero-content h2 { font-size: 1.5rem; }
+}
+
+@media (max-width: 600px) {
+    .main-section,
+    .hero-section {
+        min-height: 220px;
+    }
 }
 
 /* ===== 移动端 Drawer 菜单样式 ===== */
@@ -202,17 +213,14 @@ body {
     background-color: #1f2029;
     padding: 20px;
 }
-
 .drawer-menu ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-
 .drawer-menu li {
     padding: 10px 0;
 }
-
 .drawer-menu a {
     color: #fff;
     font-size: 1.2rem;
