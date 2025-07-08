@@ -200,23 +200,35 @@ export default function Info({ lang }) {
             </section>
             {/* ---------- 第二屏：四张海报 ---------- */}
             <section className="main-section info-poster-full">
-                <div className="info-poster">
-                    {posterLinks.map((src, i) => (
-                        <div
-                            key={i}
-                            className="poster-item"
-                            onClick={() => {
-                                if (i === 1) nav('/garden');   // ← 第二张图跳转 Digital Garden
-                                if (i === 2) nav('/realms');
-                                if (i === 3) nav('/city')
-                            }}
-                            style={{ cursor: i === 1 || i === 2 || i === 3? 'pointer' : 'default' }}
-                        >
-                            <img src={src} alt={`poster-${i + 1}`} />
-                        </div>
-                    ))}
+                <div className="info-poster-container">
+                    {/* 新增标题 */}
+                    <h2 className="info-poster-title">
+                        {lang === 'zh' ? '展区介绍' : 'Exhibition Areas'}
+                    </h2>
+
+                    <div className="info-poster">
+                        {posterLinks.map((src, i) => (
+                            <div
+                                key={i}
+                                className="poster-item"
+                                onClick={() => {
+                                    if (i === 0) { nav('/ocean');   window.scrollTo(0, 0); }
+                                    if (i === 1) { nav('/garden');  window.scrollTo(0, 0); }
+                                    if (i === 2) { nav('/realms');  window.scrollTo(0, 0); }
+                                    if (i === 3) { nav('/city');    window.scrollTo(0, 0); }
+                                }}
+                                style={{
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                <img src={src} alt={`poster-${i + 1}`} />
+                            </div>
+                        ))}
+                    </div>
+
                 </div>
             </section>
+
 
             {/* ---------- 第三屏：VR Corner ---------- */}
             <VRCornerSection lang={lang} t={t} />

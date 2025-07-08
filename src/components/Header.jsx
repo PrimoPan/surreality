@@ -14,7 +14,7 @@ export default function Header({ lang, onLangChange }) {
             { key: '/',        label: 'Home'           },
             { key: '/info',    label: 'Information'    },
             { key: '/about',   label: 'About Us'       },
-            { key: '/contact', label: 'Contact Us'     },   // ★ NEW
+            { key: '/contact', label: 'Contact'     },   // ★ NEW
         ],
         zh: [
             { key: '/',        label: '首頁'           },
@@ -25,18 +25,26 @@ export default function Header({ lang, onLangChange }) {
     };
 
     /* ---------- 公共渲染函数 ---------- */
+    /* ---------- 公共渲染函数 ---------- */
     const renderLinks = (isDrawer = false) => (
         menuItems[lang].map(({ key, label }) => (
             <li
                 key={key}
                 className={isDrawer ? '' : 'nav__link'}
                 style={isDrawer ? { cursor: 'pointer' } : {}}
-                onClick={() => { nav(key); if (isDrawer) setDrawerOpen(false); }}
+                onClick={() => {
+                    nav(key);
+                    window.scrollTo({ top: 0, behavior: 'smooth' }); // 点击任何链接后都回到顶部
+                    if (isDrawer) {
+                        setDrawerOpen(false);
+                    }
+                }}
             >
                 <span>{label}</span>
             </li>
         ))
     );
+
 
     return (
         <>

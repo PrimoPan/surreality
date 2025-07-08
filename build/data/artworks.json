@@ -5,13 +5,14 @@
     "title_en": "AquaVerse",
     "artist_cn": "蒋雨洋",
     "artist_en": "Yuyang Jiang",
-    "description_cn": "传统海洋教育多依赖单调的教学方式，难以激发学生的兴趣，也无法展现海洋生态系统的独特魅力。现有的AR水族馆应用虽然具有创新性，却受限于单一的空间设计、有限的交互体验以及割裂的教育内容，导致学习过程缺乏连贯性和艺术感染力。为此，本研究提出了AquaVerse增强现实框架，将海洋教育与艺术体验相融合，打造沉浸式、互动性的学习环境。AquaVerse让学习者以自然手势与多彩的虚拟海洋生命进行生动互动，犹如置身于一场艺术探索之旅。",
-    "description_en": "Traditional marine education often struggles to engage students and express the intricate beauty of marine ecosystems, relying on static and uninspiring methods. Existing AR aquarium applications, while innovative, are restrained by simplistic spatial design, limited interactivity, and isolated educational content, resulting in disjointed and superficial learning experiences. In response, this study introduces AquaVerse—a creative augmented reality framework that reimagines marine education as an immersive and interactive art form. AquaVerse transforms learning into an artistic exploration, inviting users to use natural gestures to interact playfully with vivid virtual marine life.",
+    "description_cn": "传统海洋教育多依赖单调的教学方式，难以激发学生的兴趣，也无法展现海洋生态系统的独特魅力。现有的AR水族馆应用虽然具有创新性，却受限于单一的空间设计、有限的交互体验以及割裂的教育内容，导致学习过程缺乏连贯性和艺术感染力。为此，本研究提出了AquaVerse增强现实框架，将海洋教育与艺术体验相融合，打造沉浸式、互动性的学习环境。AquaVerse让学习者以自然手势与多彩的虚拟海洋生命进行生动互动，犹如置身于一场艺术探索之旅。了解更多请访问：<a href=\"https://generous-aquarium.mysxl.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">https://generous-aquarium.mysxl.cn/</a>",
+    "description_en": "Traditional marine education often struggles to engage students and express the intricate beauty of marine ecosystems, relying on static and uninspiring methods. Existing AR aquarium applications, while innovative, are restrained by simplistic spatial design, limited interactivity, and isolated educational content, resulting in disjointed and superficial learning experiences. In response, this study introduces AquaVerse—a creative augmented reality framework that reimagines marine education as an immersive and interactive art form. AquaVerse transforms learning into an artistic exploration, inviting users to use natural gestures to interact playfully with vivid virtual marine life. Learn more at: <a href=\"https://generous-aquarium.mysxl.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">https://generous-aquarium.mysxl.cn/</a>",
     "artist_bio_cn": "蒋雨洋毕业于中国美术学院，获得工学学士学位。他是一位媒体艺术家和艺术治疗师，其创作聚焦于情感、情绪设计与互动，探索艺术的疗愈力量。他的作品曾在ISEA、VINCI 和 Cumulus 等国际知名艺术节与会议中展出。近期，他的多屏影像作品正在北京798艺术中心展出。",
     "artist_bio_en": "Yuyang graduated from the China Academy of Art with a Bachelor of Engineering degree. He is a media artist and art therapist, and works focus on emotions, emotional design, and interaction in his works, exploring the healing aspects of art. His artworks have been highlighted at prestigious festivals and conferences such as ISEA, VINCI, and Cumulus. Recently, his multi-screen video works are on display at the 798 Art Center in Beijing.",
     "poster_url": "https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/artworks/_01.jpg",
     "slug": "aquaverse"
   },
+
   {
     "id": 2,
     "title_cn": "物种的崛起",

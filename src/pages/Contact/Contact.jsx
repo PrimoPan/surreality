@@ -59,14 +59,19 @@ export default function Contact() {
                     </h2>
 
                     <p style={{ marginBottom: '1.2rem' }}>
-                        HKUST(GZ) is located at No.&nbsp;1&nbsp;Duxue&nbsp;Road, Qingsheng Hub
-                        Cluster, Nansha&nbsp;District, Guangzhou.
+                        <h2 style={{ fontSize: '1.1rem', fontWeight: 500 }}>
+                            Location:
+                        </h2><br/>
+                        HKUST (Guangzhou)<br/>
+                        No.1 Du Xue Rd, Nansha District,<br/>
+                        Guangzhou, Guangdong, China<br/>
+
                         <br />
-                        廣東省南沙區慶盛樞紐，篤學路一號，香港科技大學廣州
+                        廣東省南沙區慶盛樞紐<br/>篤學路一號<br/>香港科技大學廣州
                     </p>
 
                     <p>
-                        Email:&nbsp;
+                        <bold> Email:&nbsp;</bold>
                         <a
                             href="mailto:mc2@hkust-gz.edu.cn"
                             style={{ color: '#00e0ff', textDecoration: 'underline' }}

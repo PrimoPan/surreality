@@ -11,7 +11,8 @@ import News   from './pages/News/News';
 import Contact from './pages/Contact/Contact';
 import DigitalGarden from "./pages/DigitalGarden/DigitalGarden";
 import SymbioticRealms from "./pages/SymbioticRealms/SymbioticRealms";
-import City from "./pages/City/City";   // ⬅️ NEW
+import City from "./pages/City/City";
+import Ocean from "./pages/Ocean/Ocean";   // ⬅️ NEW
 
 if (typeof window !== 'undefined') {
     Modal.setAppElement('#root');
@@ -29,6 +30,7 @@ export default function App() {
                     <Route path="/about"    element={<About   lang={lang} />} />
                     <Route path="/info"     element={<Info    lang={lang} />} />
                     <Route path="/news"     element={<News    lang={lang} />} />
+                    <Route path="/ocean" element={<Ocean lang={lang}/>}/>
                     <Route path="/garden"   element={<DigitalGarden lang={lang} />} /> {/* ⬅️ 新增 */}
                       <Route
                         path="/realms"

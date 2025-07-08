@@ -1,0 +1,10 @@
+/* Ocean.css */
+.ocean-section a {
+    color: inherit;            /* 链接与父元素文字同色 */
+    text-decoration: underline;/* 保留下划线 */
+}
+
+.ocean-section a:hover,
+.ocean-section a:active {
+    color: inherit;            /* 鼠标悬停/激活时也不变色 */
+}

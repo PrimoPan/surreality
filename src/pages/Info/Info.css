@@ -15,8 +15,15 @@
 }
 
 /* ===== Reset ===== */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { height: 100%; scroll-behavior: smooth; }
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    height: 100%;
+    scroll-behavior: smooth;
+}
 body {
     min-height: 100vh;
     background: var(--bg-color);
@@ -31,21 +38,48 @@ body {
     width: 100vw;
     position: relative;
     scroll-snap-align: start;
+}
+/* 非首屏溢出隐藏 */
+.main-section:not(.info-content-section) {
     overflow: hidden;
+}
+/* 首屏允许内部滚动，但整体不裁剪 */
+.info-content-section {
+    overflow: visible;
+}
+/* 第二屏：海报标题 + 布局 */
+.info-poster-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* 水平居中 */
+    background: var(--bg-color);
+    padding: 2rem 0;       /* 上下间距可微调 */
+}
+
+.info-poster-title {
+    font-size: clamp(2.8rem, 6vw, 3.6rem);  /* 放大字体 */
+    font-weight: 900;                       /* 加粗 */
+    color: var(--text-color);
+    margin-bottom: 2rem;                    /* 和海报之间留空 */
+    text-align: center;                     /* 文本居中 */
+    letter-spacing: 0.03em;                 /* 可选：加点字间 */
 }
 
 /* ------------------------------------
    Hero / Info Page（首屏文字）
 ------------------------------------ */
+/* 外层 wrapper 去掉滚动，交由内层容器处理 */
 .info-wrapper {
     background: var(--bg-color);
     height: 100%;
     padding: 4rem 1.5rem 6rem;
     display: flex;
     justify-content: center;
-    overflow-y: auto;
+    /* 这里关闭滚动 */
+    overflow: hidden;
 }
 
+/* “金属框”容器：限制最大高度并开启滚动 */
 .info-container {
     max-width: 960px;
     font-size: 1.1rem;
@@ -56,11 +90,16 @@ body {
     border-radius: 16px;
     padding: 3rem;
     color: var(--text-color);
-    box-shadow: 0 0 20px rgba(0,255,247,0.07);
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
+
+    /* 关键：计算最大高度 = 100vh - wrapper 垂直内边距 (4rem+6rem = 10rem) */
+    max-height: calc(100vh - 10rem);
+    overflow-y: auto;
 }
+
+/* 标题、副标题、段落保持原样 */
 .info-hero-title {
     font-size: clamp(2.6rem, 6vw, 4.5rem);
     font-weight: 900;
@@ -68,6 +107,7 @@ body {
     letter-spacing: .04em;
     margin-bottom: .4rem;
 }
+
 .info-hero-sub {
     font-size: clamp(1.2rem, 3.5vw, 2rem);
     text-align: center;
@@ -79,10 +119,25 @@ body {
     margin-right: auto;
     word-break: break-word;
 }
+
 .info-period {
     font-weight: 700;
     font-size: 1.2rem;
     margin-bottom: 1rem;
+}
+
+/* 二维码块——居中 & 略大 */
+.info-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2.5rem;
+}
+.info-qr img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    margin-top: .6rem;
 }
 
 /* ------------------------------------
@@ -102,29 +157,50 @@ body {
     max-width: 1280px;
     padding: 2rem;
 }
-.poster-item { flex: 1 1 22%; max-width: 22%; transition: transform .3s; }
-.poster-item img { width: 100%; border-radius: 12px; object-fit: cover; }
-.poster-item:hover { transform: scale(1.05); }
+
+.poster-item {
+    flex: 1 1 22%;
+    max-width: 22%;
+    transition: transform .3s;
+}
+
+.poster-item img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.poster-item:hover {
+    transform: scale(1.05);
+}
 
 /* ------------------------------------
    VR Corner Section
 ------------------------------------ */
 .vrcorner-section {
-    background: #111 url('https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images%2FWechatIMG14415.jpg') center/cover no-repeat fixed;
+    background: #111 url('https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images%2F145961751956204_.pic_hd.jpg') center/cover no-repeat fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 3rem 0 4rem;
+    /* 原来：padding: 3rem 0 4rem; */
+    padding: 1rem 0 8rem;               /* ↑ 这里把顶部从 3rem 调到 2rem */
+    padding-bottom: max(15rem, env(safe-area-inset-bottom)); /* 保留底部缓冲 */
     gap: 2.5rem;
     overflow-y: auto;
 }
+
 .vrcorner-title {
     font-size: clamp(2.7rem, 6vw, 4.2rem);
     font-weight: 800;
     text-align: center;
     letter-spacing: .02em;
     margin: 0 0 1.2rem;
+}
+.vrcorner-section::after {
+    content: '';
+    display: block;
+    height: 6rem;  /* 根据需要自行调整高度 */
 }
 
 /* ——— 卡片样式 ——— */
@@ -139,7 +215,11 @@ body {
     transition: transform .25s ease, background .25s ease;
     height: 100%;
 }
-.vrcard:hover { transform: translateY(-4px); background: var(--card-hover); }
+
+.vrcard:hover {
+    transform: translateY(-4px);
+    background: var(--card-hover);
+}
 
 .vrcard img {
     width: 100%;
@@ -148,13 +228,13 @@ body {
     display: block;
 }
 
-/* 新的卡片正文区域 */
 .vrcard-body {
     display: flex;
     flex-direction: column;
     flex: 1;
     padding: 1rem 1.1rem 1.25rem;
 }
+
 .vrcard-title {
     font-size: 1.08rem;
     font-weight: 600;
@@ -163,12 +243,14 @@ body {
     max-height: 2.7em;
     overflow: hidden;
 }
+
 .vrcard-author {
     font-size: .8rem;
     color: rgba(255,255,255,.68);
     font-weight: 400;
     margin-bottom: .5rem;
 }
+
 .vrcard-summary {
     font-size: .78rem;
     line-height: 1.45;
@@ -177,6 +259,7 @@ body {
     max-height: 3em;
     overflow: hidden;
 }
+
 .vrcard-learn {
     align-self: flex-start;
     margin-top: .75rem;
@@ -194,11 +277,22 @@ body {
     cursor: pointer;
     transition: background .2s, border-color .2s;
 }
-.vrcard-learn::after { content: '›'; font-size: .9rem; transform: translateY(1px); }
-.vrcard-learn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.45); }
+
+.vrcard-learn::after {
+    content: '›';
+    font-size: .9rem;
+    transform: translateY(1px);
+}
+
+.vrcard-learn:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.45);
+}
 
 /* Hide legacy span */
-.vrcard span { display: none; }
+.vrcard span {
+    display: none;
+}
 
 /* ——— Modal ——— */
 .vrcard-modal {
@@ -211,6 +305,7 @@ body {
     align-items: center;
     z-index: 2000;
 }
+
 .vrcard-modal-body {
     width: min(90vw, 820px);
     max-height: 92vh;
@@ -221,24 +316,37 @@ body {
     border: 1px solid var(--card-border);
     color: var(--text-color);
 }
+
 .vrcard-modal-img {
     width: 100%;
     border-radius: 10px;
     object-fit: cover;
     margin-bottom: 1.6rem;
 }
-.vrcard-modal-body h2 { font-size: 2rem; margin-bottom: .4rem; }
-.vrcard-modal-body h4 { font-weight: 500; margin-bottom: 1rem; opacity: .85; }
+
+.vrcard-modal-body h2 {
+    font-size: 2rem;
+    margin-bottom: .4rem;
+}
+
+.vrcard-modal-body h4 {
+    font-weight: 500;
+    margin-bottom: 1rem;
+    opacity: .85;
+}
+
 .vrcard-desc {
     white-space: pre-line;
     line-height: 1.8;
     font-size: 1rem;
 }
+
 .vrcard-modal-actions {
     margin-top: 2rem;
     display: flex;
     gap: 1rem;
 }
+
 .vrcard-modal-actions button {
     flex: 1;
     padding: .8rem 1rem;
@@ -250,6 +358,7 @@ body {
     cursor: pointer;
     transition: background .2s;
 }
+
 .vrcard-modal-actions button:hover {
     background: rgba(255,255,255,0.18);
 }
@@ -261,6 +370,7 @@ body {
     align-items: center;
     margin-top: 2.5rem;
 }
+
 .info-qr img {
     width: 140px;
     height: 140px;
@@ -272,12 +382,22 @@ body {
    Responsive tweaks
 ------------------------------------ */
 @media (max-width: 900px) {
-    .vrcard img { aspect-ratio: 1.5/1; }
+    .vrcard img {
+        aspect-ratio: 1.5/1;
+    }
 }
 @media (max-width: 768px) {
-    .info-container { font-size: 1rem; padding: 2rem; }
-    .poster-item { flex: 1 1 45%; max-width: 45%; }
-    .vrcorner-title { font-size: 2.1rem; }
+    .info-container {
+        font-size: 1rem;
+        padding: 2rem;
+    }
+    .poster-item {
+        flex: 1 1 45%;
+        max-width: 45%;
+    }
+    .vrcorner-title {
+        font-size: 2.1rem;
+    }
     .info-hero-sub {
         font-size: 1.1rem;
         line-height: 1.4;

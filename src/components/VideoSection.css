@@ -36,7 +36,7 @@
 .video-subtitle-container{
     position:absolute;
     left:50%;
-    bottom:12%;
+    bottom:50%;
     transform:translateX(-50%);
     width:90%;
     text-align:center;
@@ -45,7 +45,7 @@
 
 .video-subtitle{
     font-size:clamp(1.25rem,2.8vw,2.2rem);   /* 小屏→大屏 自动缩放 */
-    font-weight:700;                         /* 加粗 */
+    font-weight:400;                         /* 加粗 */
     line-height:1.45;
     color:#fff;
     text-shadow:0 2px 6px rgba(0,0,0,.85);   /* 提高可读性 */
