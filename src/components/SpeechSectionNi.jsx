@@ -4,7 +4,7 @@ import styles from './SpeechSectionNi.module.css';
 
 const speechTextNi = {
     en: [
-        `President Lionel M. Ni shares his vision: The Surreality Exhibition brings a dreamlike fusion of AI-assisted creation, XR technology, and immersive digital art to our campus.`,
+        `HKUST (GZ) President Lionel M. Ni shares his vision: The Surreality Exhibition brings a dreamlike fusion of AI-assisted creation, XR technology, and immersive digital art to our campus.`,
         `Before the opening, journalists explored four mixed-reality zones and a virtual-reality corner, experiencing everything from underwater worlds of swimming fish to giant floating orchids and fantastical sky-borne structures—truly a living laboratory, as President Ni calls HKUST Guangzhou.`,
         `He adds: “This is not merely a technical breakthrough, but a revolution in artistic expression—when technology meets art, imagination knows no bounds.”`,
     ],

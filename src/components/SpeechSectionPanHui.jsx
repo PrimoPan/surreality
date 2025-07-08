@@ -4,7 +4,7 @@ import styles from './SpeechSectionPanHui.module.css';
 
 const speechTextPanHui = {
     en: [
-        `Professor Pan Hui says: After nearly a year of preparation, the "Surreality Exhibition"—a large-scale XR+AI art show—opens brilliantly on June 26th at the HKUST (Guangzhou) campus.`,
+        `Professor Pan Hui says: After nearly a year of preparation, the "Surreality Exhibition"—a large-scale XR+AI art show—opens brilliantly on June 26th at the HKUST (GZ) campus.`,
         `I want to pay special tribute to my curatorial team: with pioneering courage, you made the “impossible” real. When the media asked, “Large-scale mixed-reality carries enormous technical risk—why do you dare to lead?” my answer stays the same: if you’re investing the time anyway, why not create something truly unique? Our confidence comes from our team’s fearless spirit and from every artist’s extraordinary creativity.`,
         `I’m particularly moved by our international artists’ dedication: some rerouted from South America to Doha only to be forced down in Saudi Arabia by conflict; others missed flights due to train delays and made emergency landings in San Francisco… these epic journeys mirror our own breakthroughs of technical frontiers.`,
         `Heartfelt thanks to HKUST (Guangzhou) and the French Consulate for their unwavering support. Today’s opening is just the beginning—we’ve already received invitations for an international tour. Yet no description compares to the thrill of being there in person—when virtual and reality entwine across 3,000㎡, you will witness the limitless possibilities of art and technology.`,

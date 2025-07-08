@@ -1,5 +1,7 @@
+// Info.jsx
+
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';        // ← ① 引入
+import { useNavigate } from 'react-router-dom';
 import './Info.css';
 
 /* ------------------ 1. 工具函数 ------------------ */
@@ -13,7 +15,6 @@ const posterLinks = [
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster03.jpg',
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster04.jpg',
 ];
-
 /* ---------- 固定 UI 文本 ---------- */
 const copy = {
     en: {
@@ -71,13 +72,12 @@ const copy = {
  * =================================================== */
 const ArtworkCard = ({ item, lang, onClick }) => {
     const firstAuthor = pick(item, 'artist', lang).split(/[，,]/)[0]?.trim();
-
     return (
         <div className="vrcard" onClick={() => onClick(item)}>
             <img src={item.poster_url} alt={pick(item, 'title', lang)} />
             <div className="vrcard-body">
                 <h3 className="vrcard-title">{pick(item, 'title', lang)}</h3>
-                <p  className="vrcard-author">{firstAuthor}</p>
+                <p className="vrcard-author">{firstAuthor}</p>
                 <button className="vrcard-learn">
                     {lang === 'zh' ? '了解更多' : 'Learn more'}
                 </button>
@@ -91,11 +91,17 @@ const ArtworkModal = ({ item, lang, showBio, onToggleBio, onClose, t }) =>
     !item ? null : (
         <div className="vrcard-modal" onClick={onClose}>
             <div className="vrcard-modal-body" onClick={e => e.stopPropagation()}>
-                <img className="vrcard-modal-img" src={item.poster_url} alt={pick(item,'title',lang)} />
-                <h2>{pick(item,'title',lang)}</h2>
-                <h4>{pick(item,'artist',lang)}</h4>
+                <img
+                    className="vrcard-modal-img"
+                    src={item.poster_url}
+                    alt={pick(item, 'title', lang)}
+                />
+                <h2>{pick(item, 'title', lang)}</h2>
+                <h4>{pick(item, 'artist', lang)}</h4>
                 <p className="vrcard-desc">
-                    {showBio ? pick(item,'artist_bio',lang) : pick(item,'description',lang)}
+                    {showBio
+                        ? pick(item, 'artist_bio', lang)
+                        : pick(item, 'description', lang)}
                 </p>
                 <div className="vrcard-modal-actions">
                     <button onClick={onToggleBio}>{t.vrArtistBtn}</button>
@@ -108,16 +114,35 @@ const ArtworkModal = ({ item, lang, showBio, onToggleBio, onClose, t }) =>
 /* =====================================================
  * 6. VR-Corner 小节
  * =================================================== */
-function VRCornerSection({ lang, t = {} }) {           // ←给 t 默认值，防止未传
-    const [data, setData]   = useState([]);
+function VRCornerSection({ lang, t = {} }) {
+    const [data, setData] = useState([]);
     const [selected, setSel] = useState(null);
-    const [showBio, setBio]  = useState(false);
+    const [showBio, setBio] = useState(false);
 
-    /* 拉取作品 22-31 */
     useEffect(() => {
         fetch('/data/artworks.json')
             .then(r => r.json())
-            .then(all => setData(all.filter(x => x.id >= 22 && x.id <= 31)))
+            .then(all => {
+                const items = all.filter(x => x.id >= 22 && x.id <= 31);
+
+                // First row: Krista(25), Michaela(26), Melissa(27), Naima(29), Cory(24)
+                const firstRowIds = [25, 26, 27, 29, 24];
+                const firstRow = firstRowIds
+                    .map(id => items.find(x => x.id === id))
+                    .filter(Boolean);
+
+                // Then start second row with Hao Li(30), then the rest
+                const secondFirst = items.find(x => x.id === 30);
+                const rest = items.filter(
+                    x => !firstRowIds.includes(x.id) && x.id !== 30
+                );
+
+                setData([
+                    ...firstRow,
+                    ...(secondFirst ? [secondFirst] : []),
+                    ...rest,
+                ]);
+            })
             .catch(console.error);
     }, []);
 
@@ -136,18 +161,19 @@ function VRCornerSection({ lang, t = {} }) {           // ←给 t 默认值，�
             <h2 className="vrcorner-title">
                 {t.vrCorner ?? (lang === 'zh' ? 'VR 角' : 'VR Corner')}
             </h2>
-
             <div style={grid}>
                 {data.map(it => (
                     <ArtworkCard
                         key={it.id}
                         item={it}
                         lang={lang}
-                        onClick={() => { setSel(it); setBio(false); }}
+                        onClick={() => {
+                            setSel(it);
+                            setBio(false);
+                        }}
                     />
                 ))}
             </div>
-
             <ArtworkModal
                 item={selected}
                 lang={lang}
@@ -162,35 +188,68 @@ function VRCornerSection({ lang, t = {} }) {           // ←给 t 默认值，�
 
 /* =====================================================
  * 7. 主组件 Info
+ *    ★ sections reordered: Poster → VR Corner → Info Content
  * =================================================== */
 export default function Info({ lang }) {
-    const t   = copy[lang] || copy.en;   // ← 生成本地化文案
-    const nav = useNavigate();          // ← ② 声明 nav
+    const t   = copy[lang] || copy.en;
+    const nav = useNavigate();
+
+    const goto = path => {
+        nav(path);
+        window.scrollTo(0, 0);
+    };
 
     return (
         <div className="info-page">
-            {/* ---------- 首屏：展览信息 ---------- */}
+            {/* —— 第二屏：四张海报 —— */}
+            <section className="main-section info-poster-full">
+                <div className="info-poster-container">
+                    <h2 className="info-poster-title">
+                        {lang === 'zh' ? '展区介绍' : 'Exhibition Areas'}
+                    </h2>
+                    <div className="info-poster">
+                        {posterLinks.map((src, i) => (
+                            <div
+                                key={i}
+                                className="poster-item"
+                                onClick={() => {
+                                    if (i === 0) goto('/ocean');
+                                    if (i === 1) goto('/garden');
+                                    if (i === 2) goto('/realms');
+                                    if (i === 3) goto('/city');
+                                }}
+                            >
+                                <img src={src} alt={`poster-${i + 1}`} />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* —— 醒目提示 —— */}
+            <div className="scroll-hint">
+                {lang === 'zh'
+                    ? '向下滚动查看 VR 角与预约入口'
+                    : 'Scroll down to explore the VR Corner & registration'}
+            </div>
+
+            {/* —— 第三屏：VR Corner —— */}
+            <VRCornerSection lang={lang} t={t} />
+
+            {/* —— 第一屏：展览信息（预约入口） —— */}
             <section className="main-section info-content-section">
                 <div className="info-wrapper">
                     <div className="info-container">
-
                         <h1 className="info-hero-title">{t.heroTitle}</h1>
                         <h2 className="info-hero-sub">{t.heroSub}</h2>
-
                         <p className="info-period">{t.period}</p>
                         <p className="info-host">{t.host}</p>
-
                         <h3>{t.techTitle}</h3>
                         <ul className="info-list">
                             {t.techList.map(txt => <li key={txt}>{txt}</li>)}
                         </ul>
-
-                        <p className="info-artists">{t.artists}</p>
-
                         <h3>{t.guideTitle}</h3>
                         <p className="info-guide">{t.guideDesc}</p>
-
-                        {/* —— 二维码 —— */}
                         <div className="info-qr">
                             <h3>{t.qrTitle}</h3>
                             <img src={t.qrImg} alt="QR code" />
@@ -198,40 +257,6 @@ export default function Info({ lang }) {
                     </div>
                 </div>
             </section>
-            {/* ---------- 第二屏：四张海报 ---------- */}
-            <section className="main-section info-poster-full">
-                <div className="info-poster-container">
-                    {/* 新增标题 */}
-                    <h2 className="info-poster-title">
-                        {lang === 'zh' ? '展区介绍' : 'Exhibition Areas'}
-                    </h2>
-
-                    <div className="info-poster">
-                        {posterLinks.map((src, i) => (
-                            <div
-                                key={i}
-                                className="poster-item"
-                                onClick={() => {
-                                    if (i === 0) { nav('/ocean');   window.scrollTo(0, 0); }
-                                    if (i === 1) { nav('/garden');  window.scrollTo(0, 0); }
-                                    if (i === 2) { nav('/realms');  window.scrollTo(0, 0); }
-                                    if (i === 3) { nav('/city');    window.scrollTo(0, 0); }
-                                }}
-                                style={{
-                                    cursor: 'pointer',
-                                }}
-                            >
-                                <img src={src} alt={`poster-${i + 1}`} />
-                            </div>
-                        ))}
-                    </div>
-
-                </div>
-            </section>
-
-
-            {/* ---------- 第三屏：VR Corner ---------- */}
-            <VRCornerSection lang={lang} t={t} />
         </div>
     );
 }
