@@ -1,14 +1,14 @@
 /* ---------------- CoreTechSection.css ---------------- */
 
-/* 本区块自身作为一个 main-section，取消全局一屏限制，允许内部滚动 */
+/* 本区块自身允许滚动，且吸顶时齐头 */
 .coretech-section {
+    position: relative;
     height: auto !important;
     min-height: 100vh;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    /* 依旧 snap 到视口起点 */
-    scroll-snap-align: start !important;
-    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-snap-align: start;
+    background: #111; /* 如需深色底，可去掉视频时保持一致 */
 }
 
 /* 背景视频 */
@@ -23,94 +23,96 @@
 }
 
 /* 内容容器 */
-.coretech-inner {
+.coretech-container {
     position: relative;
     z-index: 1;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 6rem 1.5rem 5rem;
+    padding: 4rem 1rem 3rem;
+}
+
+/* 标题区 */
+.coretech-header {
     text-align: center;
-    color: #fafafa;
+    margin-bottom: 2rem;
 }
-
-/* 标题 */
-.coretech-title {
-    font-size: clamp(2.4rem, 5vw, 3.4rem);
+.coretech-header h2 {
+    margin: 0;
+    font-size: 2rem;
     font-weight: 900;
-    letter-spacing: 0.02em;
-    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    color: #fff;
 }
-
-/* 副标题 */
-.coretech-sub {
-    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+.coretech-header h3 {
+    margin: 0.5rem 0 0;
+    font-size: 1.2rem;
     font-weight: 500;
-    opacity: 0.9;
-    margin-bottom: 3rem;
+    opacity: 0.8;
+    color: #ddd;
 }
 
 /* 图网格 */
 .coretech-grid {
     display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    margin-bottom: 2.5rem;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    margin-bottom: 2rem;
 }
 .coretech-grid img {
     width: 100%;
-    height: 300px;
+    height: 180px;
     object-fit: cover;
-    border-radius: 16px;
-    box-shadow: 0 0 25px rgba(0, 255, 247, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 255, 247, 0.1);
 }
 
 /* 文本列表 */
 .coretech-list {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
-    font-size: 1.2rem;
-    line-height: 1.95;
+    font-size: 1rem;
+    line-height: 1.6;
     text-align: left;
     list-style: none;
     padding: 0;
 }
 .coretech-list li {
     position: relative;
-    margin-bottom: 1.2rem;
-    padding-left: 1.6rem;
+    padding-left: 1.4rem;
+    margin-bottom: 0.8rem;
 }
 .coretech-list li::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 0.7em;
-    width: 0.55rem;
-    height: 0.55rem;
+    top: 0.6em;
+    width: 0.5rem;
+    height: 0.5rem;
     border-radius: 50%;
     background: #00fff7;
 }
 
-/* —— 响应式 —— */
+/* 响应式 */
 @media (max-width: 900px) {
     .coretech-grid {
         grid-template-columns: 1fr;
     }
 }
-@media (max-width: 768px) {
-    .coretech-inner {
-        padding: 4rem 1rem 3rem;
+@media (max-width: 600px) {
+    .coretech-container {
+        padding: 3rem 0.5rem 2rem;
     }
-    .coretech-title {
-        font-size: 2rem;
+    .coretech-header h2 {
+        font-size: 1.8rem;
     }
-    .coretech-sub {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
+    .coretech-header h3 {
+        font-size: 1rem;
     }
     .coretech-grid img {
-        height: 200px;
+        height: 140px;
     }
     .coretech-list {
-        font-size: 1rem;
+        font-size: 0.9rem;
+        line-height: 1.4;
     }
 }
