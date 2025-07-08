@@ -1,13 +1,20 @@
+/* ====================================
+   About Page Styles – v2
+   ==================================== */
+
+/* —— 整体包裹 —— */
 .about-wrapper {
-    background: #1f2029;          /* 与全站暗色一致 */
+    background: #1f2029;
     padding: 4rem 1.5rem 6rem;
     display: flex;
     justify-content: center;
     scroll-snap-align: start;
+    overflow-y: auto;
 }
 
 .about-container {
     max-width: 960px;
+    width: 100%;
     color: #e6e6e6;
     font-size: 1.05rem;
     line-height: 1.9;
@@ -16,13 +23,52 @@
     border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 16px;
     padding: 3rem;
-    box-shadow: 0 0 20px rgba(0, 255, 247, 0.07); /* 科技感氛圍 */
+    box-shadow: 0 0 20px rgba(0, 255, 247, 0.07);
 }
 
+/* === 领航人 (Pan Hui) ================= */
+.leader-section{
+    display:flex;
+    gap:2.2rem;
+    align-items:flex-start;
+    margin-bottom:3rem;
+}
+
+.leader-photo{
+    width:180px;
+    min-width:180px;
+    border-radius:12px;
+    object-fit:cover;
+    box-shadow:0 4px 14px rgba(0,0,0,.4);
+}
+
+.leader-bio{
+    flex:1;
+}
+
+.leader-name{
+    font-size:1.5rem;
+    font-weight:800;
+    margin-bottom:.4rem;
+}
+
+.leader-title{
+    font-size:1rem;
+    font-weight:500;
+    opacity:.8;
+    margin-bottom:1.2rem;
+}
+
+.leader-bio p{
+    margin-bottom:1.1rem;
+}
+
+/* === 其餘標題 / 列表 ================= */
 .about-container h3 {
-    margin: 2.5rem 0 1rem;
-    font-size: 1.4rem;
+    margin: 2.8rem 0 1.2rem;
+    font-size: 1.35rem;
     color: #00fff7;
+    font-weight: 700;
 }
 
 .about-list {
@@ -30,6 +76,17 @@
     list-style: disc;
 }
 
-.about-list li {
-    margin-bottom: 0.75rem;
+.about-list li { margin-bottom: 0.75rem; }
+
+/* ======= Responsive ======= */
+@media (max-width: 768px) {
+    .about-container { font-size: 0.95rem; padding: 2rem; }
+    .leader-section  { flex-direction: column; align-items: center; text-align:center; }
+    .leader-photo    { width: 140px; min-width:140px; }
+    .leader-bio      { text-align: left; }
+}
+
+@media (max-width: 480px) {
+    .about-wrapper   { padding: 3rem 1rem 4rem; }
+    .leader-photo    { width: 120px; min-width:120px; }
 }

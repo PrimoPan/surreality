@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';        // ← ① 引入
 import './Info.css';
 
-/* ---------- 工具：按语言安全取字段 ---------- */
-const pick = (item, key, lang) =>
-    item?.[`${key}_${lang === 'zh' ? 'cn' : 'en'}`] ?? '';
+/* ------------------ 1. 工具函数 ------------------ */
+const pick = (obj, key, lang) =>
+    obj?.[`${key}_${lang === 'zh' ? 'cn' : 'en'}`] ?? '';
 
-/* ---------- 4 张通用海报 ---------- */
+/* ------------------ 2. 四张海报 ------------------ */
 const posterLinks = [
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster01.jpg',
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster02.jpg',
@@ -65,12 +66,11 @@ const copy = {
     },
 };
 
-/* =================================================
-   卡片组件
-================================================= */
+/* =====================================================
+ * 4. 卡片组件
+ * =================================================== */
 const ArtworkCard = ({ item, lang, onClick }) => {
     const firstAuthor = pick(item, 'artist', lang).split(/[，,]/)[0]?.trim();
-    const summary     = pick(item, 'description', lang).split(/[\n。.]/)[0];
 
     return (
         <div className="vrcard" onClick={() => onClick(item)}>
@@ -86,8 +86,7 @@ const ArtworkCard = ({ item, lang, onClick }) => {
     );
 };
 
-/* —— Modal —— */
-/* Modal 内加入作品图 */
+/* ------------------ 5. Modal ------------------ */
 const ArtworkModal = ({ item, lang, showBio, onToggleBio, onClose, t }) =>
     !item ? null : (
         <div className="vrcard-modal" onClick={onClose}>
@@ -106,18 +105,18 @@ const ArtworkModal = ({ item, lang, showBio, onToggleBio, onClose, t }) =>
         </div>
     );
 
-
-/* =================================================
-   VR-Corner Section
-================================================= */
-function VRCornerSection({ lang, t }) {
+/* =====================================================
+ * 6. VR-Corner 小节
+ * =================================================== */
+function VRCornerSection({ lang, t = {} }) {           // ←给 t 默认值，防止未传
     const [data, setData]   = useState([]);
     const [selected, setSel] = useState(null);
     const [showBio, setBio]  = useState(false);
 
+    /* 拉取作品 22-31 */
     useEffect(() => {
         fetch('/data/artworks.json')
-            .then(res => res.json())
+            .then(r => r.json())
             .then(all => setData(all.filter(x => x.id >= 22 && x.id <= 31)))
             .catch(console.error);
     }, []);
@@ -132,15 +131,20 @@ function VRCornerSection({ lang, t }) {
         boxSizing: 'border-box',
     };
 
-    const open = it => { setSel(it); setBio(false); };
-
     return (
         <section className="main-section vrcorner-section">
-            <h2 className="vrcorner-title">{t.vrCorner}</h2>
+            <h2 className="vrcorner-title">
+                {t.vrCorner ?? (lang === 'zh' ? 'VR 角' : 'VR Corner')}
+            </h2>
 
             <div style={grid}>
                 {data.map(it => (
-                    <ArtworkCard key={it.id} item={it} lang={lang} onClick={open} />
+                    <ArtworkCard
+                        key={it.id}
+                        item={it}
+                        lang={lang}
+                        onClick={() => { setSel(it); setBio(false); }}
+                    />
                 ))}
             </div>
 
@@ -156,18 +160,20 @@ function VRCornerSection({ lang, t }) {
     );
 }
 
-/* =================================================
-   主页面
-================================================= */
+/* =====================================================
+ * 7. 主组件 Info
+ * =================================================== */
 export default function Info({ lang }) {
-    const t = copy[lang] || copy.en;
+    const t   = copy[lang] || copy.en;   // ← 生成本地化文案
+    const nav = useNavigate();          // ← ② 声明 nav
 
     return (
         <div className="info-page">
-            {/* ===== 首屏：展览信息 ===== */}
+            {/* ---------- 首屏：展览信息 ---------- */}
             <section className="main-section info-content-section">
                 <div className="info-wrapper">
                     <div className="info-container">
+
                         <h1 className="info-hero-title">{t.heroTitle}</h1>
                         <h2 className="info-hero-sub">{t.heroSub}</h2>
 
@@ -184,27 +190,35 @@ export default function Info({ lang }) {
                         <h3>{t.guideTitle}</h3>
                         <p className="info-guide">{t.guideDesc}</p>
 
-                        {/* 居中二维码 */}
+                        {/* —— 二维码 —— */}
                         <div className="info-qr">
                             <h3>{t.qrTitle}</h3>
-                            <img src={t.qrImg} alt="QR" />
+                            <img src={t.qrImg} alt="QR code" />
                         </div>
                     </div>
                 </div>
             </section>
-
-            {/* ===== 第二屏：四张海报 ===== */}
+            {/* ---------- 第二屏：四张海报 ---------- */}
             <section className="main-section info-poster-full">
                 <div className="info-poster">
                     {posterLinks.map((src, i) => (
-                        <div key={i} className="poster-item">
+                        <div
+                            key={i}
+                            className="poster-item"
+                            onClick={() => {
+                                if (i === 1) nav('/garden');   // ← 第二张图跳转 Digital Garden
+                                if (i === 2) nav('/realms');
+                                if (i === 3) nav('/city')
+                            }}
+                            style={{ cursor: i === 1 || i === 2 || i === 3? 'pointer' : 'default' }}
+                        >
                             <img src={src} alt={`poster-${i + 1}`} />
                         </div>
                     ))}
                 </div>
             </section>
 
-            {/* ===== 第三屏：VR Corner ===== */}
+            {/* ---------- 第三屏：VR Corner ---------- */}
             <VRCornerSection lang={lang} t={t} />
         </div>
     );

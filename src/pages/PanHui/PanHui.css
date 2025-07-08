@@ -1,0 +1,63 @@
+/* 单页名片风格 —— PanHui */
+.panhui-wrapper {
+    background: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 1.5rem;
+}
+
+.panhui-card {
+    max-width: 860px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    backdrop-filter: blur(6px);
+    padding: 2.8rem 2.4rem;
+    color: var(--text-color);
+    line-height: 1.9;
+    box-shadow: 0 0 24px rgba(0, 255, 247, 0.08);
+}
+
+.panhui-header {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+    margin-bottom: 1.8rem;
+}
+
+.panhui-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.panhui-title h1 {
+    font-size: 1.9rem;
+    font-weight: 800;
+    margin-bottom: 0.35rem;
+}
+.panhui-title h4 {
+    font-weight: 500;
+    opacity: 0.85;
+}
+
+.panhui-bio {
+    font-size: 1.05rem;
+    white-space: pre-line;
+}
+
+/* 移动端优化 */
+@media (max-width: 600px) {
+    .panhui-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .panhui-avatar {
+        width: 120px;
+        height: 120px;
+    }
+}
