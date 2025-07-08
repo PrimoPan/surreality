@@ -113,13 +113,10 @@ export default function Home({ lang }) {
             <section className="main-section">
                 <SpeechSectionPanHui lang={lang} />
             </section>
-
-            <section className="main-section">
                 <CoreTechSection
                     lang={lang}
                     videoBg="https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/newwebsite/red_bird_2.mp4"
                 />
-            </section>
         </>
     );
 }

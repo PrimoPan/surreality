@@ -2,7 +2,7 @@
    Global Styles – Dark Theme (fixed)
    ==================================== */
 
-/* Root design tokens – hard‑coded for dark UI */
+/* Root design tokens – hard-coded for dark UI */
 :root {
     /* layout */
     --header-height: 48px;
@@ -26,12 +26,13 @@
     box-sizing: border-box;
 }
 
+/* ===== Base HTML & Body ===== */
 html {
     height: 100%;
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory; /* vertical snap */
+    scroll-snap-type: y mandatory;
     scroll-padding-top: var(--header-height);
-    overscroll-behavior-y: contain; /* avoid rubber‑band */
+    overscroll-behavior-y: contain;
 }
 
 body {
@@ -48,8 +49,13 @@ body {
     height: 100vh;
     width: 100vw;
     scroll-snap-align: start;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
+}
+
+/* Utility: clamp full-screen sections */
+.fullpage-clamp {
+    overflow: hidden;
 }
 
 /* ===== Header / Nav ===== */
@@ -71,7 +77,10 @@ body {
     align-items: center;
 }
 
-.nav-logo img { height: 32px; margin-right: 0.5rem; }
+.nav-logo img {
+    height: 32px;
+    margin-right: 0.5rem;
+}
 
 .vertical {
     width: 1px;
@@ -80,7 +89,9 @@ body {
     margin-right: 0.5rem;
 }
 
-.nav { margin-left: auto; }
+.nav {
+    margin-left: auto;
+}
 
 .nav__links {
     list-style: none;
@@ -90,7 +101,9 @@ body {
     font-size: 0.9rem;
 }
 
-.nav__link { cursor: pointer; }
+.nav__link {
+    cursor: pointer;
+}
 
 .nav__link a {
     color: var(--nav-text);
@@ -100,7 +113,9 @@ body {
 }
 
 .nav__link a:hover,
-.nav__link.active a { opacity: 1; }
+.nav__link.active a {
+    opacity: 1;
+}
 
 /* ===== Mobile burger ===== */
 .mobile-menu-btn {
@@ -163,15 +178,22 @@ body {
     opacity: 0.85;
 }
 
-/* ===== Ant Select theme tweaks ===== */
+/* ===== Ant Design Select Tweaks ===== */
 .language-select .ant-select-selector {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     color: var(--text-color) !important;
 }
-.language-select .ant-select-selection-item { color: var(--text-color) !important; }
-.language-select .ant-select-arrow           { color: var(--text-color) !important; }
+
+.language-select .ant-select-selection-item {
+    color: var(--text-color) !important;
+}
+
+.language-select .ant-select-arrow {
+    color: var(--text-color) !important;
+}
+
 .language-select.ant-select-focused .ant-select-selector {
     border-color: transparent !important;
     box-shadow: none !important;
@@ -182,6 +204,7 @@ body {
     background-color: var(--bg-color);
     padding: 20px;
 }
+
 .drawer-menu a {
     color: var(--text-color);
     font-size: 1.2rem;
@@ -189,19 +212,65 @@ body {
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-    .major-nav { height: var(--header-height-mobile); padding: 0 0.75rem; }
-    .nav__links, .nav-logo { display: none; }
-    .mobile-menu-btn { display: block; }
-
+    .major-nav {
+        height: var(--header-height-mobile);
+        padding: 0 0.75rem;
+    }
+    .nav__links,
+    .nav-logo {
+        display: none;
+    }
+    .mobile-menu-btn {
+        display: block;
+    }
     .main-section,
-    .hero-section { height: calc(100vh - var(--header-height-mobile)); min-height: 350px; }
-    .hero-content h1 { font-size: 2.5rem; }
-    .hero-content h2 { font-size: 1.5rem; }
+    .hero-section {
+        height: calc(100vh - var(--header-height-mobile));
+        min-height: 350px;
+    }
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .hero-content h2 {
+        font-size: 1.5rem;
+    }
 }
 
 @media (max-width: 600px) {
     .main-section,
-    .hero-section { min-height: 220px; }
+    .hero-section {
+        min-height: 220px;
+    }
 }
 
-/* ========== END =========="}]}
+/* ===== VR Corner Override ===== */
+.vrcorner-section {
+    height: auto !important;
+    min-height: 100vh;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+.vrcorner-section.fullpage-clamp {
+    overflow: visible !important;
+}
+
+/* ===== CoreTechSection Override ===== */
+.main-section.coretech-section {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+/* ===== CoreTechSection 全局 Override ===== */
+.coretech-section {
+    /* 继续允许内部滚动 */
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    /* 重新成为一个 snap 目标 */
+    scroll-snap-align: start !important;
+}
+

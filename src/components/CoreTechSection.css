@@ -1,19 +1,17 @@
-/* CoreTechSection.css */
+/* ---------------- CoreTechSection.css ---------------- */
 
+/* 本区块自身作为一个 main-section，取消全局一屏限制，允许内部滚动 */
 .coretech-section {
+    height: auto !important;
+    min-height: 100vh;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    /* 依旧 snap 到视口起点 */
+    scroll-snap-align: start !important;
     position: relative;
-    width: 100%;
-    /* 关闭裁剪，允许内部内容全部显示 */
-    overflow: visible;
-    /* 取消顶部吸附，防止 scroll-snap 导致内容无法滚动到末尾 */
-    scroll-snap-align: none;
 }
 
-/* 可选：如果父容器使用了 scroll-snap，需要让最后一个版块底部吸附 */
-.coretech-section:last-of-type {
-    scroll-snap-align: end;
-}
-
+/* 背景视频 */
 .coretech-video-bg {
     position: absolute;
     inset: 0;
@@ -24,6 +22,7 @@
     z-index: 0;
 }
 
+/* 内容容器 */
 .coretech-inner {
     position: relative;
     z-index: 1;
@@ -34,6 +33,7 @@
     color: #fafafa;
 }
 
+/* 标题 */
 .coretech-title {
     font-size: clamp(2.4rem, 5vw, 3.4rem);
     font-weight: 900;
@@ -41,6 +41,7 @@
     margin-bottom: 1.25rem;
 }
 
+/* 副标题 */
 .coretech-sub {
     font-size: clamp(1.25rem, 2.5vw, 1.6rem);
     font-weight: 500;
@@ -48,13 +49,13 @@
     margin-bottom: 3rem;
 }
 
+/* 图网格 */
 .coretech-grid {
     display: grid;
     gap: 1.5rem;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     margin-bottom: 2.5rem;
 }
-
 .coretech-grid img {
     width: 100%;
     height: 300px;
@@ -63,6 +64,7 @@
     box-shadow: 0 0 25px rgba(0, 255, 247, 0.12);
 }
 
+/* 文本列表 */
 .coretech-list {
     max-width: 900px;
     margin: 0 auto;
@@ -72,13 +74,11 @@
     list-style: none;
     padding: 0;
 }
-
 .coretech-list li {
     position: relative;
     margin-bottom: 1.2rem;
     padding-left: 1.6rem;
 }
-
 .coretech-list li::before {
     content: '';
     position: absolute;
@@ -88,4 +88,29 @@
     height: 0.55rem;
     border-radius: 50%;
     background: #00fff7;
+}
+
+/* —— 响应式 —— */
+@media (max-width: 900px) {
+    .coretech-grid {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 768px) {
+    .coretech-inner {
+        padding: 4rem 1rem 3rem;
+    }
+    .coretech-title {
+        font-size: 2rem;
+    }
+    .coretech-sub {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+    .coretech-grid img {
+        height: 200px;
+    }
+    .coretech-list {
+        font-size: 1rem;
+    }
 }

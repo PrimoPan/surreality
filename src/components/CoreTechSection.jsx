@@ -1,7 +1,7 @@
 import React from 'react';
 import './CoreTechSection.css';
 
-// 技術演示圖
+// 技术演示图
 const images = [
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/newwebsite/test02.png',
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/newwebsite/test03.png',
@@ -31,18 +31,11 @@ const copy = {
     },
 };
 
-/**
- * CoreTechSection
- * -------------------------------------------------------
- * Props
- *   lang      'en' | 'zh'
- *   videoBg   可選：背景視頻 URL
- */
 export default function CoreTechSection({ lang = 'en', videoBg }) {
     const t = copy[lang] || copy.en;
+
     return (
-        <section className="coretech-section">
-            {/* 背景視頻（可選） */}
+        <section className="main-section coretech-section">
             {videoBg && (
                 <video
                     className="coretech-video-bg"
@@ -59,9 +52,8 @@ export default function CoreTechSection({ lang = 'en', videoBg }) {
                 <h2 className="coretech-title">{t.title}</h2>
                 <h3 className="coretech-sub">{t.subtitle}</h3>
 
-                {/* 圖網格 */}
                 <div className="coretech-grid">
-                    {images.map((src) => (
+                    {images.map(src => (
                         <img key={src} src={src} alt="spatial-tech" loading="lazy" />
                     ))}
                 </div>
@@ -75,5 +67,3 @@ export default function CoreTechSection({ lang = 'en', videoBg }) {
         </section>
     );
 }
-
-/* ---------------- CoreTechSection.css ---------------- */
