@@ -25,8 +25,8 @@ const speechSubs = [
         en: 'The future of art is an unbounded variation.'
     },
     {
-        zh: '超越頭顯的，是意識的邊界。',
-        en: 'What lies beyond the headsets is the boundary of consciousness.'
+        zh: '超越屏幕的，是意識的邊界。',
+        en: 'What lies beyond the screen is the boundary of consciousness.'
     }
 ];
 
