@@ -1,21 +1,18 @@
-// Info.jsx
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Info.css';
+import { ChevronDown } from 'lucide-react';
 
-/* ------------------ 1. 工具函数 ------------------ */
 const pick = (obj, key, lang) =>
     obj?.[`${key}_${lang === 'zh' ? 'cn' : 'en'}`] ?? '';
 
-/* ------------------ 2. 四张海报 ------------------ */
 const posterLinks = [
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster01.jpg',
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster02.jpg',
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster03.jpg',
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster04.jpg',
 ];
-/* ---------- 固定 UI 文本 ---------- */
+
 const copy = {
     en: {
         heroTitle: 'SURREALITY·幻實之境',
@@ -29,8 +26,6 @@ const copy = {
             'Large-Scale XR: seamless AR/VR headset integration with spatial interaction.',
             'Spatial Audio & Multimodal Experience: immersive audio, scent, and haptic feedback.',
         ],
-        artists:
-            'Featuring works by over 50 artists worldwide in digital painting, interactive installations, immersive video, sound art, and generative creation—where technology meets imagination.',
         guideTitle: 'AI Butterfly Guide',
         guideDesc:
             'On-site AI “butterfly” guide supports Chinese, English, and Cantonese—responding to questions on each artwork’s background, technical details, and inspirations in real time.',
@@ -53,8 +48,6 @@ const copy = {
             '大空間擴展現實（XR）：AR/VR 頭顯與空間交互無縫融合。',
             '空間音頻與多模態體驗：沉浸式聲音、氣味與觸覺反饋。',
         ],
-        artists:
-            '本次展覽匯聚全球逾 50 位藝術家作品，涵蓋數字繪畫、交互裝置、沉浸式影像、聲音藝術與生成式創作等多樣形式，科技與想像在此交匯，描繪虛實融合新視界。',
         guideTitle: 'AI 蝴蝶導覽員',
         guideDesc:
             '現場 AI 蝴蝶導覽員提供中文、English 及廣東話三語支持，可根據觀眾提問，即時解讀作品創作背景、技術原理與藝術靈感。',
@@ -67,9 +60,6 @@ const copy = {
     },
 };
 
-/* =====================================================
- * 4. 卡片组件
- * =================================================== */
 const ArtworkCard = ({ item, lang, onClick }) => {
     const firstAuthor = pick(item, 'artist', lang).split(/[，,]/)[0]?.trim();
     return (
@@ -86,7 +76,6 @@ const ArtworkCard = ({ item, lang, onClick }) => {
     );
 };
 
-/* ------------------ 5. Modal ------------------ */
 const ArtworkModal = ({ item, lang, showBio, onToggleBio, onClose, t }) =>
     !item ? null : (
         <div className="vrcard-modal" onClick={onClose}>
@@ -111,9 +100,6 @@ const ArtworkModal = ({ item, lang, showBio, onToggleBio, onClose, t }) =>
         </div>
     );
 
-/* =====================================================
- * 6. VR-Corner 小节
- * =================================================== */
 function VRCornerSection({ lang, t = {} }) {
     const [data, setData] = useState([]);
     const [selected, setSel] = useState(null);
@@ -124,14 +110,10 @@ function VRCornerSection({ lang, t = {} }) {
             .then(r => r.json())
             .then(all => {
                 const items = all.filter(x => x.id >= 22 && x.id <= 31);
-
-                // First row: Krista(25), Michaela(26), Melissa(27), Naima(29), Cory(24)
                 const firstRowIds = [25, 26, 27, 29, 24];
                 const firstRow = firstRowIds
                     .map(id => items.find(x => x.id === id))
                     .filter(Boolean);
-
-                // Then start second row with Hao Li(30), then the rest
                 const secondFirst = items.find(x => x.id === 30);
                 const rest = items.filter(
                     x => !firstRowIds.includes(x.id) && x.id !== 30
@@ -182,16 +164,19 @@ function VRCornerSection({ lang, t = {} }) {
                 onClose={() => setSel(null)}
                 t={t}
             />
+            <div className="scroll-hint" style={{ marginTop: '1rem' }}>
+                {lang === 'zh'
+                    ? '向下滚动查看预约入口'
+                    : 'Scroll down to explore registration'}
+                <ChevronDown className="scroll-icon" size={36} strokeWidth={1.8} />
+            </div>
         </section>
+
     );
 }
 
-/* =====================================================
- * 7. 主组件 Info
- *    ★ sections reordered: Poster → VR Corner → Info Content
- * =================================================== */
 export default function Info({ lang }) {
-    const t   = copy[lang] || copy.en;
+    const t = copy[lang] || copy.en;
     const nav = useNavigate();
 
     const goto = path => {
@@ -201,7 +186,6 @@ export default function Info({ lang }) {
 
     return (
         <div className="info-page">
-            {/* —— 第二屏：四张海报 —— */}
             <section className="main-section info-poster-full">
                 <div className="info-poster-container">
                     <h2 className="info-poster-title">
@@ -224,19 +208,20 @@ export default function Info({ lang }) {
                         ))}
                     </div>
                 </div>
+                <div className="scroll-hint">
+                    {lang === 'zh'
+                        ? '向下滚动查看 VR 角与预约入口'
+                        : 'Scroll down to explore the VR Corner & registration'}
+                    <ChevronDown className="scroll-icon" size={36} strokeWidth={1.8} />
+                </div>
             </section>
 
-            {/* —— 醒目提示 —— */}
-            <div className="scroll-hint">
-                {lang === 'zh'
-                    ? '向下滚动查看 VR 角与预约入口'
-                    : 'Scroll down to explore the VR Corner & registration'}
-            </div>
+            <section className="main-section vrcorner-section">
+                <VRCornerSection lang={lang} t={t} />
 
-            {/* —— 第三屏：VR Corner —— */}
-            <VRCornerSection lang={lang} t={t} />
 
-            {/* —— 第一屏：展览信息（预约入口） —— */}
+            </section>
+
             <section className="main-section info-content-section">
                 <div className="info-wrapper">
                     <div className="info-container">

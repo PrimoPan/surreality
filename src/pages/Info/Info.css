@@ -38,6 +38,7 @@ body {
     width: 100vw;
     position: relative;
     scroll-snap-align: start;
+    overflow: visible; /* 或不要限制溢出 */
 }
 /* 非首屏溢出隐藏 */
 .main-section:not(.info-content-section) {
@@ -190,26 +191,27 @@ body {
     overflow-y: auto;
 }
 .scroll-hint {
-    width: 100%;
-    text-align: center;
+    display: flex;
+    flex-direction: column;      /* 垂直排列 */
+    align-items: center;         /* 居中对齐 */
+    gap: 0.4rem;                 /* 文字和箭头之间间距 */
     font-size: 1rem;
     color: var(--text-color);
-    position: relative;
-    margin: -4.5rem 0 1rem; /* 向上提 1.5rem */
+    margin: 2.5rem 0 2rem;       /* 上下留白，避免堆叠 */
     z-index: 10;
 }
-.scroll-hint::after {
-    content: '↓';
-    display: block;
-    font-size: 2rem;
-    margin: -1rem; /* 向上提 1.5rem */
+
+.scroll-icon {
     animation: bounce 1.5s infinite;
+    color: #999;
 }
 
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50%      { transform: translateY(8px); }
 }
+
+
 .vrcorner-title {
     font-size: clamp(2.7rem, 6vw, 4.2rem);
     font-weight: 800;
@@ -269,6 +271,15 @@ body {
     color: rgba(255,255,255,.68);
     font-weight: 400;
     margin-bottom: .5rem;
+}
+.scroll-icon {
+    animation: bounce 1.5s infinite;
+    color: #999;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
 }
 
 .vrcard-summary {
