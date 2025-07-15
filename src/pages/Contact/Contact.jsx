@@ -1,19 +1,50 @@
-// src/pages/Contact.jsx
+// src/pages/Contact/Contact.jsx
 import React from 'react';
 
-export default function Contact() {
-    /* —— 当前位置坐标 —— */
-    const lat = 22.887358;      // N
-    const lon = 113.4822253;    // E
+export default function Contact({ lang = 'en' }) {
+    /* —— 1. 多语言文案映射 —— */
+    const texts = {
+        en: {
+            header: 'Contact',
+            locationLabel: 'Location:',
+            addressLines: [
+                'HKUST (Guangzhou)',
+                'No. 1 Duxue Road, Dongchong Town, Nansha District',
+                'Guangzhou, Guangdong, China',
+            ],
+            emailLabel: 'Email:',
+        },
+        'zh-Hans': {
+            header: '联系我们',
+            locationLabel: '位置：',
+            addressLines: [
+                '香港科技大学（广州）',
+                '广东省广州市南沙区东涌镇笃学路1号',
+            ],
+            emailLabel: '邮箱：',
+        },
+        'zh-Hant': {
+            header: '聯絡我們',
+            locationLabel: '位置：',
+            addressLines: [
+                '香港科技大學（廣州）',
+                '中華人民共和國廣東省廣州市南沙區東涌鎮篤學路1號',
+            ],
+            emailLabel: '郵箱：',
+        },
+    };
+    // 安全回退
+    const { header, locationLabel, addressLines, emailLabel } = texts[lang] || texts.en;
 
-    /* 小范围包围盒：±0.01°，进入页面就能看到校园一带 */
+    /* —— 2. 地图逻辑保持不变 —— */
+    const lat = 22.887358;
+    const lon = 113.4822253;
     const bbox = [
-        (lon - 0.01).toFixed(4),  // left
-        (lat - 0.01).toFixed(4),  // bottom
-        (lon + 0.01).toFixed(4),  // right
-        (lat + 0.01).toFixed(4),  // top
+        (lon - 0.01).toFixed(4),
+        (lat - 0.01).toFixed(4),
+        (lon + 0.01).toFixed(4),
+        (lat + 0.01).toFixed(4),
     ].join(',');
-
     const osmSrc =
         `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}` +
         `&marker=${lat}%2C${lon}&layer=mapnik`;
@@ -28,6 +59,10 @@ export default function Contact() {
                 padding: '0 1.25rem',
             }}
         >
+            <img
+                src="https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/MC2.png"
+                alt="MC2 Lab"
+            />
             <div
                 style={{
                     display: 'flex',
@@ -55,23 +90,24 @@ export default function Contact() {
                     }}
                 >
                     <h2 style={{ fontSize: '1.6rem', fontWeight: 800, marginBottom: '1.4rem' }}>
-                        Contact
+                        {header}
                     </h2>
 
                     <p style={{ marginBottom: '1.2rem' }}>
                         <h2 style={{ fontSize: '1.1rem', fontWeight: 500 }}>
-                            Location:
-                        </h2><br/>
-                        HKUST (Guangzhou)<br/>
-                        No.1 Du Xue Rd, Nansha District,<br/>
-                        Guangzhou, Guangdong, China<br/>
-
+                            {locationLabel}
+                        </h2>
                         <br />
-                        廣東省南沙區慶盛樞紐<br/>篤學路一號<br/>香港科技大學廣州
+                        {addressLines.map((line) => (
+                            <React.Fragment key={line}>
+                                {line}
+                                <br />
+                            </React.Fragment>
+                        ))}
                     </p>
 
                     <p>
-                        <bold> Email:&nbsp;</bold>
+                        <strong>{emailLabel}&nbsp;</strong>
                         <a
                             href="mailto:mc2@hkust-gz.edu.cn"
                             style={{ color: '#00e0ff', textDecoration: 'underline' }}

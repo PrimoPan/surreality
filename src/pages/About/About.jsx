@@ -1,25 +1,28 @@
+// src/pages/About/About.jsx
 import React, { useState, useEffect } from 'react';
 import ParallaxSection from '../../components/ParallaxSection';
+import TeamGrid from '../../components/TeamGrid/TeamGrid';  // 新增：团队九宫格
 import './About.css';
 import PanHui from '../PanHui/PanHui.jsx';
+
 /* =============================================================
- * 1. 文案：實驗室總覽（copy）
+ * 1. 文案：實驗室總覽 copy
  * =========================================================== */
 const copy = {
     en: {
         intro: [
             `As the Metaverse continues to evolve, its significance in shaping social interactions, educational experiences, and collaborative opportunities is becoming increasingly essential. This digital frontier holds the potential to create prosocial environments where individuals can connect, learn, and innovate, transcending geographical boundaries and fostering inclusivity. By leveraging immersive technologies, the Metaverse can enhance engagement, promote creativity, and facilitate knowledge sharing, ultimately contributing to a more connected and compassionate society.`,
-            `Led by Professor Pan Hui—an International Fellow of the Royal Academy of Engineering, Member of Academia Europaea, and IEEE Fellow—the <a href="https://mc2-lab-hkust.netlify.app/" target="_blank" rel="noopener noreferrer">Center for Metaverse and Computational Creativity (MC2)</a> operates at the intersection of immersive technology, Human‑Computer Interaction (HCI), social computing, computational social science, and machine learning.`
+            `Led by Professor Pan Hui—an International Fellow of the Royal Academy of Engineering, Member of Academia Europaea, and IEEE Fellow—the <a href="https://mc2-lab-hkust.netlify.app/" target="_blank" rel="noopener noreferrer">Center for Metaverse and Computational Creativity (MC2)</a> operates at the intersection of immersive technology, Human-Computer Interaction (HCI), social computing, computational social science, and machine learning.`
         ],
         fociTitle: 'Our research is guided by five key foci:',
         foci: [
             'Pushing the Boundaries of Immersive Technologies: We explore the convergence of virtual reality (VR), augmented reality (AR), extended reality (XR), and mixed reality (MR), alongside other transformative technologies that shape the Metaverse.',
             'Social Computing and Prosocial Interactions: We investigate how social computing can enhance prosocial behaviors, fostering trust, engagement, and collaboration within virtual communities.',
-            'Generative AI and Large Language Models Techniques: As core technologies driving our research, we focus on developing applicable generative AI and LLM‑related techniques for enhancing the interactivity in the metaverse and broadening the boundaries of higher education.',
-            'VR/AR/XR Computer Network: We examine innovative approaches on VR‑related network usage that adapt to user needs and environmental conditions, ensuring seamless experiences in the Metaverse.',
-            'AI+ Projects: Our AI+ initiative, particularly in education, encompasses three main components: Metaverse classrooms, AI lecturers, and the development of interactive AI lecturers. These projects aim to create immersive, cross‑campus learning environments, introduce AI‑driven teaching methods, and develop real‑time interactive AI lecturers, thereby revolutionizing the educational landscape.'
+            'Generative AI and Large Language Models Techniques: As core technologies driving our research, we focus on developing applicable generative AI and LLM-related techniques for enhancing the interactivity in the metaverse and broadening the boundaries of higher education.',
+            'VR/AR/XR Computer Network: We examine innovative approaches on VR-related network usage that adapt to user needs and environmental conditions, ensuring seamless experiences in the Metaverse.',
+            'AI+ Projects: Our AI+ initiative, particularly in education, encompasses three main components: Metaverse classrooms, AI lecturers, and the development of interactive AI lecturers. These projects aim to create immersive, cross-campus learning environments, introduce AI-driven teaching methods, and develop real-time interactive AI lecturers, thereby revolutionizing the educational landscape.'
         ],
-        pubs: 'Our group’s work has been published in top‑tier venues across computer science and art, including ACM WWW, ACM SIGCOMM, ACM MobiSys, ACM MobiCom, ACM CoNEXT, IEEE INFOCOM, IEEE PerCom, IEEE ICNP, IEEE ICDCS, IJCAI, AAAI, SIGGRAPH, CHI, CSCW, and more.',
+        pubs: 'Our group’s work has been published in top-tier venues across computer science and art, including ACM WWW, ACM SIGCOMM, ACM MobiSys, ACM MobiCom, ACM CoNEXT, IEEE INFOCOM, IEEE PerCom, IEEE ICNP, IEEE ICDCS, IJCAI, AAAI, SIGGRAPH, CHI, CSCW, and more.',
         join: 'At MC2, we are committed to harnessing these interdisciplinary approaches to create transformative experiences that enrich lives and foster a more connected world. Join us as we navigate the exciting possibilities of the Metaverse and its applications in society.'
     },
     zh: {
@@ -41,11 +44,7 @@ const copy = {
 };
 
 /* =============================================================
- * 2. 文案：領航人（Prof. Pan Hui）
- * =========================================================== */
-
-/* =============================================================
- * 3. 輪播封面圖片
+ * 2. 轮播封面图片
  * =========================================================== */
 const coverImages = [
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/mc2/mc201.jpg',
@@ -53,15 +52,20 @@ const coverImages = [
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/mc2/mc203.png',
 ];
 
-export default function About({ lang }) {
-    // 语言安全回退
-    const locale = copy[lang] ? lang : 'en';
-    const t = copy[locale];
+export default function About({ lang = 'en' }) {
+    // 1️⃣ 直接使用上层传过来的 lang（'en' | 'zh-Hans' | 'zh-Hant'）
+    const locale = ['en', 'zh-Hans', 'zh-Hant'].includes(lang) ? lang : 'en';
 
-    // 轮播头图索引
+    // 2️⃣ 实验室介绍部分，只区分 en / zh（简体 / 繁体 都走同一套 copy.zh）
+    const t = locale === 'en' ? copy.en : copy.zh;
+
+    // 3️⃣ 轮播头图
     const [coverIndex, setCoverIndex] = useState(0);
     useEffect(() => {
-        const id = setInterval(() => setCoverIndex(i => (i + 1) % coverImages.length), 6000);
+        const id = setInterval(
+            () => setCoverIndex(i => (i + 1) % coverImages.length),
+            6000
+        );
         return () => clearInterval(id);
     }, []);
 
@@ -70,7 +74,7 @@ export default function About({ lang }) {
             {/* —— 1. 头图 Parallax —— */}
             <ParallaxSection
                 image={coverImages[coverIndex]}
-                title={locale === 'en' ? 'HKUST MC2 Lab' : '香港科技大學 MC2 實驗室'}
+                title={ locale === 'en' ? 'HKUST MC2 Lab' : '香港科技大學 MC2 實驗室' }
                 subtitle={
                     locale === 'en'
                         ? 'Center for Metaverse and Computational Creativity'
@@ -79,10 +83,13 @@ export default function About({ lang }) {
                 isParallax
             />
 
-            {/* —— 2. 领航人 Pan Hui 名片 —— */}
-            <PanHui lang={locale} />               {/* ← ② 新增 */}
+            {/* —— 2. 团队九宫格 —— */}
+            <TeamGrid lang={locale} />
 
-            {/* —— 3. 实验室详情 —— */}
+            {/* —— 3. 领航人 Pan Hui 名片 —— */}
+            <PanHui lang={locale} />
+
+            {/* —— 4. 实验室详情 —— */}
             <section className="about-wrapper">
                 <div className="about-container">
                     {t.intro.map((p, i) => (
@@ -91,9 +98,7 @@ export default function About({ lang }) {
 
                     <h3>{t.fociTitle}</h3>
                     <ul className="about-list">
-                        {t.foci.map(item => (
-                            <li key={item}>{item}</li>
-                        ))}
+                        {t.foci.map(item => <li key={item}>{item}</li>)}
                     </ul>
 
                     <p>{t.pubs}</p>

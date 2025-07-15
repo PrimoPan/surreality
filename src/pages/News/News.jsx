@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './News.css';
+import { Converter } from 'opencc-js';
 
 /* ------------------------------------------------------------------
    SURREALITY press-release – bilingual content fully aligned (zh & en)
@@ -19,9 +20,12 @@ const HIGHLIGHT_IMAGES = [
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/newwebsite/00003.png',
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/newwebsite/00004.jpg',
 ];
+
 const ImageGrid = ({ imgs }) => (
     <div className="image-grid">
-        {imgs.map(src => <img key={src} src={src} alt="overview" loading="lazy" />)}
+        {imgs.map(src => (
+            <img key={src} src={src} alt="overview" loading="lazy" />
+        ))}
     </div>
 );
 
@@ -40,18 +44,26 @@ function Carousel({ imgs, auto = false }) {
 
     return (
         <div className="carousel horizontal-slider">
-            <button className="nav prev" onClick={prev} aria-label="prev">‹</button>
+            <button className="nav prev" onClick={prev} aria-label="prev">
+                ‹
+            </button>
             <div className="viewport">
-                <div className="track" style={{ transform: `translateX(-${idx * 100}%)` }}>
+                <div
+                    className="track"
+                    style={{ transform: `translateX(-${idx * 100}%)` }}
+                >
                     {imgs.map(src => (
                         <img key={src} src={src} alt="slide" loading="lazy" />
                     ))}
                 </div>
             </div>
-            <button className="nav next" onClick={next} aria-label="next">›</button>
+            <button className="nav next" onClick={next} aria-label="next">
+                ›
+            </button>
         </div>
     );
 }
+
 const content = {
     zh: {
         hero: {
@@ -61,9 +73,7 @@ const content = {
             bgImage: '/assets/news/hero.jpg',
         },
         sections: [
-            /* 0 开幕概览 */
             {
-
                 heading: '开幕概览',
                 paragraphs: [
                     '2025 年 6 月 26 日，全球首个大空间扩展现实（XR）人工智能（AI）艺术展 “SURREALITY·幻实之境” 在香港科技大学（广州）隆重开幕。本次展览由港科大（广州）主办，元宇宙与计算创意研究中心（MC²）承办。作为全球首个大规模融合 AI 艺术创作与大空间 XR 的艺术展览，幻实之境应邀纳入 2025 年“中法文化之春”官方系列活动，并获法国驻广州总领事馆及法国文化中心鼎力支持。',
@@ -71,8 +81,6 @@ const content = {
                 ],
                 openingCarousel: OPENING_IMAGES,
             },
-
-            /* 1 展览亮点 */
             {
                 heading: '展览亮点',
                 bullets: [
@@ -82,8 +90,6 @@ const content = {
                 ],
                 openingCarousel: HIGHLIGHT_IMAGES,
             },
-
-            /* 2 开幕式致辞 */
             {
                 heading: '开幕式致辞',
                 paragraphs: [
@@ -94,27 +100,23 @@ const content = {
                     '展览总监许彬教授阐释“感知—技术—现实”的策展思路，并介绍 MR 装置区、VR 空间与 SLAM 导览系统。',
                 ],
             },
-
-            /* 3 策展人导览 */
             {
                 heading: '策展人导览',
                 paragraphs: [
                     '策展团队带领嘉宾与媒体深度导览作品，讲解创作背景与技术语境。倪明选校长与多位嘉宾现场体验 XR + AI 装置，并与艺术家交流技术策略。',
                 ],
             },
-
-            /* 4 国际艺术家现场感言 */
             {
                 heading: '国际艺术家现场感言',
                 paragraphs: [
                     '玻利维亚裔电影制片人、AI 艺术家 Violeta Ayala：“看到作品像丝绸一样在空中飞翔，我真的想哭。” 她期待大湾区成为全球创意科技中心。',
                 ],
             },
-
-            /* 5 艺术家讲座 I */
             {
                 heading: '艺术家讲座 Artist Talk',
-                paragraphs: ['六位国际艺术家围绕“创作”与“表达”分享跨媒介灵感与实践。'],
+                paragraphs: [
+                    '六位国际艺术家围绕“创作”与“表达”分享跨媒介灵感与实践。',
+                ],
                 bullets: [
                     'Jeremy Oury & Michelle Falcon：从建筑投影到 MR 与声音几何。',
                     'Naima Karim：VR 短片《The Anticipation of Rain》结合香氛与多感官叙事。',
@@ -124,32 +126,24 @@ const content = {
                     '袁正：从服装到 VR 艺术，构建“共生身体”。',
                 ],
             },
-
-            /* 6 圆桌讨论 I */
             {
                 heading: '圆桌讨论：未来生态的构建与连接',
                 paragraphs: [
-                    '在 Ingeborg Reichle 教授主持下，六位艺术家围绕“未来生态”展开深度对话，强调技术需服务情感与内容，并在创作伦理与生态系统构建中承担责任。'
+                    '在 Ingeborg Reichle 教授主持下，六位艺术家围绕“未来生态”展开深度对话，强调技术需服务情感与内容，并在创作伦理与生态系统构建中承担责任。',
                 ],
             },
-
-            /* 7 艺术讲座 II：重写未来的物质与记忆 */
             {
                 heading: '艺术讲座 II：重写未来的物质与记忆',
                 paragraphs: [
-                    '27 日上午论坛聚焦“重写未来的物质与记忆”，六位中国高校学者、艺术家分享跨媒体创作：曹澍探讨“副本”与多维历史想象；RAY LC 通过 XR 与机器人重构文化遗产；张超讨论 AI 与身份认同；谭亮分享算法艺术教学与商业合作；胡芮用游戏引擎探讨金融市场与意识形态；卢思屹剖析 MR 叙事与观众行为互动。',
+                    '27 日上午论坛聚焦“重写未来的物质与记忆”，六位中国高校学者、艺术家分享跨媒介创作：曹澍探讨“副本”与多维历史想象；RAY LC 通过 XR 与机器人重构文化遗产；张超讨论 AI 与身份认同；谭亮分享算法艺术教学与商业合作；胡芮用游戏引擎探讨金融市场与意识形态；卢思屹剖析 MR 叙事与观众行为互动。',
                 ],
             },
-
-            /* 8 圆桌讨论 II：生成与共生 / 模拟与副本 */
             {
                 heading: '圆桌讨论 II：生成与共生 & 模拟与副本',
                 paragraphs: [
                     '六位艺术家、学者围绕 AI & XR 作为“创作者”与“叙事引擎”展开双场对谈，讨论技术如何扩展艺术主体性、重写历史与未来想象。',
                 ],
             },
-
-            /* 9 幻实之间，连接未来 */
             {
                 heading: '幻实之间，连接未来',
                 paragraphs: [
@@ -170,8 +164,6 @@ const content = {
             '特别鸣谢｜香港科技大学（广州）校长倪明选',
         ],
     },
-
-    /* ---------------- English ---------------- */
     en: {
         hero: {
             title: 'HKUST(GZ) Launches Ground-breaking “SURREALITY” Tech-Art Exhibition',
@@ -188,7 +180,6 @@ const content = {
                 ],
                 openingCarousel: OPENING_IMAGES,
             },
-
             {
                 heading: 'Highlights',
                 bullets: [
@@ -198,7 +189,6 @@ const content = {
                 ],
                 openingCarousel: HIGHLIGHT_IMAGES,
             },
-
             {
                 heading: 'Opening Speeches',
                 paragraphs: [
@@ -209,21 +199,18 @@ const content = {
                     'Curator Prof. Pan Hui detailed the show’s multi-space narrative map driven by perception, technology and reality.',
                 ],
             },
-
             {
                 heading: 'Curator-led Tour',
                 paragraphs: [
                     'The MC² team guided guests and media through each zone, explaining creative context and technical pipelines. President Ni experienced AI-XR installations first-hand and discussed research pathways with artists.',
                 ],
             },
-
             {
                 heading: 'Artists on Site',
                 paragraphs: [
                     'Bolivian-Australian filmmaker & AI artist Violeta Ayala said: “Seeing my work fly like silk in the air almost made me cry.” She hopes the Greater Bay Area will become a global hub for creative tech.',
                 ],
             },
-
             {
                 heading: 'Artist Talks',
                 paragraphs: ['Six international creators shared cross-media inspirations around “creation” and “expression.”'],
@@ -236,28 +223,24 @@ const content = {
                     'Zheng Yuan – From fashion to VR art with “symbiotic bodies.”',
                 ],
             },
-
             {
                 heading: 'Roundtable I: Building Future Ecologies',
                 paragraphs: [
                     'Moderated by Prof. Ingeborg Reichle, six artists debated AI/XR ethics and aesthetics, asserting that technology must serve content, emotion and sustainable creative ecosystems.',
                 ],
             },
-
             {
                 heading: 'Forum II: Rewriting Futures of Matter & Memory',
                 paragraphs: [
                     'On 27 June, six Chinese scholars and artists explored algorithms, VR and historical “copies” as devices to rethink materiality and cultural memory.',
                 ],
             },
-
             {
                 heading: 'Roundtable II: Generation & Symbiosis / Simulation & Replica',
                 paragraphs: [
                     'Two deep-dive panels examined AI & XR as creators and narrative engines—probing how emerging media reshape authorship, history and future imagination.',
                 ],
             },
-
             {
                 heading: 'Between Reality and Virtuality',
                 paragraphs: [
@@ -279,19 +262,39 @@ const content = {
 };
 
 /* ------------------------------------------------------------------
-   News component
+   News component with full zh-Hant support
 ------------------------------------------------------------------------ */
 export default function News({ lang = 'en' }) {
-    const t = content[lang] || content.en;
+    const isZhHans = lang === 'zh' || lang === 'zh-Hans';
+    const isZhHant = lang === 'zh-Hant';
+    const isEn = !isZhHans && !isZhHant;
+
+    // choose base object
+    const raw = isEn ? content.en : content.zh;
+
+    // set up converter once: simplified → traditional
+    const s2t = React.useMemo(() => Converter({ from: 'cn', to: 'tw' }), []);
+
+    // conversion helper
+    const cvt = str => (isZhHant && str ? s2t(str) : str);
+
     return (
         <main className="news-page">
-            <section className="news-hero" style={{ backgroundImage: `url(${t.hero.bgImage})` }}>
-                <div className="news-hero__overlay"><h1>{t.hero.title}</h1><h2>{t.hero.subtitle}</h2><p className="news-date">{t.hero.date}</p></div>
+            <section
+                className="news-hero"
+                style={{ backgroundImage: `url(${raw.hero.bgImage})` }}
+            >
+                <div className="news-hero__overlay">
+                    <h1>{cvt(raw.hero.title)}</h1>
+                    <h2>{cvt(raw.hero.subtitle)}</h2>
+                    <p className="news-date">{cvt(raw.hero.date)}</p>
+                </div>
             </section>
 
-            {t.sections.map((sec, i) => (
+            {raw.sections.map((sec, i) => (
                 <section key={i} className="news-section">
-                    <h2>{sec.heading}</h2>
+                    <h2>{cvt(sec.heading)}</h2>
+
                     {sec.openingCarousel && (
                         sec.openingCarousel === HIGHLIGHT_IMAGES ? (
                             <Carousel imgs={sec.openingCarousel} />
@@ -299,12 +302,23 @@ export default function News({ lang = 'en' }) {
                             <ImageGrid imgs={OPENING_IMAGES} />
                         )
                     )}
-                    {sec.paragraphs && sec.paragraphs.map((p, j) => <p key={j}>{p}</p>)}
-                    {sec.bullets && <ul className="news-bullets">{sec.bullets.map(b => <li key={b}>{b}</li>)}</ul>}
+
+                    {sec.paragraphs && sec.paragraphs.map((p, j) => <p key={j}>{cvt(p)}</p>)}
+
+                    {sec.bullets && (
+                        <ul className="news-bullets">
+                            {sec.bullets.map(b => <li key={b}>{cvt(b)}</li>)}
+                        </ul>
+                    )}
                 </section>
             ))}
 
-            <section className="news-ack"><h2>{lang === 'zh' ? '鸣谢' : 'Acknowledgments'}</h2><ul>{t.acknowledgments.map(a => <li key={a}>{a}</li>)}</ul></section>
+            <section className="news-ack">
+                <h2>{isEn ? 'Acknowledgments' : cvt('鸣谢')}</h2>
+                <ul>
+                    {raw.acknowledgments.map(a => <li key={a}>{cvt(a)}</li>)}
+                </ul>
+            </section>
         </main>
     );
 }

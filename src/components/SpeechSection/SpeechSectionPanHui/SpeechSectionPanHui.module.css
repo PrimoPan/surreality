@@ -1,0 +1,64 @@
+/* SpeechSectionPanHui.module.css */
+
+.speechSection {
+    position: relative;
+    background-size: cover;       /* 关键：等比铺满 */
+    background-position: center;  /* 关键：始终居中裁切 */
+    background-repeat: no-repeat; /* 关键：防止右侧重复 */
+}
+.sectionTitle {
+    position: absolute;
+    top: 8%;
+    right: 5%;
+    text-align: right;
+    z-index: 2;
+}
+.sectionTitle h2 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+}
+.sectionTitle h3 {
+    margin: 0;
+    margin-top: 0.25rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ddd;
+}
+
+/* 云朵气泡主体 */
+.speechBubble {
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    width: 300px;
+    height: 60vh;               /* 固定高度 */
+    background: rgba(31, 32, 41, 0.85);
+    padding: 1rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    border-radius: 16px;
+    display: flex;              /* flex 布局 */
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* 气泡内容滚动区 */
+.bubbleContent {
+    flex: 1;                    /* 撑满剩余空间 */
+    overflow-y: auto;           /* 打开纵向滚动 */
+    text-align: left;
+    color: #fff;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* 滚动条微调（WebKit 内核） */
+.bubbleContent::-webkit-scrollbar {
+    width: 6px;
+}
+.bubbleContent::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}

@@ -1,0 +1,173 @@
+[
+  {
+    "name": {
+      "en": "Yawei Zhao",
+      "cn": "赵雅薇",
+      "tw": "趙雅薇"
+    },
+    "position": {
+      "en": "Chief Planner",
+      "cn": "总策划",
+      "tw": "總策劃"
+    },
+    "research": {
+      "en": "Urban HCI， XR",
+      "cn": "城市人机交互，拓展现实",
+      "tw": "城市人機交互，拓展現實"
+    },
+    "email": "yzhao099@connect.hkust-gz.edu.cn",
+    "photo_url": "https://wj.qq.com/api/files/download?survey_id=23096558&question_id=q-9-UZL0&file_name=23096558_0_cb6482fe27a3678a03da938d95fd8073.jpeg&download=1"
+  },
+  {
+    "name": {
+      "en": "Hao Li",
+      "cn": "李昊",
+      "tw": "李昊"
+    },
+    "position": {
+      "en": "Technical Lead and Exhibition Curation Execution",
+      "cn": "技术负责和执行策展",
+      "tw": "技術負責和執行策展"
+    },
+    "research": {
+      "en": "Artificial Intelligence (AI) Art， Augmented Reality (AR) Art， Audiovisual Art",
+      "cn": "人工智能艺术、增强现实艺术、视听艺术",
+      "tw": "人工智能藝術、增強現實藝術、視聽藝術"
+    },
+    "email": "haoli2@hkust-gz.edu.cn",
+    "photo_url": "https://wj.qq.com/api/files/download?survey_id=23096558&question_id=q-9-UZL0&file_name=23096558_0_28d68807c42e9cd55c4f24b5a853197f.jpg&download=1"
+  },
+  {
+    "name": {
+      "en": "Qinyong Gao",
+      "cn": "高沁咏",
+      "tw": "高沁咏"
+    },
+    "position": {
+      "en": "Planning & Administration",
+      "cn": "策划-行政事务",
+      "tw": "策劃-行政事務"
+    },
+    "research": {
+      "en": "",
+      "cn": "",
+      "tw": ""
+    },
+    "email": "qinyonggao@hkust-gz.edu.cn",
+    "photo_url": "https://wj.qq.com/api/files/download?survey_id=23096558&question_id=q-9-UZL0&file_name=23096558_0_831e4be70b9214401275291af5d5efd6.jpeg&download=1"
+  },
+  {
+    "name": {
+      "en": "Shuyue Li",
+      "cn": "李姝玥",
+      "tw": "李姝玥"
+    },
+    "position": {
+      "en": "Unity Development (Art Direction); Exhibition Planning",
+      "cn": "Unity开发（美术方向）；展区策划",
+      "tw": "Unity開發（美術方向）；展區策劃"
+    },
+    "research": {
+      "en": "HCI; Art and Design; XR; Social Computing",
+      "cn": "人机交互，艺术设计，XR，社会计算",
+      "tw": "人機交互，藝術設計，XR，社會計算"
+    },
+    "email": "sli688@connect.hkust-gz.edu.cn",
+    "photo_url": "https://wj.qq.com/api/files/download?survey_id=23096558&question_id=q-9-UZL0&file_name=23096558_0_410a4c63db8ca94dd4f1c049817975d5.jpg&download=1"
+  },
+  {
+    "name": {
+      "en": "Junkung Long",
+      "cn": "龙俊坤",
+      "tw": "龍俊坤"
+    },
+    "position": {
+      "en": "Technical Development",
+      "cn": "技术开发",
+      "tw": "技術開發"
+    },
+    "research": {
+      "en": "Human Computer Interaction",
+      "cn": "人机交互",
+      "tw": "人機交互"
+    },
+    "email": "jlong892@connect.hkust-gz.edu.cn",
+    "photo_url": "https://wj.qq.com/api/files/download?survey_id=23096558&question_id=q-9-UZL0&file_name=23096558_0_ad613c8e252f6f0c6414088e27fded5b.jpeg&download=1"
+  },
+  {
+    "name": {
+      "en": "Dongyijie Primo Pan",
+      "cn": "潘東逸杰",
+      "tw": "潘東逸杰"
+    },
+    "position": {
+      "en": "AI Technical And Website Develop",
+      "cn": "AI技术开发和网页开发",
+      "tw": "人工智慧技術開發"
+    },
+    "research": {
+      "en": " HCI and XR tech in well-being and education",
+      "cn": "人机交互和XR在健康与教育领域的应用",
+      "tw": "人機交互和XR在健康與教育領域的應用"
+    },
+    "email": "dpan750@connect.hkust-gz.edu.cn",
+    "photo_url": "https://github.com/PrimoPan/picx-images-hosting/raw/master/zjz.dvx2bsydhsw.webp"
+  },
+  {
+    "name": {
+      "en": "Yuqi Liang",
+      "cn": "梁育齐",
+      "tw": "梁育齊"
+    },
+    "position": {
+      "en": "Technical Support",
+      "cn": "技术",
+      "tw": "技術"
+    },
+    "research": {
+      "en": "",
+      "cn": "",
+      "tw": ""
+    },
+    "email": "kongleung@email.cn",
+    "photo_url": "https://wj.qq.com/api/files/download?survey_id=23096558&question_id=q-9-UZL0&file_name=23096558_0_5136ed4fabfdd38bd4de814a23cbf5e5.jpg&download=1"
+  },
+  {
+    "name": {
+      "en": "Yishuai Zhang",
+      "cn": "张一帅",
+      "tw": "張一帥"
+    },
+    "position": {
+      "en": "Technical & Planning Assistance",
+      "cn": "技术辅助，策划辅助",
+      "tw": "技術輔助，策劃輔助"
+    },
+    "research": {
+      "en": "non-semantic multimodal data interpretability and artistic application",
+      "cn": "非语义多模态数据的可解释与艺术呈现",
+      "tw": "非語義多模態數據的可解釋與藝術呈現"
+    },
+    "email": "yzhang382@connect.hkust-gz.edu.cn",
+    "photo_url": "https://wj.qq.com/api/files/download?survey_id=23096558&question_id=q-9-UZL0&file_name=23096558_0_bdda2c0ad7cb168dd1aa8476d7078fbc.png&download=1"
+  },
+  {
+    "name": {
+      "en": "Wenqing Gu",
+      "cn": "顾文清",
+      "tw": "顧文清"
+    },
+    "position": {
+      "en": "Public Relations / Communications",
+      "cn": "公共关系/宣传",
+      "tw": "公共關係/宣傳"
+    },
+    "research": {
+      "en": "Computational Social Science/HCI",
+      "cn": "计算社会科学/人机交互",
+      "tw": "計算社會科學/人機交互"
+    },
+    "email": "wgu492@connect.hkust-gz.edu.cn",
+    "photo_url": "https://wj.qq.com/api/files/download?survey_id=23096558&question_id=q-9-UZL0&file_name=23096558_0_1fdc3eb2602b30b0a8c093743705db96.jpg&download=1"
+  }
+]

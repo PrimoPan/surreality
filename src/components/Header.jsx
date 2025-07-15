@@ -11,21 +11,25 @@ export default function Header({ lang, onLangChange }) {
 
     const menuItems = {
         en: [
-            { key: '/',        label: 'Home'           },
-            { key: '/info',    label: 'Information'    },
-            { key: '/about',   label: 'About Us'       },
-            { key: '/contact', label: 'Contact'     },   // ★ NEW
+            { key: '/', label: 'Home' },
+            { key: '/info', label: 'Information' },
+            { key: '/about', label: 'About Us' },
+            { key: '/contact', label: 'Contact' },
         ],
-        zh: [
-            { key: '/',        label: '首頁'           },
-            { key: '/info',    label: '展覽信息'       },
-            { key: '/about',   label: '關於團隊'       },
-            { key: '/contact', label: '聯絡我們'       },   // ★ NEW
+        'zh-Hans': [
+            { key: '/', label: '首页' },
+            { key: '/info', label: '展览信息' },
+            { key: '/about', label: '关于我们' },
+            { key: '/contact', label: '联系我们' },
+        ],
+        'zh-Hant': [
+            { key: '/', label: '首頁' },
+            { key: '/info', label: '展覽資訊' },
+            { key: '/about', label: '關於我們' },
+            { key: '/contact', label: '聯絡我們' },
         ],
     };
 
-    /* ---------- 公共渲染函数 ---------- */
-    /* ---------- 公共渲染函数 ---------- */
     const renderLinks = (isDrawer = false) => (
         menuItems[lang].map(({ key, label }) => (
             <li
@@ -34,7 +38,7 @@ export default function Header({ lang, onLangChange }) {
                 style={isDrawer ? { cursor: 'pointer' } : {}}
                 onClick={() => {
                     nav(key);
-                    window.scrollTo({ top: 0, behavior: 'smooth' }); // 点击任何链接后都回到顶部
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                     if (isDrawer) {
                         setDrawerOpen(false);
                     }
@@ -45,25 +49,27 @@ export default function Header({ lang, onLangChange }) {
         ))
     );
 
-
     return (
         <>
             {/* ===== 顶部栏 ===== */}
             <div className="major-nav">
-                {/* LOGO 组 */}
+                {/* ✅ 只保留后两个 Logo */}
                 <nav className="nav-logo">
-                    <img src="https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/MC2.png" alt="MC2 Lab" />
+                    <img
+                        src="https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/UST-GZ-EN.png"
+                        alt="HKUST GZ"
+                    />
                     <div className="vertical" />
-                    <img src="https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/UST-GZ-EN.png" alt="HKUST GZ" />
-                    <div className="vertical" />
-                    <img src="https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/UST-EN.png" alt="HKUST" />
+                    <img
+                        src="https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/UST-EN.png"
+                        alt="HKUST"
+                    />
                 </nav>
 
                 {/* 桌面导航 */}
                 <nav className="nav">
                     <ul className="nav__links">
                         {renderLinks()}
-                        {/* 语言选择器 */}
                         <li className="nav__link">
                             <Select
                                 className="language-select"
@@ -73,7 +79,8 @@ export default function Header({ lang, onLangChange }) {
                                 dropdownMatchSelectWidth={false}
                             >
                                 <Option value="en">English</Option>
-                                <Option value="zh">中文</Option>
+                                <Option value="zh-Hans">简体中文</Option>
+                                <Option value="zh-Hant">繁體中文</Option>
                             </Select>
                         </li>
                     </ul>
@@ -98,27 +105,31 @@ export default function Header({ lang, onLangChange }) {
                 bodyStyle={{ background: '#1f2029', padding: '1.2rem' }}
                 headerStyle={{ display: 'none' }}
             >
-                <ul style={{
-                    listStyle: 'none',
-                    padding: 0,
-                    margin: 0,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '1.2rem'
-                }}>
+                <ul
+                    style={{
+                        listStyle: 'none',
+                        padding: 0,
+                        margin: 0,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '1.2rem',
+                    }}
+                >
                     {renderLinks(true)}
-
-                    {/* 语言选择（移动端） */}
                     <li style={{ marginTop: '1rem' }}>
                         <Select
                             className="language-select"
                             value={lang}
                             bordered={false}
-                            onChange={(v) => { onLangChange(v); setDrawerOpen(false); }}
+                            onChange={(v) => {
+                                onLangChange(v);
+                                setDrawerOpen(false);
+                            }}
                             dropdownMatchSelectWidth={false}
                         >
                             <Option value="en">English</Option>
-                            <Option value="zh">中文</Option>
+                            <Option value="zh-Hans">简体中文</Option>
+                            <Option value="zh-Hant">繁體中文</Option>
                         </Select>
                     </li>
                 </ul>

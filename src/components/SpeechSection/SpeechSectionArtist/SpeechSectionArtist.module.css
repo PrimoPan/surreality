@@ -1,0 +1,82 @@
+/* SpeechSectionArtist.module.css */
+
+.speechSection {
+    position: relative;
+    background-size: cover;       /* 关键：等比铺满 */
+    background-position: center;  /* 关键：始终居中裁切 */
+    background-repeat: no-repeat; /* 关键：防止右侧重复 */
+}
+.sectionTitleArtist {
+    position: absolute;
+    top: 8%;
+    left: 5%;
+    text-align: left;
+    z-index: 2;
+}
+.sectionTitleArtist h2 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+}
+.sectionTitleArtist h3 {
+    margin: 0;
+    margin-top: 0.25rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ddd;
+}
+
+/* 底部中央云朵状气泡 */
+.speechBubbleArtist {
+    position: absolute;
+    bottom: 25%;
+    left: 5%;                /* 从 50% 调整到 60%，向右移动 */
+    transform: translateX(-50%);
+    width: 320px;
+    height: 55vh;
+    background: rgba(31, 32, 41, 0.9);
+    padding: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* 气泡内所有内容，包括姓名/身份+发言文本 */
+.bubbleContentArtist {
+    flex: 1;
+    overflow-y: auto;
+    text-align: left;
+    color: #fff;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* 艺术家姓名与身份在气泡内的样式 */
+.bubbleContentArtist .artistInfo {
+    margin-bottom: 1rem;
+}
+.bubbleContentArtist .artistInfo h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+}
+.bubbleContentArtist .artistInfo p {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #ccc;
+}
+
+/* 滚动条微调 */
+.bubbleContentArtist::-webkit-scrollbar {
+    width: 6px;
+}
+.bubbleContentArtist::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}

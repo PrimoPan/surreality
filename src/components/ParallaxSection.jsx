@@ -5,14 +5,24 @@ import { motion, AnimatePresence } from 'framer-motion';
 import './ParallaxSection.css';
 
 /**
- * ParallaxSection 3.1 – 统一标记 + 精简 CSS
+ * ParallaxSection 3.1 – 多语言支持
  * — 背景 cross‑fade；文字首屏动画；Parallax 位移
- * — 彻底移除旧的 .parallax-banner 样式，避免冲突
+ * — 支持 en / zh-Hans / zh-Hant 的 CTA 与 scroll 提示
  */
 
 const uiText = {
-    en: { cta: 'View the news!', scroll: 'Scroll ↓' },
-    zh: { cta: '查看新闻稿！', scroll: '下滑探索 ↓' },
+    en: {
+        cta: 'View the news!',
+        scroll: 'Scroll ↓',
+    },
+    'zh-Hans': {
+        cta: '查看新闻！',
+        scroll: '下滑探索 ↓',
+    },
+    'zh-Hant': {
+        cta: '查看新聞！',
+        scroll: '下滑探索 ↓',
+    },
 };
 
 export default function ParallaxSection({

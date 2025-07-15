@@ -8,15 +8,24 @@ const images = [
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/newwebsite/test04.png',
 ];
 
-/* 文案 */
+/* 文案：繁体、简体、英文 */
 const copy = {
-    zh: {
+    'zh-Hant': {
         title: '我們的核心技術：空間計算',
         subtitle: '基於 Lidar & 全景相機 的大空間掃描、重建與定位系統',
         bullets: [
             '即插即用 — <b>無需標定同步</b>，簡化硬件依賴；',
             '預掃描地圖支援多用戶協同 SLAM，達到 <b>公分級定位</b>；',
             '超高清彩色點雲可直入 <b>Unity</b>，快速對齊虛實資產。',
+        ],
+    },
+    'zh-Hans': {
+        title: '我们的核心技术：空间计算',
+        subtitle: '基于 Lidar 与全景相机的大空间扫描、重建与定位系统',
+        bullets: [
+            '即插即用 — <b>无需标定同步</b>，简化硬件依赖；',
+            '预扫描地图支持多用户协同 SLAM，实现 <b>厘米级定位</b>；',
+            '超高清彩色点云可直接导入 <b>Unity</b>，快速对齐虚实资产。',
         ],
     },
     en: {
@@ -53,7 +62,7 @@ export default function CoreTechSection({ lang = 'en', videoBg }) {
                 </header>
 
                 <div className="coretech-grid">
-                    {images.map(src => (
+                    {images.map((src) => (
                         <img key={src} src={src} alt="spatial-tech" loading="lazy" />
                     ))}
                 </div>

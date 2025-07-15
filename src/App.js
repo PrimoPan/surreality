@@ -40,7 +40,7 @@ export default function App() {
                         path="/city"
                         element={<City lang={lang} />}
                     />
-                    <Route path="/contact"  element={<Contact />} />   {/* ⬅️ NEW */}
+                    <Route path="/contact"  element={<Contact lang={lang} />} />
                 </Routes>
             </ParallaxProvider>
         </BrowserRouter>

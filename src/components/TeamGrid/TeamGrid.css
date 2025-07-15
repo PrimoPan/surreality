@@ -1,0 +1,120 @@
+/* src/components/TeamGrid/TeamGrid.css */
+
+/* 整个模块撑满视口，并作为一个 snap 停靠点 */
+.team-grid-wrapper {
+    padding: 2rem 1rem;
+    scroll-snap-align: start;
+
+    /* 去掉固定高度，让容器自适应内容高度 */
+    width: 100vw;
+    overflow-y: auto;
+
+    /* 从顶部开始，不要居中对齐 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* 大标题 */
+.team-grid-title {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 2.5rem;
+    color: #00ffd1;
+    letter-spacing: 1px;
+}
+
+/* 固定 3 列九宫格 */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    gap: 2.5rem;
+    justify-items: center;
+
+    /* 限制最大宽度，水平居中 */
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* 单个项目 */
+.team-item {
+    text-align: center;
+    position: relative;
+}
+
+/* 头像容器 & 缩放效果 */
+.avatar-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.team-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.2s;
+}
+
+.avatar-wrapper:hover .team-avatar {
+    transform: scale(1.07);
+}
+
+/* 悬浮框 */
+.team-tooltip {
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #f0f0f0;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    z-index: 10;
+}
+
+.avatar-wrapper:hover .team-tooltip {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.tooltip-line {
+    margin: 0.25rem 0;
+}
+
+/* 职称 + 姓名 */
+.team-label {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+}
+
+/* 职称 */
+.team-position {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #00ffd1;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 姓名 */
+.team-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #ffffff;
+}
