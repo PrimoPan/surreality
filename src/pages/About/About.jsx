@@ -12,7 +12,7 @@ const copy = {
     en: {
         intro: [
             `As the Metaverse continues to evolve, its significance in shaping social interactions, educational experiences, and collaborative opportunities is becoming increasingly essential. This digital frontier holds the potential to create prosocial environments where individuals can connect, learn, and innovate, transcending geographical boundaries and fostering inclusivity. By leveraging immersive technologies, the Metaverse can enhance engagement, promote creativity, and facilitate knowledge sharing, ultimately contributing to a more connected and compassionate society.`,
-            `Led by Professor Pan Hui—an International Fellow of the Royal Academy of Engineering, Member of Academia Europaea, and IEEE Fellow—the <a href="https://mc2-lab-hkust.netlify.app/" target="_blank" rel="noopener noreferrer">Center for Metaverse and Computational Creativity (MC2)</a> operates at the intersection of immersive technology, Human-Computer Interaction (HCI), social computing, computational social science, and machine learning.`
+            `Led by Professor Pan Hui—an International Fellow of the Royal Academy of Engineering, Member of Academia Europaea, and IEEE Fellow—the <a href="https://mc2-lab-hkust.netlify.app/" target="_blank" rel="noopener noreferrer">Center for Metaverse and Computational Creativity (MC²)</a> operates at the intersection of immersive technology, Human-Computer Interaction (HCI), social computing, computational social science, and machine learning.`
         ],
         fociTitle: 'Our research is guided by five key foci:',
         foci: [
@@ -23,12 +23,12 @@ const copy = {
             'AI+ Projects: Our AI+ initiative, particularly in education, encompasses three main components: Metaverse classrooms, AI lecturers, and the development of interactive AI lecturers. These projects aim to create immersive, cross-campus learning environments, introduce AI-driven teaching methods, and develop real-time interactive AI lecturers, thereby revolutionizing the educational landscape.'
         ],
         pubs: 'Our group’s work has been published in top-tier venues across computer science and art, including ACM WWW, ACM SIGCOMM, ACM MobiSys, ACM MobiCom, ACM CoNEXT, IEEE INFOCOM, IEEE PerCom, IEEE ICNP, IEEE ICDCS, IJCAI, AAAI, SIGGRAPH, CHI, CSCW, and more.',
-        join: 'At MC2, we are committed to harnessing these interdisciplinary approaches to create transformative experiences that enrich lives and foster a more connected world. Join us as we navigate the exciting possibilities of the Metaverse and its applications in society.'
+        join: 'At MC², we are committed to harnessing these interdisciplinary approaches to create transformative experiences that enrich lives and foster a more connected world. Join us as we navigate the exciting possibilities of the Metaverse and its applications in society.'
     },
     'zh-Hans': {
         intro: [
             '随着元宇宙的不断演进，其在塑造社交互动、教育体验及协作机会方面的重要性日益凸显。这一数字前沿拥有创造互惠环境的潜力，让个体能够连接、学习并创新，超越地理界限并促进包容性。通过利用沉浸式技术，元宇宙可以提升参与度、促进创造力并推动知识分享，最终有助于构建更紧密且富有同理心的社会。',
-            '在欧洲工程院国际院士、欧洲学术院成员及 IEEE 院士许彬教授的带领下，<a href="https://mc2-lab-hkust.netlify.app/" target="_blank" rel="noopener noreferrer">元宇宙与计算创意中心（MC2）</a>工作于沉浸式技术、人机交互（HCI）、社会计算、计算社会科学与机器学习的交叉领域，推动前沿研究。'
+            '在欧洲工程院国际院士、欧洲学术院成员及 IEEE 院士许彬教授的带领下，<a href="https://mc2-lab-hkust.netlify.app/" target="_blank" rel="noopener noreferrer">元宇宙与计算创意中心（MC²）</a>工作于沉浸式技术、人机交互（HCI）、社会计算、计算社会科学与机器学习的交叉领域，推动前沿研究。'
         ],
         fociTitle: '我们的研究聚焦于五大方向：',
         foci: [
@@ -39,12 +39,12 @@ const copy = {
             'AI+ 项目：我们的 AI+ 计划（特别是教育领域）涵盖元宇宙教室、AI 讲师及互动式 AI 讲师的开发，这些项目旨在创建沉浸式、跨校园的学习环境，引入 AI 驱动的教学方法并开发实时互动 AI 讲师，从而革新教育体验。'
         ],
         pubs: '我们的团队成果已发表于计算机科学与艺术领域的顶级期刊和会议，包括 ACM WWW、ACM SIGCOMM、ACM MobiSys、ACM MobiCom、ACM CoNEXT、IEEE INFOCOM、IEEE PerCom、IEEE ICNP、IEEE ICDCS、IJCAI、AAAI、SIGGRAPH、CHI、CSCW 等等。',
-        join: '在 MC2，我们致力于运用这些跨学科方法创造变革性的体验，以丰富人们的生活并促进更紧密的连接。期待您与我们一同探索元宇宙及其在社会中的应用所带来的无限可能。'
+        join: '在 MC²，我们致力于运用这些跨学科方法创造变革性的体验，以丰富人们的生活并促进更紧密的连接。期待您与我们一同探索元宇宙及其在社会中的应用所带来的无限可能。'
     },
     'zh-Hant': {
         intro: [
             '隨著元宇宙的不斷演進，其在塑造社交互動、教育體驗及協作機會方面的重要性日益凸顯。這一數位前沿擁有創造互惠環境的潛力，讓個體能夠連結、學習並創新，超越地理界限並促進包容性。通過利用沉浸式技術，元宇宙可以提升參與度、促進創造力並促進知識分享，最終有助於構建更緊密且富有同理心的社會。',
-            '在歐洲工程院國際院士、歐洲學術院成員及 IEEE 院士許彬教授的帶領下，<a href="https://mc2-lab-hkust.netlify.app/" target="_blank" rel="noopener noreferrer">元宇宙與計算創意中心（MC2）</a>工作於沉浸式技術、人機互動（HCI）、社會計算、計算社會科學與機器學習的交叉領域，推動前沿研究。'
+            '在歐洲工程院國際院士、歐洲學術院成員及 IEEE 院士許彬教授的帶領下，<a href="https://mc2-lab-hkust.netlify.app/" target="_blank" rel="noopener noreferrer">元宇宙與計算創意中心（MC²）</a>工作於沉浸式技術、人機互動（HCI）、社會計算、計算社會科學與機器學習的交叉領域，推動前沿研究。'
         ],
         fociTitle: '我們的研究聚焦於五大方向：',
         foci: [
@@ -55,7 +55,7 @@ const copy = {
             'AI+ 專案：我們的 AI+ 計畫（特別是教育領域）涵蓋元宇宙教室、AI 講師及互動式 AI 講師的開發，這些項目旨在創建沉浸式、跨校園的學習環境，引入 AI 驅動的教學方法並開發實時互動 AI 講師，從而革新教育體驗。'
         ],
         pubs: '我們的團隊成果已發表於計算機科學與藝術領域的頂級期刊和會議，包括 ACM WWW、ACM SIGCOMM、ACM MobiSys、ACM MobiCom、ACM CoNEXT、IEEE INFOCOM、IEEE PerCom、IEEE ICNP、IEEE ICDCS、IJCAI、AAAI、SIGGRAPH、CHI、CSCW 等等。',
-        join: '在 MC2，我們致力於運用這些跨學科方法創造變革性的體驗，以豐富人們的生活並促進更緊密的連結。期待您與我們一同探索元宇宙及其在社會中的應用所帶來的無限可能。'
+        join: '在 MC²，我們致力於運用這些跨學科方法創造變革性的體驗，以豐富人們的生活並促進更緊密的連結。期待您與我們一同探索元宇宙及其在社會中的應用所帶來的無限可能。'
     }
 };
 
@@ -89,10 +89,10 @@ export default function About({ lang = 'en' }) {
                 image={coverImages[coverIndex]}
                 title={
                     locale === 'en'
-                        ? 'HKUST MC2 Lab'
+                        ? 'HKUST MC² CENTER'
                         : locale === 'zh-Hans'
-                            ? '香港科技大学 MC2 实验室'
-                            : '香港科技大學 MC2 實驗室'
+                            ? '香港科技大学 MC² 实验室'
+                            : '香港科技大學 MC² 實驗室'
                 }
                 subtitle={
                     locale === 'en'

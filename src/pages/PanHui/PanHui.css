@@ -28,7 +28,7 @@
 
 /* 头部：头像 + 名称职称 */
 .panhui-header {
-    display: flex;
+    display: block;
     flex-wrap: wrap;
     align-items: flex-start;
     gap: 2rem;
@@ -37,9 +37,11 @@
 
 /* 头像 */
 .panhui-avatar {
-    flex-shrink: 0;
-    width: 180px;
-    height: 180px;
+    float: left;
+    width: auto;       /* 按原图尺寸 */
+    height: auto;
+    max-width: 305px;  /* 或直接写 305px */
+    margin: 0 1.5rem 1rem 0; /* 头像右侧留空，让文字有呼吸 */
     border-radius: 12px;
     object-fit: cover;
     box-shadow: 0 4px 14px rgba(0,0,0,0.4);

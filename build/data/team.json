@@ -1,6 +1,25 @@
 [
   {
     "name": {
+      "en": "Pan HUI",
+      "cn": "许彬",
+      "tw": "許彬"
+    },
+    "position": {
+      "en": "Director of the Exhibition\nDirector of MC²",
+      "cn": "展览总监\nMC² 中心主任",
+      "tw": "展覽總監\nMC² 中心主任"
+    },
+    "research": {
+      "en": "Ubiquitous Computing, XR, HCI",
+      "cn": "普适计算，拓展现实，人机交互",
+      "tw": "普及計算，拓展現實，人机交互"
+    },
+    "email": "panhui@hkust-gz.edu.cn.",
+    "photo_url": "https://cma.hkust-gz.edu.cn/content/images/2021/10/Hui-Pan_E3F9823_photo-small-.jpg"
+  },
+  {
+    "name": {
       "en": "Yawei Zhao",
       "cn": "赵雅薇",
       "tw": "趙雅薇"
@@ -73,7 +92,7 @@
       "tw": "人機交互，藝術設計，XR，社會計算"
     },
     "email": "sli688@connect.hkust-gz.edu.cn",
-    "photo_url": "https://wj.qq.com/api/files/download?survey_id=23096558&question_id=q-9-UZL0&file_name=23096558_0_410a4c63db8ca94dd4f1c049817975d5.jpg&download=1"
+    "photo_url": "https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/WechatIMG15170.jpg"
   },
   {
     "name": {
@@ -83,8 +102,8 @@
     },
     "position": {
       "en": "Technical Development",
-      "cn": "技术开发",
-      "tw": "技術開發"
+      "cn": "Unity技术开发",
+      "tw": "Unity技術開發"
     },
     "research": {
       "en": "Human Computer Interaction",
@@ -101,14 +120,14 @@
       "tw": "潘東逸杰"
     },
     "position": {
-      "en": "AI Technical And Website Develop",
+      "en": "AI Technical And Web Develop",
       "cn": "AI技术开发和网页开发",
-      "tw": "人工智慧技術開發"
+      "tw": "人工智慧技術開發, Web開發"
     },
     "research": {
       "en": " HCI and XR tech in well-being and education",
       "cn": "人机交互和XR在健康与教育领域的应用",
-      "tw": "人機交互和XR在健康與教育領域的應用"
+      "tw": "人機互動技術與XR在健康與教育領域的應用"
     },
     "email": "dpan750@connect.hkust-gz.edu.cn",
     "photo_url": "https://github.com/PrimoPan/picx-images-hosting/raw/master/zjz.dvx2bsydhsw.webp"
@@ -134,22 +153,23 @@
   },
   {
     "name": {
-      "en": "Yishuai Zhang",
-      "cn": "张一帅",
-      "tw": "張一帥"
+      "en": "Bonan Liu",
+      "cn": "刘博楠",
+      "tw": "劉博楠"
     },
     "position": {
-      "en": "Technical & Planning Assistance",
-      "cn": "技术辅助，策划辅助",
-      "tw": "技術輔助，策劃輔助"
+      "en": "Technical & Algorithm Assistance",
+      "cn": "技术辅助，算法辅助",
+      "tw": "技術輔助，算法輔助"
     },
+
     "research": {
-      "en": "non-semantic multimodal data interpretability and artistic application",
-      "cn": "非语义多模态数据的可解释与艺术呈现",
-      "tw": "非語義多模態數據的可解釋與藝術呈現"
-    },
-    "email": "yzhang382@connect.hkust-gz.edu.cn",
-    "photo_url": "https://wj.qq.com/api/files/download?survey_id=23096558&question_id=q-9-UZL0&file_name=23096558_0_bdda2c0ad7cb168dd1aa8476d7078fbc.png&download=1"
+      "en": "Mapping Systems, Motion Capture and Human-to-Robot Interaction",
+      "cn": "映射系统、动作捕捉与人-机器人交互",
+      "tw": "映射系統、動作捕捉與人-機器人互動"
+  },
+  "email": "bliu404@connect.hkust-gz.edu.cn",
+    "photo_url": "https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/WechatIMG56.jpg"
   },
   {
     "name": {

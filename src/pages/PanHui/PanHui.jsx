@@ -9,15 +9,13 @@ export default function PanHui({ lang = 'en' }) {
         name_en: 'Professor Pan Hui',
         name_cn: '许彬 教授',
 
-        pos_en: 'Director, MC2 – HKUST(GZ)',
-        pos_cn: '香港科技大学（广州）MC2 中心主任',
+        pos_en: 'Director, MC² – HKUST(GZ)',
+        pos_cn: '香港科技大学（广州）MC² 中心主任',
 
         bio_en: `
-Professor Pan Hui received his PhD from the Computer Laboratory at the University of Cambridge and both his Bachelor and MPhil degrees from the University of Hong Kong. He is a Chair Professor of Computational Media and Arts and Director of the Centre for Metaverse and Computational Creativity at HKUST (Guangzhou), and a Chair Professor of Emerging Interdisciplinary Areas and Director of the HKUST-DT Systems and Media Lab, HKUST.
+Professor Pan Hui received his PhD from the Computer Laboratory at the University of Cambridge and both his Bachelor and MPhil degrees from the University of Hong Kong. He is a Chair Professor of Computational Media and Arts and Director of the Centre for Metaverse and Computational Creativity at HKUST (GZ), and a Chair Professor of Emerging Interdisciplinary Areas at HKUST. From 2008 to 2015 he was a Distinguished Scientist at Telekom Innovation Labs, Germany. He has also conducted research at Intel Research Cambridge and Thomson Paris. His work has been sponsored by Nokia, Deutsche Telekom, Microsoft Research, and China Mobile. He has published 500+ papers (35 000+ citations) and holds over 30 EU/US patents in AR, mobile computing, and data science. He is an International Fellow of the Royal Academy of Engineering, a member of Academia Europaea, an IEEE Fellow, and an ACM Distinguished Scientist. He serves on the INTERPOL Expert Group on Metaverse and was a member the World Economic Forum Global Future Council on the Future of Metaverse.
 
-His research team is highly multicultural with researchers from over 12 countries. From 2008 to 2015 he was a Distinguished Scientist at Telekom Innovation Labs, Germany. He has also conducted research at Intel Research Cambridge and Thomson Paris. His work has been sponsored by Nokia, Deutsche Telekom, Microsoft Research, and China Mobile.
 
-He has published 500+ papers (35 000+ citations) and holds 30 EU/US patents in AR, mobile computing, and data science. He is an International Fellow of the Royal Academy of Engineering, a member of Academia Europaea, an IEEE Fellow, and an ACM Distinguished Scientist. He serves on the INTERPOL Expert Group on Metaverse and the World Economic Forum Global Future Council on the Future of Metaverse.
     `.trim(),
 
         bio_cn: `
@@ -39,8 +37,9 @@ He has published 500+ papers (35 000+ citations) and holds 30 EU/US patents in A
             <div className="panhui-card">
                 <div className="panhui-header">
                     <img
+
                         className="panhui-avatar"
-                        src="https://cma.hkust-gz.edu.cn/content/images/2021/10/Hui-Pan_E3F9823_photo-small-.jpg"
+                        src="https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/3051752581882_.pic_hd.jpg"
                         alt={name}
                     />
                     <div className="panhui-title">

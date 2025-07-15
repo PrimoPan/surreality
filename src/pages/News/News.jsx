@@ -175,7 +175,7 @@ const content = {
             {
                 heading: 'Opening Overview',
                 paragraphs: [
-                    'On 26 June 2025, the world’s first large-space XR & AI art exhibition “SURREALITY” opened at The Hong Kong University of Science and Technology (Guangzhou). Co-hosted by HKUST(GZ) and the Center for Metaverse and Computational Creativity (MC²), the show joined the 2025 “Festival Croisements” with support from the Consulate General of France in Guangzhou and the French Cultural Center.',
+                    'On 26 June 2025, the world’s first large-space XR & AI art exhibition “SURREALITY” opened at The Hong Kong University of Science and Technology (Guangzhou). Co-hosted by HKUST(GZ) and the Center for Metaverse and Computational Creativity (MC²), the show was invited to join the 2025 “Festival Croisements” with support from the Consulate General of France in Guangzhou and the French Cultural Center.',
                     'Over 150 people attended, including university leadership, French diplomats, artists, journalists and the public—underscoring SURREALITY’s openness and cross-disciplinary reach.',
                 ],
                 openingCarousel: OPENING_IMAGES,
