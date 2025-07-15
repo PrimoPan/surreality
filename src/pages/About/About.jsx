@@ -1,12 +1,12 @@
 // src/pages/About/About.jsx
 import React, { useState, useEffect } from 'react';
 import ParallaxSection from '../../components/ParallaxSection';
-import TeamGrid from '../../components/TeamGrid/TeamGrid';  // 新增：团队九宫格
+import TeamGrid from '../../components/TeamGrid/TeamGrid';
 import './About.css';
 import PanHui from '../PanHui/PanHui.jsx';
 
 /* =============================================================
- * 1. 文案：實驗室總覽 copy
+ * 1. 文案：实验室总览 copy（英文 / 简体 / 繁体）
  * =========================================================== */
 const copy = {
     en: {
@@ -18,14 +18,30 @@ const copy = {
         foci: [
             'Pushing the Boundaries of Immersive Technologies: We explore the convergence of virtual reality (VR), augmented reality (AR), extended reality (XR), and mixed reality (MR), alongside other transformative technologies that shape the Metaverse.',
             'Social Computing and Prosocial Interactions: We investigate how social computing can enhance prosocial behaviors, fostering trust, engagement, and collaboration within virtual communities.',
-            'Generative AI and Large Language Models Techniques: As core technologies driving our research, we focus on developing applicable generative AI and LLM-related techniques for enhancing the interactivity in the metaverse and broadening the boundaries of higher education.',
+            'Generative AI and Large Language Models Techniques: As core technologies driving our research, we focus on developing applicable generative AI and LLM-related techniques for enhancing the interactivity in the Metaverse and broadening the boundaries of higher education.',
             'VR/AR/XR Computer Network: We examine innovative approaches on VR-related network usage that adapt to user needs and environmental conditions, ensuring seamless experiences in the Metaverse.',
             'AI+ Projects: Our AI+ initiative, particularly in education, encompasses three main components: Metaverse classrooms, AI lecturers, and the development of interactive AI lecturers. These projects aim to create immersive, cross-campus learning environments, introduce AI-driven teaching methods, and develop real-time interactive AI lecturers, thereby revolutionizing the educational landscape.'
         ],
         pubs: 'Our group’s work has been published in top-tier venues across computer science and art, including ACM WWW, ACM SIGCOMM, ACM MobiSys, ACM MobiCom, ACM CoNEXT, IEEE INFOCOM, IEEE PerCom, IEEE ICNP, IEEE ICDCS, IJCAI, AAAI, SIGGRAPH, CHI, CSCW, and more.',
         join: 'At MC2, we are committed to harnessing these interdisciplinary approaches to create transformative experiences that enrich lives and foster a more connected world. Join us as we navigate the exciting possibilities of the Metaverse and its applications in society.'
     },
-    zh: {
+    'zh-Hans': {
+        intro: [
+            '随着元宇宙的不断演进，其在塑造社交互动、教育体验及协作机会方面的重要性日益凸显。这一数字前沿拥有创造互惠环境的潜力，让个体能够连接、学习并创新，超越地理界限并促进包容性。通过利用沉浸式技术，元宇宙可以提升参与度、促进创造力并推动知识分享，最终有助于构建更紧密且富有同理心的社会。',
+            '在欧洲工程院国际院士、欧洲学术院成员及 IEEE 院士许彬教授的带领下，<a href="https://mc2-lab-hkust.netlify.app/" target="_blank" rel="noopener noreferrer">元宇宙与计算创意中心（MC2）</a>工作于沉浸式技术、人机交互（HCI）、社会计算、计算社会科学与机器学习的交叉领域，推动前沿研究。'
+        ],
+        fociTitle: '我们的研究聚焦于五大方向：',
+        foci: [
+            '突破沉浸式技术的边界：我们探索虚拟现实（VR）、增强现实（AR）、扩展现实（XR）和混合现实（MR）等技术的融合，以及其他塑造元宇宙的变革性技术。',
+            '社会计算与互惠互动：我们研究社会计算如何增强互惠行为，在虚拟社群中促进信任、参与和协作。',
+            '生成式 AI 与大型语言模型技术：作为推动研究的核心技术，我们专注于开发可应用的生成式 AI 和 LLM 相关技术，以加强元宇宙中的交互性并拓宽高等教育的边界。',
+            'VR/AR/XR 网络：我们研究针对 VR 应用的网络使用创新方法，以适应用户需求和环境条件，确保在元宇宙中的无缝体验。',
+            'AI+ 项目：我们的 AI+ 计划（特别是教育领域）涵盖元宇宙教室、AI 讲师及互动式 AI 讲师的开发，这些项目旨在创建沉浸式、跨校园的学习环境，引入 AI 驱动的教学方法并开发实时互动 AI 讲师，从而革新教育体验。'
+        ],
+        pubs: '我们的团队成果已发表于计算机科学与艺术领域的顶级期刊和会议，包括 ACM WWW、ACM SIGCOMM、ACM MobiSys、ACM MobiCom、ACM CoNEXT、IEEE INFOCOM、IEEE PerCom、IEEE ICNP、IEEE ICDCS、IJCAI、AAAI、SIGGRAPH、CHI、CSCW 等等。',
+        join: '在 MC2，我们致力于运用这些跨学科方法创造变革性的体验，以丰富人们的生活并促进更紧密的连接。期待您与我们一同探索元宇宙及其在社会中的应用所带来的无限可能。'
+    },
+    'zh-Hant': {
         intro: [
             '隨著元宇宙的不斷演進，其在塑造社交互動、教育體驗及協作機會方面的重要性日益凸顯。這一數位前沿擁有創造互惠環境的潛力，讓個體能夠連結、學習並創新，超越地理界限並促進包容性。通過利用沉浸式技術，元宇宙可以提升參與度、促進創造力並促進知識分享，最終有助於構建更緊密且富有同理心的社會。',
             '在歐洲工程院國際院士、歐洲學術院成員及 IEEE 院士許彬教授的帶領下，<a href="https://mc2-lab-hkust.netlify.app/" target="_blank" rel="noopener noreferrer">元宇宙與計算創意中心（MC2）</a>工作於沉浸式技術、人機互動（HCI）、社會計算、計算社會科學與機器學習的交叉領域，推動前沿研究。'
@@ -53,13 +69,10 @@ const coverImages = [
 ];
 
 export default function About({ lang = 'en' }) {
-    // 1️⃣ 直接使用上层传过来的 lang（'en' | 'zh-Hans' | 'zh-Hant'）
+    // 支持 'en' | 'zh-Hans' | 'zh-Hant'
     const locale = ['en', 'zh-Hans', 'zh-Hant'].includes(lang) ? lang : 'en';
+    const t = copy[locale] || copy.en;
 
-    // 2️⃣ 实验室介绍部分，只区分 en / zh（简体 / 繁体 都走同一套 copy.zh）
-    const t = locale === 'en' ? copy.en : copy.zh;
-
-    // 3️⃣ 轮播头图
     const [coverIndex, setCoverIndex] = useState(0);
     useEffect(() => {
         const id = setInterval(
@@ -74,11 +87,19 @@ export default function About({ lang = 'en' }) {
             {/* —— 1. 头图 Parallax —— */}
             <ParallaxSection
                 image={coverImages[coverIndex]}
-                title={ locale === 'en' ? 'HKUST MC2 Lab' : '香港科技大學 MC2 實驗室' }
+                title={
+                    locale === 'en'
+                        ? 'HKUST MC2 Lab'
+                        : locale === 'zh-Hans'
+                            ? '香港科技大学 MC2 实验室'
+                            : '香港科技大學 MC2 實驗室'
+                }
                 subtitle={
                     locale === 'en'
                         ? 'Center for Metaverse and Computational Creativity'
-                        : '元宇宙與計算創意中心'
+                        : locale === 'zh-Hans'
+                            ? '元宇宙与计算创意中心'
+                            : '元宇宙與計算創意中心'
                 }
                 isParallax
             />
