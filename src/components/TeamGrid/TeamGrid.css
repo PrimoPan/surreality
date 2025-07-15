@@ -4,6 +4,7 @@
     text-align: center;
     scroll-snap-align: start;
 }
+
 .team-title {
     font-family: 'Montserrat', sans-serif;
     font-size: 2.5rem;
@@ -18,10 +19,13 @@
     cursor: pointer;
     margin-bottom: 4rem;
     transition: transform 0.2s;
+    position: relative;          /* 让浮层定位生效 */
+    overflow: hidden;
 }
 .team-center:hover {
     transform: scale(1.03);
 }
+
 .center-avatar {
     width: 220px;
     height: 220px;
@@ -29,16 +33,19 @@
     object-fit: cover;
     box-shadow: 0 0 20px rgba(0, 255, 209, 0.6);
 }
+
 .center-info {
     margin-top: 1rem;
     color: #00ffd1;
     font-weight: 600;
 }
+
 .center-pos {
     font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
+
 .center-name {
     font-size: 1.3rem;
     margin-top: 0.25rem;
@@ -53,9 +60,20 @@
     margin: 0 auto;
     justify-items: center;
 }
+
 .team-item {
     text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    position: relative;          /* 让浮层定位生效 */
+    overflow: hidden;
 }
+
+.team-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 255, 209, 0.3);
+}
+
 .team-avatar {
     width: 120px;
     height: 120px;
@@ -63,9 +81,11 @@
     object-fit: cover;
     transition: transform 0.2s;
 }
+
 .team-item:hover .team-avatar {
     transform: scale(1.05);
 }
+
 .team-pos {
     margin-top: 0.75rem;
     font-family: 'Poppins', sans-serif;
@@ -75,12 +95,59 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
+
 .team-name {
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
     font-weight: 500;
     color: #ffffff;
     margin-top: 0.3rem;
+}
+
+/* 科技感浮层（深色底+高对比度文字） */
+.info-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);       /* 深黑半透明底 */
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-radius: 1rem;
+    pointer-events: none;
+}
+
+.team-center:hover .info-overlay,
+.team-item:hover .info-overlay {
+    opacity: 1;
+}
+
+.overlay-text {
+    color: #00ffda;                       /* 霓虹绿高亮 */
+    font-size: 0.9rem;
+    margin: 0.2rem 0;
+    font-weight: 500;
+    text-shadow: 0 0 8px rgba(0, 255, 218, 0.9);
+    text-align: center;
+    padding: 0 0.5rem;
+}
+
+.overlay-email {
+    margin-top: 0.6rem;
+    color: #ffffff;                       /* 纯白可读 */
+    font-size: 0.75rem;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    line-height: 1.2;
+    word-break: break-all;
+    text-align: center;
+    padding: 0 0.5rem;
 }
 
 /* 移动端自适应 */

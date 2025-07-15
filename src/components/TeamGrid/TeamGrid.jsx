@@ -25,20 +25,22 @@ export default function TeamGrid({ lang = 'en' }) {
             .catch(console.error);
     }, []);
 
-    // 第一位作为中心人物
     const center = members[0];
-    // 其余九位作为九宫格
     const others = members.slice(1, 10);
+
+    const renderOverlay = (member) => (
+        <div className="info-overlay">
+            <div className="overlay-text">{member.research[suf]}</div>
+            <div className="overlay-email">{member.email}</div>
+        </div>
+    );
 
     return (
         <section className="team-wrapper">
             <h2 className="team-title">{title}</h2>
 
             {center && (
-                <div
-                    className="team-center"
-                    onClick={() => (window.location.href = '/about')}
-                >
+                <div className="team-center">
                     <img
                         className="center-avatar"
                         src={center.photo_url}
@@ -48,6 +50,7 @@ export default function TeamGrid({ lang = 'en' }) {
                         <div className="center-pos">{center.position[suf]}</div>
                         <div className="center-name">{center.name[suf]}</div>
                     </div>
+                    {renderOverlay(center)}
                 </div>
             )}
 
@@ -61,6 +64,7 @@ export default function TeamGrid({ lang = 'en' }) {
                         />
                         <div className="team-pos">{m.position[suf]}</div>
                         <div className="team-name">{m.name[suf]}</div>
+                        {renderOverlay(m)}
                     </div>
                 ))}
             </div>
