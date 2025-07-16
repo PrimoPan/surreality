@@ -11,7 +11,7 @@ const carouselImages = [
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/002.PNG',
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/003.PNG',
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/004.PNG',
-    'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/005.png',
+    'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/mc2/BenBenBen.jpg',
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/006.PNG',
 ];
 
