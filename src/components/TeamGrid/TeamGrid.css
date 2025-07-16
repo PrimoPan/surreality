@@ -9,19 +9,20 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 2.5rem;
     font-weight: 800;
-    color: #00ffd1;
+    color: #ffffff;      /* 全白標題 */
     margin-bottom: 3rem;
 }
 
-/* 中心人物独占一行 */
+/* 中心人物獨占一行 */
 .team-center {
     display: inline-block;
     cursor: pointer;
     margin-bottom: 4rem;
     transition: transform 0.2s;
-    position: relative;          /* 让浮层定位生效 */
+    position: relative;
     overflow: hidden;
 }
+
 .team-center:hover {
     transform: scale(1.03);
 }
@@ -31,12 +32,15 @@
     height: 220px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 0 20px rgba(0, 255, 209, 0.6);
+    /* 向下推 20% */
+    object-position: center 20%;
+    box-shadow: 0 0 20px rgba(0, 75, 150, 0.5);
 }
+
 
 .center-info {
     margin-top: 1rem;
-    color: #00ffd1;
+    color: #ffffff;      /* 白色文字 */
     font-weight: 600;
 }
 
@@ -51,7 +55,7 @@
     margin-top: 0.25rem;
 }
 
-/* 九宫格布局 */
+/* 九宮格布局 */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -65,13 +69,13 @@
     text-align: center;
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
-    position: relative;          /* 让浮层定位生效 */
+    position: relative;
     overflow: hidden;
 }
 
 .team-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 255, 209, 0.3);
+    box-shadow: 0 8px 16px rgba(0, 75, 150, 0.3);  /* 海軍藍投影 */
 }
 
 .team-avatar {
@@ -91,7 +95,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 0.95rem;
     font-weight: 600;
-    color: #00ffd1;
+    color: #ffffff;      /* 白色文字 */
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -100,16 +104,16 @@
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
     font-weight: 500;
-    color: #ffffff;
+    color: #ffffff;      /* 白色文字 */
     margin-top: 0.3rem;
 }
 
-/* 科技感浮层（深色底+高对比度文字） */
+/* 科技感浮層（深色底 + 海軍藍高對比文字） */
 .info-overlay {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.6);       /* 深黑半透明底 */
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(6px);
     display: flex;
     flex-direction: column;
@@ -129,18 +133,18 @@
 }
 
 .overlay-text {
-    color: #00ffda;                       /* 霓虹绿高亮 */
+    color: #4a90e2;      /* 海軍藍文字 */
     font-size: 0.9rem;
     margin: 0.2rem 0;
     font-weight: 500;
-    text-shadow: 0 0 8px rgba(0, 255, 218, 0.9);
+    text-shadow: 0 0 6px rgba(74, 144, 226, 0.7);
     text-align: center;
     padding: 0 0.5rem;
 }
 
 .overlay-email {
     margin-top: 0.6rem;
-    color: #ffffff;                       /* 纯白可读 */
+    color: #ffffff;      /* 白色郵件 */
     font-size: 0.75rem;
     font-family: 'Courier New', monospace;
     text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
@@ -150,7 +154,7 @@
     padding: 0 0.5rem;
 }
 
-/* 移动端自适应 */
+/* 移動端自適應 */
 @media (max-width: 600px) {
     .center-avatar {
         width: 180px;
