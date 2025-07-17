@@ -89,10 +89,10 @@ export default function About({ lang = 'en' }) {
                 image={coverImages[coverIndex]}
                 title={
                     locale === 'en'
-                        ? 'HKUST MC² CENTER'
+                        ? 'MC² at HKUST(GZ)'
                         : locale === 'zh-Hans'
-                            ? '香港科技大学 MC² 实验室'
-                            : '香港科技大學 MC² 實驗室'
+                            ? '香港科技大学(广州) MC² 实验室'
+                            : '香港科技大學(广州) MC² 實驗室'
                 }
                 subtitle={
                     locale === 'en'
