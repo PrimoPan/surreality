@@ -430,24 +430,7 @@ export default function News({ lang = 'en' }) {
             </section>
 
             {/* 右侧锚点导航栏 */}
-            <div className="right-nav">
-                {navTitles.map((title, i) => (
-                    <a
-                        key={i}
-                        href={`#section-${i+1}`}
-                        className={activeSection === (i+1) ? 'active' : ''}
-                        onClick={e => {
-                            e.preventDefault();
-                            const el = document.getElementById(`section-${i+1}`);
-                            if (el) {
-                                window.scrollTo({ top: el.offsetTop - 20, behavior: 'smooth' });
-                            }
-                        }}
-                    >
-                        {title}
-                    </a>
-                ))}
-            </div>
+
 
             {t.sections.map((sec, i) => (
                 <section key={i} className="news-section" ref={el => sectionRefs.current[i] = el}>

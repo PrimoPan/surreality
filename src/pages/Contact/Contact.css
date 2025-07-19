@@ -1,0 +1,99 @@
+/* ====================================
+   Contact Page – mobile‑first
+   ==================================== */
+
+/* 覆写 main‑section：允许内部滚动 */
+.main-section.contact-section{
+    height:auto!important;
+    min-height:100vh!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    scroll-snap-align:start!important;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:3rem 1.25rem 5rem;
+    gap:2rem;
+}
+
+/* 顶部可选 logo */
+.contact-logo{
+    width:120px;
+    height:auto;
+    object-fit:contain;
+    opacity:.9;
+}
+
+/* 包含卡片 + 地图的父容器 */
+.contact-wrapper{
+    width:100%;
+    max-width:1080px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:2rem;
+}
+
+/* 联系信息卡片 */
+.contact-card{
+    flex:1 1 380px;
+    min-width:300px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:16px;
+    backdrop-filter:blur(6px);
+    color:var(--text-color);
+    padding:2.6rem 2.2rem;
+    line-height:1.85;
+    font-size:1.05rem;
+}
+.contact-title{
+    font-size:1.7rem;
+    font-weight:800;
+    margin-bottom:1.6rem;
+}
+.contact-block{margin-bottom:1.3rem}
+.contact-block h3{
+    font-size:1.1rem;
+    font-weight:600;
+    margin-bottom:.2rem;
+}
+.contact-block a{
+    color:#00d5ff;
+    text-decoration:underline;
+}
+
+/* 地图容器 */
+.contact-map{
+    flex:1 1 380px;
+    min-width:300px;
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.12);
+}
+.contact-map iframe{
+    display:block;
+    width:100%;
+    height:420px;
+    border:0;
+}
+
+/* ---------- 移动端纵向堆叠 ---------- */
+@media(max-width:768px){
+    .contact-wrapper{
+        flex-direction:column;
+        align-items:stretch;
+    }
+    .contact-card,
+    .contact-map{
+        flex:1 1 100%;
+        min-width:0;
+    }
+    .contact-map iframe{height:360px;}
+}
+
+@media(max-width:450px){
+    .contact-card{padding:2rem 1.6rem;font-size:1rem}
+    .contact-title{font-size:1.4rem}
+}

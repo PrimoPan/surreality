@@ -62,7 +62,7 @@ const copy = {
         vrClose: '关闭',
         learnMore: '了解更多',
         areaTitle: '展区介绍',
-        scrollPosterHint: '向下滚动查看 VR 角与预约入口',
+        scrollPosterHint: '向下滚动查看 VR 角与预约',
         scrollVRHint: '向下滚动查看预约入口',
     },
     'zh-Hant': {
@@ -93,6 +93,7 @@ const copy = {
 };
 
 
+/* ---------- 单张 VR 卡片 ---------- */
 const ArtworkCard = ({ item, lang, onClick, t }) => {
     const firstAuthor = pick(item, 'artist', lang).split(/[，,]/)[0]?.trim();
     return (
@@ -107,6 +108,7 @@ const ArtworkCard = ({ item, lang, onClick, t }) => {
     );
 };
 
+/* ---------- VR Modal ---------- */
 const ArtworkModal = ({ item, lang, showBio, onToggleBio, onClose, t }) =>
     !item ? null : (
         <div className="vrcard-modal" onClick={onClose}>
@@ -119,8 +121,7 @@ const ArtworkModal = ({ item, lang, showBio, onToggleBio, onClose, t }) =>
                 <h2>{pick(item, 'title', lang)}</h2>
                 <h4>{pick(item, 'artist', lang)}</h4>
                 <p className="vrcard-desc">
-                    {showBio
-                        ? pick(item, 'artist_bio', lang)
+                    {showBio ? pick(item, 'artist_bio', lang)
                         : pick(item, 'description', lang)}
                 </p>
                 <div className="vrcard-modal-actions">
@@ -131,6 +132,7 @@ const ArtworkModal = ({ item, lang, showBio, onToggleBio, onClose, t }) =>
         </div>
     );
 
+/* ---------- VR Corner Section ---------- */
 function VRCornerSection({ lang, t }) {
     const [data, setData] = useState([]);
     const [selected, setSel] = useState(null);
@@ -140,21 +142,11 @@ function VRCornerSection({ lang, t }) {
         fetch('/data/artworks.json')
             .then(r => r.json())
             .then(all => {
+                // 只取 id 22‑31
                 const items = all.filter(x => x.id >= 22 && x.id <= 31);
-                const firstRowIds = [25, 26, 27, 29, 24];
-                const firstRow = firstRowIds
-                    .map(id => items.find(x => x.id === id))
-                    .filter(Boolean);
-                const secondFirst = items.find(x => x.id === 30);
-                const rest = items.filter(
-                    x => !firstRowIds.includes(x.id) && x.id !== 30
-                );
-
-                setData([
-                    ...firstRow,
-                    ...(secondFirst ? [secondFirst] : []),
-                    ...rest,
-                ]);
+                // 固定顺序（按你的需求）
+                const order = [25, 26, 27, 29, 24, 30, 22, 23, 28, 31];
+                setData(order.map(id => items.find(x => x.id === id)).filter(Boolean));
             })
             .catch(console.error);
     }, []);
@@ -162,30 +154,19 @@ function VRCornerSection({ lang, t }) {
     return (
         <section className="main-section vrcorner-section">
             <h2 className="vrcorner-title">{t.vrCorner}</h2>
-            <div
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(5, 1fr)',
-                    gap: '1.2rem',
-                    width: '100%',
-                    maxWidth: '1280px',
-                    padding: '0 2rem',
-                    boxSizing: 'border-box',
-                }}
-            >
+
+            <div className="vr-grid">
                 {data.map(it => (
                     <ArtworkCard
                         key={it.id}
                         item={it}
                         lang={lang}
                         t={t}
-                        onClick={() => {
-                            setSel(it);
-                            setBio(false);
-                        }}
+                        onClick={() => { setSel(it); setBio(false); }}
                     />
                 ))}
             </div>
+
             <ArtworkModal
                 item={selected}
                 lang={lang}
@@ -194,53 +175,46 @@ function VRCornerSection({ lang, t }) {
                 onClose={() => setSel(null)}
                 t={t}
             />
-            <div className="scroll-hint" style={{ marginTop: '1rem' }}>
+
+            <div className="scroll-hint">
                 {t.scrollVRHint}
-                <ChevronDown className="scroll-icon" size={36} strokeWidth={1.8} />
+                <ChevronDown className="scroll-icon" size={34} strokeWidth={1.8}/>
             </div>
         </section>
     );
 }
 
+/* ---------- 整个 Info 页面 ---------- */
 export default function Info({ lang }) {
-    const t = copy[lang] || copy['zh-Hant'];
+    const t = copy[lang] || copy['zh-Hans'];
     const nav = useNavigate();
-
-    const goto = path => {
-        nav(path);
-        window.scrollTo(0, 0);
-    };
+    const goto = p => { nav(p); window.scrollTo(0,0); };
 
     return (
         <div className="info-page">
+            {/* ---- 展区海报 ---- */}
             <section className="main-section info-poster-full">
                 <div className="info-poster-container">
                     <h2 className="info-poster-title">{t.areaTitle}</h2>
                     <div className="info-poster">
-                        {posterLinks.map((src, i) => (
-                            <div
-                                key={i}
-                                className="poster-item"
-                                onClick={() => {
-                                    if (i === 0) goto('/ocean');
-                                    if (i === 1) goto('/garden');
-                                    if (i === 2) goto('/realms');
-                                    if (i === 3) goto('/city');
-                                }}
-                            >
-                                <img src={src} alt={`poster-${i + 1}`} />
+                        {posterLinks.map((src,i)=>(
+                            <div key={i} className="poster-item"
+                                 onClick={()=>goto(['/ocean','/garden','/realms','/city'][i])}>
+                                <img src={src} alt={`poster-${i+1}`} />
                             </div>
                         ))}
                     </div>
                 </div>
                 <div className="scroll-hint">
                     {t.scrollPosterHint}
-                    <ChevronDown className="scroll-icon" size={36} strokeWidth={1.8} />
+                    <ChevronDown className="scroll-icon" size={34} strokeWidth={1.8}/>
                 </div>
             </section>
 
+            {/* ---- VR Corner ---- */}
             <VRCornerSection lang={lang} t={t} />
 
+            {/* ---- 展览说明 ---- */}
             <section className="main-section info-content-section">
                 <div className="info-wrapper">
                     <div className="info-container">
@@ -248,14 +222,13 @@ export default function Info({ lang }) {
                         <h2 className="info-hero-sub">{t.heroSub}</h2>
                         <p className="info-period">{t.period}</p>
                         <p className="info-host">{t.host}</p>
+
                         <h3>{t.techTitle}</h3>
-                        <ul className="info-list">
-                            {t.techList.map(txt => (
-                                <li key={txt}>{txt}</li>
-                            ))}
-                        </ul>
+                        <ul className="info-list">{t.techList.map(s=><li key={s}>{s}</li>)}</ul>
+
                         <h3>{t.guideTitle}</h3>
                         <p className="info-guide">{t.guideDesc}</p>
+
                         <div className="info-qr">
                             <h3>{t.qrTitle}</h3>
                             <img src={t.qrImg} alt="QR code" />
