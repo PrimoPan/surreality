@@ -5,55 +5,56 @@ import { MenuOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 
+/**
+ * 顶部导航栏
+ */
 export default function Header({ lang, onLangChange }) {
     const nav = useNavigate();
     const [drawerOpen, setDrawerOpen] = React.useState(false);
 
+    /* ---------- 三语菜单 ---------- */
     const menuItems = {
         en: [
-            { key: '/', label: 'Home' },
-            { key: '/info', label: 'Information' },
-            { key: '/about', label: 'About Us' },
-            { key: '/contact', label: 'Contact' },
+            { key: '/',        label: 'Home'         },
+            { key: '/info',    label: 'Information'  },
+            { key: '/about',   label: 'About Us'     },
+            { key: '/contact', label: 'Contact'      },
         ],
         'zh-Hans': [
-            { key: '/', label: '首页' },
-            { key: '/info', label: '展览信息' },
-            { key: '/about', label: '关于我们' },
-            { key: '/contact', label: '联系我们' },
+            { key: '/',        label: '首页'       },
+            { key: '/info',    label: '展览信息'   },
+            { key: '/about',   label: '关于我们'   },
+            { key: '/contact', label: '联系我们'   },
         ],
         'zh-Hant': [
-            { key: '/', label: '首頁' },
-            { key: '/info', label: '展覽資訊' },
-            { key: '/about', label: '關於我們' },
-            { key: '/contact', label: '聯絡我們' },
+            { key: '/',        label: '首頁'       },
+            { key: '/info',    label: '展覽資訊'   },
+            { key: '/about',   label: '關於我們'   },
+            { key: '/contact', label: '聯絡我們'   },
         ],
     };
 
-    const renderLinks = (isDrawer = false) => (
+    /* ---------- 统一渲染函数 ---------- */
+    const renderLinks = (isDrawer = false) =>
         menuItems[lang].map(({ key, label }) => (
             <li
                 key={key}
                 className={isDrawer ? '' : 'nav__link'}
                 style={isDrawer ? { cursor: 'pointer' } : {}}
                 onClick={() => {
-                    nav(key);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    if (isDrawer) {
-                        setDrawerOpen(false);
-                    }
+                    nav(key);          // 跳转路由
+                    if (isDrawer) setDrawerOpen(false);
                 }}
             >
                 <span>{label}</span>
             </li>
-        ))
-    );
+        ));
 
     return (
         <>
-            {/* ===== 顶部栏 ===== */}
+            {/* ===== 顶部条 ===== */}
             <div className="major-nav">
-                {/* ✅ 只保留后两个 Logo */}
+                {/* 仅保留后两个 Logo */}
                 <nav className="nav-logo">
                     <img
                         src="https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/UST-GZ-EN.png"
@@ -96,7 +97,7 @@ export default function Header({ lang, onLangChange }) {
                 </button>
             </div>
 
-            {/* ===== 移动端 Drawer ===== */}
+            {/* ===== Drawer（移动端侧边栏） ===== */}
             <Drawer
                 placement="right"
                 closable
