@@ -37,12 +37,6 @@ export default function ParallaxSection({
     const bgImage = image || '/assets/hero/bg.jpg';
     const hasAnimated = useRef(false);
 
-    const bgFade = {
-        initial: { opacity: 0 },
-        animate: { opacity: 1, transition: { duration: 1 } },
-        exit: { opacity: 0, transition: { duration: 1 } },
-    };
-
     const textVariants = {
         hidden: { opacity: 0, y: 40 },
         visible: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
@@ -50,17 +44,13 @@ export default function ParallaxSection({
 
     return (
         <section className="parallax-root">
-            {/* 背景层 (cross‑fade) */}
+            {/* 背景层 */}
             <Parallax speed={isParallax ? -20 : 0} className="bg-parallax">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={bgImage}
                         className="bg-image"
                         style={{ backgroundImage: `url(${bgImage})` }}
-                        variants={bgFade}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
                     />
                 </AnimatePresence>
             </Parallax>

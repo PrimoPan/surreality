@@ -1,3 +1,6 @@
+/* ParallaxSection.css */
+
+/* 背景 (parallax 容器) */
 .parallax-root {
     position: relative;
     width: 100%;
@@ -6,7 +9,7 @@
     scroll-snap-align: start;
 }
 
-/* 背景 (parallax 容器) */
+/* 背景图 (cross-fade) */
 .bg-parallax {
     position: absolute;
     inset: 0;
@@ -17,13 +20,17 @@
     inset: 0;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    will-change: opacity;
+    transition: opacity 1s ease-in-out; /* 确保背景透明度渐变 */
 }
 
-/* 暗色遮罩，与全局 hero-section::before 统一 */
+/* 暗色遮罩，减少背景模糊 */
 .dark-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.18); /* 调整透明度 */
+    backdrop-filter: blur(0px); /* 去除模糊或降低模糊程度 */
 }
 
 /* 文字 / CTA 容器 */

@@ -229,10 +229,15 @@ export default function Info({ lang }) {
                         <h3>{t.guideTitle}</h3>
                         <p className="info-guide">{t.guideDesc}</p>
 
-                        <div className="info-qr">
+                        <div className="info-qr" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
                             <h3>{t.qrTitle}</h3>
-                            <img src={t.qrImg} alt="QR code" />
+                            <img
+                                src={t.qrImg}
+                                alt="QR code"
+                                style={{ maxWidth: '200px', width: '100%', height: 'auto' }}  /* 控制图片大小，居中 */
+                            />
                         </div>
+
                     </div>
                 </div>
             </section>

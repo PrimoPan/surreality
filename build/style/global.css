@@ -1,232 +1,157 @@
 /* ====================================
-   Global Styles – Dark Theme (mobile-ready v4)
+   Global Styles – Dark Theme (mobile-ready v5)
    ==================================== */
 
-/* 1. 强制深色模式 —— 不跟随系统浅/深切换 */
-html {
-    color-scheme: dark;
-}
+/* 1. 强制深色模式 —— 不跟随系统切换 */
+html { color-scheme: dark; }
 @media (prefers-color-scheme: light) {
     :root {
-        --bg-color: #1f2029;
-        --text-color: #ffffff;
-        --nav-bg: rgba(31, 32, 41, 0.7);
-        --nav-text: #ffffff;
-        --divider: rgba(255, 255, 255, 0.6);
-        --card-bg: #26272f;
-        --card-border: rgba(255, 255, 255, 0.08);
-        --card-hover: rgba(255, 255, 255, 0.14);
+        --bg-color:#1f2029; --text-color:#ffffff;
+        --nav-bg:rgba(31,32,41,.7); --nav-text:#ffffff;  /* 确保按钮和菜单文字是白色 */
+        --divider:rgba(255,255,255,.6);
+        --card-bg:#26272f; --card-border:rgba(255,255,255,.08);
+        --card-hover:rgba(255,255,255,.14);
     }
 }
 
 /* ===== Design tokens ===== */
 :root {
-    --header-height: 48px;
-    --header-height-mobile: 56px;
-
-    --bg-color: #1f2029;
-    --text-color: #ffffff;
-    --nav-bg: rgba(31, 32, 41, 0.7);
-    --nav-text: #ffffff;
-    --divider: rgba(255, 255, 255, 0.6);
-
-    --card-bg: #26272f;
-    --card-border: rgba(255, 255, 255, 0.08);
-    --card-hover: rgba(255, 255, 255, 0.14);
+    --header-height:48px; --header-height-mobile:56px;
+    --bg-color:#1f2029;  --text-color:#ffffff;
+    --nav-bg:rgba(31,32,41,.7); --nav-text:#ffffff;  /* 确保按钮和菜单文字是白色 */
+    --divider:rgba(255,255,255,.6);
+    --card-bg:#26272f; --card-border:rgba(255,255,255,.08);
+    --card-hover:rgba(255,255,255,.14);
 }
 
 /* ===== Reset ===== */
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
 /* ===== Base ===== */
-html, body, #root {
-    height: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;           /* 始终保留全页吸附 */
-    scroll-padding-top: var(--header-height);
-    overscroll-behavior-y: contain;
-    font-family: 'Poppins', sans-serif;
-    color: var(--text-color);
-    background: var(--bg-color);
+html,body,#root{
+    height:100%;max-width:100vw;overflow-x:hidden;
+    scroll-behavior:smooth;
+    scroll-snap-type:y mandatory;           /* PC 端保留吸附 */
+    scroll-padding-top:var(--header-height);
+    overscroll-behavior-y:contain;
+    font-family:'Poppins',sans-serif;
+    color:var(--text-color);background:var(--bg-color);
 }
 
-img, video {
-    max-width: 100%;
-    height: auto;
+/* —— 移动端关闭吸附 & 橡皮筋 —— */
+@media(max-width:768px){
+    html,body{
+        scroll-snap-type:none !important;
+        overscroll-behavior-y:auto;
+    }
 }
 
 /* ===== Section block ===== */
-.main-section {
-    height: 100vh;
-    width: 100%;
-    max-width: 100vw;
-    position: relative;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;                /* 允许中途停靠 */
+.main-section{
+    height:100vh;min-height:100vh;
+    width:100%;max-width:100vw;position:relative;
+    scroll-snap-align:start;scroll-snap-stop:always;
 }
-.fullpage-clamp {
-    overflow: hidden;
-}
+.fullpage-clamp{overflow:hidden}
 
-/* —— 在区块尾部再设一个对齐点，保证内容看完可停留 —— */
-.main-section > *:last-child,
-.parallax-root > *:last-child {
-    scroll-snap-align: end;
+/* —— 尾部对齐点 —— */
+.main-section>*:last-child,
+.parallax-root>*:last-child{scroll-snap-align:end}
+
+/* —— 移动端让区块随内容伸展 —— */
+@media(max-width:768px){
+    .main-section{height:auto}
 }
 
 /* ===== Header ===== */
-.major-nav {
-    position: fixed;
-    inset: 0 0 auto 0;
-    width: 100%; max-width: 100vw;
-    height: var(--header-height);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 1rem;
-    background: var(--nav-bg);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
+.major-nav{
+    position:fixed;inset:0 0 auto 0;z-index:1000;
+    width:100%;max-width:100vw;height:var(--header-height);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 1rem;background:var(--nav-bg);backdrop-filter:blur(8px);
 }
-.nav-logo {
-    display: flex; align-items: center; overflow: hidden;
+.nav-logo{display:flex;align-items:center;overflow:hidden}
+.nav-logo img{height:32px;margin-right:.5rem}
+.vertical{width:1px;height:24px;background:var(--divider);margin-right:.5rem}
+.nav{margin-left:auto}
+.nav__links{list-style:none;display:flex;gap:1rem;align-items:center;font-size:.9rem}
+.nav__link a{color:var(--nav-text);opacity:.8;text-decoration:none;transition:opacity .2s}
+.nav__link a:hover,.nav__link.active a{opacity:1}
+
+/* ---- 修复汉堡菜单按钮字体颜色和增大字体 ---- */
+.mobile-menu-btn{
+    display:none;background:none;border:none;font-size:2rem;color:var(--nav-text);cursor:pointer;z-index:1001;
 }
-.nav-logo img {
-    height: 32px; margin-right: .5rem;
-}
-.vertical {
-    width: 1px; height: 24px; background: var(--divider); margin-right: .5rem;
-}
-.nav {
-    margin-left: auto;
-}
-.nav__links {
-    list-style: none; display: flex; gap: 1rem; align-items: center; font-size: .9rem;
-}
-.nav__link {
-    cursor: pointer;
-}
-.nav__link a {
-    color: var(--nav-text); opacity: .8; text-decoration: none; transition: opacity .2s;
-}
-.nav__link a:hover,
-.nav__link.active a {
-    opacity: 1;
-}
-.mobile-menu-btn {
-    display: none; background: none; border: none; font-size: 1.5rem;
-    color: var(--nav-text); cursor: pointer; z-index: 1001;
+
+/* ---- 确保汉堡菜单字体为白色，且增大字体大小（仅移动端） ---- */
+@media(max-width:768px){
+    .mobile-menu-btn {
+        color: #ffffff; /* 强制设置字体为白色 */
+        font-size: 0.5rem; /* 增大字体 */
+        padding: 1rem;  /* 增加间距，使其更易点击 */
+    }
 }
 
 /* ===== Hero / Parallax ===== */
-.parallax-root,
-.hero-section {
-    position: relative;
-    width: 100%; max-width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+.parallax-root,.hero-section{
+    position:relative;width:100%;max-width:100vw;height:100vh;
+    overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always;
 }
-.parallax-root .bg-image,
-.background-image {
-    position: absolute; inset: 0;
-    background-size: cover; background-position: center; background-repeat: no-repeat;
-    will-change: opacity;
-}
-.parallax-root .dark-overlay {
-    position: absolute; inset: 0; background: rgba(0,0,0,.35); backdrop-filter: blur(2px);
-}
-.parallax-root .banner-content {
-    position: relative; z-index: 1;
-    max-width: 90%; margin: 0 auto;
-    display: flex; flex-direction: column; align-items: center;
-    text-align: center; gap: 1.25rem; padding: 0 1rem;
-}
-.parallax-root h1 {
-    font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase;
-}
-.parallax-root .tagline {
-    font-size: clamp(1rem, 3.5vw, 1.8rem); opacity: .85;
-}
-.parallax-root .view-news-btn {
-    padding: .9rem 2.4rem; font-size: 1rem; border: none; border-radius: 48px;
-    background: rgba(255,255,255,.15); color: #fff; backdrop-filter: blur(6px);
-    cursor: pointer; transition: transform .2s;
-}
-.parallax-root .view-news-btn:hover {
-    transform: translateY(-2px) scale(1.04);
-}
-/* —— 居中显示滚动提示 —— */
-.parallax-root .scroll-hint {
-    position: absolute;
-    bottom: 2rem;
-    width: 100%;
-    left: 0;
-    text-align: center;
-    font-size: .85rem;
-    opacity: .8;
+.parallax-root .bg-image,.background-image{
+    position:absolute;inset:0;
+    background-size:cover;background-position:center;background-repeat:no-repeat;
+    will-change:opacity;
 }
 
-/* —— 在 VR Corner 页隐藏滚动提示 —— */
-.vrcorner-section .scroll-hint {
-    display: none !important;
+/* 背景模糊 —— 调整背景遮罩透明度和模糊效果 */
+.parallax-root .dark-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.18); /* 透明度调整 */
+    backdrop-filter: blur(0px); /* 去除模糊，或减少模糊 */
 }
+
+.parallax-root .banner-content{
+    position:relative;z-index:1;max-width:90%;margin:0 auto;
+    display:flex;flex-direction:column;align-items:center;text-align:center;
+    gap:1.25rem;padding:0 1rem;
+}
+.parallax-root h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:900;text-transform:uppercase}
+.parallax-root .tagline{font-size:clamp(1rem,3.5vw,1.8rem);opacity:.85}
+.parallax-root .view-news-btn{
+    padding:.9rem 2.4rem;font-size:1rem;border:none;border-radius:48px;
+    background:rgba(255,255,255,.15);color:#fff;backdrop-filter:blur(6px);
+    cursor:pointer;transition:transform .2s;
+}
+.parallax-root .view-news-btn:hover{transform:translateY(-2px) scale(1.04)}
+.parallax-root .scroll-hint{
+    position:absolute;bottom:2rem;width:100%;left:0;
+    text-align:center;font-size:.85rem;opacity:.8;
+}
+.vrcorner-section .scroll-hint{display:none !important}
 
 /* ===== Drawer ===== */
-.drawer-menu {
-    background: var(--bg-color); padding: 20px;
-}
-.drawer-menu a {
-    color: var(--text-color); font-size: 1.2rem;
+.drawer-menu{background:var(--bg-color);padding:20px}
+.drawer-menu a{color:var(--text-color);font-size:1.2rem}
+
+/* ===== Core / VR Corner 区块多行内容可滚 —— */
+.vrcorner-section,.coretech-section,.main-section.coretech-section{
+    height:auto !important;min-height:100vh !important;
+    overflow-y:auto !important;overflow-x:hidden !important;
+    scroll-snap-align:start !important;
 }
 
-/* ===== 专用区块复写 ===== */
-.vrcorner-section,
-.coretech-section,
-.main-section.coretech-section {
-    height: auto !important;
-    min-height: 100vh !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    scroll-snap-align: start !important;
-}
-
-/* —— 抽屉菜单文字统一白色 —— */
-.ant-drawer-body,
-.ant-drawer-body * {
-    color: #ffffff !important;
-}
+/* ===== 链接强调色统一 ===== */
+a{color:inherit}
 
 /* ===== Media Queries ===== */
-@media (max-width: 768px) {
-    .major-nav {
-        height: var(--header-height-mobile);
-        padding: 0 .75rem;
-    }
-    .nav__links,
-    .nav-logo {
-        display: none;
-    }
-    .mobile-menu-btn {
-        display: block;
-    }
-    .main-section,
-    .parallax-root {
-        height: calc(100vh - var(--header-height-mobile));
-        min-height: 340px;
-    }
+@media(max-width:768px){
+    .major-nav{height:var(--header-height-mobile);padding:0 .75rem}
+    .nav__links,.nav-logo{display:none}
+    .mobile-menu-btn{display:block}
 }
 
-@media (max-width: 450px) {
-    .parallax-root .banner-content {
-        gap: 1rem;
-    }
-    .parallax-root .view-news-btn {
-        padding: .7rem 1.8rem; font-size: .9rem;
-    }
+@media(max-width:450px){
+    .parallax-root .banner-content{gap:1rem}
+    .parallax-root .view-news-btn{padding:.7rem 1.8rem;font-size:.9rem}
 }

@@ -3,9 +3,9 @@
 /* 本区块自身允许滚动，且吸顶时齐头 */
 .coretech-section {
     position: relative;
-    height: auto !important;
-    min-height: 100vh;
-    overflow-y: auto;
+    height: auto !important;  /* 让区块根据内容自适应 */
+    min-height: auto;         /* 删除 min-height，确保内容可以自适应 */
+    overflow-y: auto;         /* 允许纵向滚动 */
     overflow-x: hidden;
     scroll-snap-align: start;
     background: #111; /* 如需深色底，可去掉视频时保持一致 */
@@ -98,6 +98,7 @@
         grid-template-columns: 1fr;
     }
 }
+
 @media (max-width: 600px) {
     .coretech-container {
         padding: 3rem 0.5rem 2rem;

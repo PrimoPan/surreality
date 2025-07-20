@@ -1,71 +1,294 @@
 /* ====================================
-   Info Page + VR Corner (mobile‑first)
+   Info Page + VR Corner (mobile-first)
    ==================================== */
 
 /* ---------- 展区海报四宫格 ---------- */
-.info-poster-full{display:flex;justify-content:center;align-items:center;background:var(--bg-color)}
-.info-poster-container{display:flex;flex-direction:column;align-items:center;padding:2rem 0}
-.info-poster-title{font-size:clamp(2.6rem,6vw,3.6rem);font-weight:900;margin-bottom:2rem;text-align:center}
-.info-poster{display:flex;flex-wrap:wrap;gap:1.4rem;max-width:1280px;padding:0 2rem}
-.poster-item{flex:1 1 22%;max-width:22%;transition:transform .25s}
-.poster-item img{width:100%;border-radius:12px;object-fit:cover}
-.poster-item:hover{transform:scale(1.05)}
-
-@media(max-width:768px){
-    .poster-item{flex:1 1 45%;max-width:45%;}
+.info-poster-full {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-color);
 }
 
-/* ---------- VR Corner 主区 ---------- */
-.vrcorner-section{
-    background:#111 url('https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images%2F145961751956204_.pic_hd.jpg') center/cover no-repeat fixed;
-    display:flex;flex-direction:column;align-items:center;padding:2rem 0 6rem;gap:2rem;
-}
-.vrcorner-title{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;text-align:center}
-.vr-grid{
-    width:100%;max-width:1280px;padding:0 2rem;
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-    gap:1.2rem;
-}
-.vrcard{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .25s,background .25s}
-.vrcard:hover{background:var(--card-hover);transform:translateY(-4px)}
-.vrcard img{width:100%;aspect-ratio:4/3;object-fit:cover}
-.vrcard-body{flex:1;padding:1rem 1.2rem;display:flex;flex-direction:column}
-.vrcard-title{font-size:1.05rem;font-weight:600;line-height:1.35;margin-bottom:.4rem}
-.vrcard-author{font-size:.8rem;opacity:.75;margin-bottom:.6rem}
-.vrcard-learn{align-self:flex-start;margin-top:auto;padding:.34rem 1rem;font-size:.78rem;background:transparent;border:1px solid rgba(255,255,255,.28);border-radius:999px;color:var(--text-color);cursor:pointer}
-.vrcard-learn::after{content:'›';margin-left:.35rem}
-.vrcard-learn:hover{background:rgba(255,255,255,.15)}
-
-@media(max-width:600px){
-    .vr-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+.info-poster-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
 }
 
-/* ---------- VR Modal ---------- */
-.vrcard-modal{position:fixed;inset:0;background:rgba(0,0,0,.9);backdrop-filter:blur(4px);display:flex;justify-content:center;align-items:center;z-index:2000}
-.vrcard-modal-body{width:min(90vw,820px);max-height:92vh;background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;overflow-y:auto;padding:2rem 2.5rem;color:var(--text-color)}
-.vrcard-modal-img{width:100%;border-radius:10px;object-fit:cover;margin-bottom:1.6rem}
-.vrcard-modal-body h2{font-size:2rem;margin-bottom:.4rem}
-.vrcard-modal-body h4{font-weight:500;margin-bottom:1rem;opacity:.85}
-.vrcard-desc{white-space:pre-line;line-height:1.8}
-.vrcard-modal-actions{display:flex;gap:1rem;margin-top:2rem}
-.vrcard-modal-actions button{flex:1;padding:.8rem 1rem;background:var(--card-hover);border:none;border-radius:8px;color:var(--text-color);font-weight:600;cursor:pointer}
-.vrcard-modal-actions button:hover{background:rgba(255,255,255,.18)}
+.info-poster-title {
+    font-size: clamp(2.6rem, 6vw, 3.6rem);
+    font-weight: 900;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.info-poster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    max-width: 1280px;
+    padding: 0 2rem;
+}
+
+.poster-item {
+    flex: 1 1 22%;
+    max-width: 22%;
+    transition: transform 0.25s;
+}
+
+.poster-item img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.poster-item:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .poster-item {
+        flex: 1 1 45%;
+        max-width: 45%;
+    }
+}
+
+/* ---------- VR Corner 主区 ---------- */
+.vrcorner-section {
+    background: #111 url('https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images%2F145961751956204_.pic_hd.jpg') center/cover no-repeat fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0 6rem;
+    gap: 2rem;
+}
+
+.vrcorner-title {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 800;
+    text-align: center;
+}
+
+.vr-grid {
+    width: 100%;
+    max-width: 1280px;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.2rem;
+}
+
+.vrcard {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.25s, background 0.25s;
+}
+
+.vrcard:hover {
+    background: var(--card-hover);
+    transform: translateY(-4px);
+}
+
+.vrcard img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+}
+
+.vrcard-body {
+    flex: 1;
+    padding: 1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.vrcard-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 0.4rem;
+}
+
+.vrcard-author {
+    font-size: 0.8rem;
+    opacity: 0.75;
+    margin-bottom: 0.6rem;
+}
+
+.vrcard-learn {
+    align-self: flex-start;
+    margin-top: auto;
+    padding: 0.34rem 1rem;
+    font-size: 0.78rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.vrcard-learn::after {
+    content: '›';
+    margin-left: 0.35rem;
+}
+
+.vrcard-learn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 600px) {
+    .vr-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+}
+
+/* ---------- VR Modal ---------- */
+.vrcard-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.vrcard-modal-body {
+    width: min(90vw, 820px);
+    max-height: 92vh;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    overflow-y: auto;
+    padding: 2rem 2.5rem;
+    color: var(--text-color);
+}
+
+.vrcard-modal-img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 1.6rem;
+}
+
+.vrcard-modal-body h2 {
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
+}
+
+.vrcard-modal-body h4 {
+    font-weight: 500;
+    margin-bottom: 1rem;
+    opacity: 0.85;
+}
+
+.vrcard-desc {
+    white-space: pre-line;
+    line-height: 1.8;
+}
+
+.vrcard-modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.vrcard-modal-actions button {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    background: var(--card-hover);
+    border: none;
+    border-radius: 8px;
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.vrcard-modal-actions button:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
 
 /* ---------- Info 文本主体 ---------- */
-.info-wrapper{display:flex;justify-content:center;align-items:center;height:100%;background:var(--bg-color);padding:4rem 1rem 6rem}
-.info-container{
-    max-width:960px;max-height:calc(100vh - 10rem);overflow-y:auto;
-    background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:16px;
-    padding:3rem;color:var(--text-color);backdrop-filter:blur(4px);
-    font-size:1.05rem;line-height:1.9
+.info-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: var(--bg-color);
+    padding: 4rem 1rem 6rem;
 }
-.info-hero-title{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:900;text-align:center;margin-bottom:.4rem}
-.info-hero-sub{font-size:clamp(1.2rem,3.5vw,2rem);text-align:center;opacity:.85;margin-bottom:2.2rem}
-.info-period{font-weight:700;font-size:1.2rem;margin-bottom:1rem}
-.info-list{padding-left:1.2rem;margin-bottom:1.4rem}
-.info-list li{margin:.35rem 0}
+
+.info-container {
+    max-width: 960px;
+    max-height: calc(100vh - 10rem);
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 16px;
+    padding: 3rem;
+    color: var(--text-color);
+    backdrop-filter: blur(4px);
+    font-size: 1.05rem;
+    line-height: 1.9;
+}
+
+.info-hero-title {
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 0.4rem;
+}
+
+.info-hero-sub {
+    font-size: clamp(1.2rem, 3.5vw, 2rem);
+    text-align: center;
+    opacity: 0.85;
+    margin-bottom: 2.2rem;
+}
+
+.info-period {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.info-list {
+    padding-left: 1.2rem;
+    margin-bottom: 1.4rem;
+}
+
+.info-list li {
+    margin: 0.35rem 0;
+}
 
 /* ---------- Scroll 提示 ---------- */
-.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:.4rem;font-size:1rem;color:#ccc;margin-top:2rem}
-.scroll-icon{animation:bounce 1.6s infinite}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+.scroll-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1rem;
+    color: #ccc;
+    margin-top: 2rem;
+}
+
+.scroll-icon {
+    animation: bounce 1.6s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(6px);
+    }
+}

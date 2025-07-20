@@ -46,7 +46,15 @@ export default function Header({ lang, onLangChange }) {
                     if (isDrawer) setDrawerOpen(false);
                 }}
             >
-                <span>{label}</span>
+                <span
+                    style={{
+                        color: '#ffffff', /* 始终保持白色字体 */
+                        fontWeight: 'bold', /* 加粗字体 */
+                        fontSize: isDrawer ? '1.5rem' : '1rem', /* 调整字体大小 */
+                    }}
+                >
+                    {label}
+                </span>
             </li>
         ));
 
@@ -78,6 +86,10 @@ export default function Header({ lang, onLangChange }) {
                                 bordered={false}
                                 onChange={onLangChange}
                                 dropdownMatchSelectWidth={false}
+                                style={{
+                                    color: '#ffffff', /* 确保语言选择文字为白色 */
+                                    fontSize: '1.1rem', /* 增大字体大小 */
+                                }}
                             >
                                 <Option value="en">English</Option>
                                 <Option value="zh-Hans">简体中文</Option>
@@ -92,6 +104,11 @@ export default function Header({ lang, onLangChange }) {
                     className="mobile-menu-btn"
                     onClick={() => setDrawerOpen(true)}
                     aria-label="Menu"
+                    style={{
+                        color: '#ffffff',
+                        fontSize: '2.5rem',  /* 增大字体 */
+                        padding: '1rem',     /* 增加点击区域 */
+                    }}
                 >
                     <MenuOutlined />
                 </button>
@@ -127,6 +144,10 @@ export default function Header({ lang, onLangChange }) {
                                 setDrawerOpen(false);
                             }}
                             dropdownMatchSelectWidth={false}
+                            style={{
+                                color: '#ffffff', /* 确保语言选择文字为白色 */
+                                fontSize: '1.5rem', /* 增大字体大小 */
+                            }}
                         >
                             <Option value="en">English</Option>
                             <Option value="zh-Hans">简体中文</Option>
