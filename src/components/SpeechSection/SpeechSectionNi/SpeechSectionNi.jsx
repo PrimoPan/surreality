@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import styles from './SpeechSectionNi.module.css';
 
@@ -20,7 +20,6 @@ const speechTextNi = {
     ],
 };
 
-// 中文副标题
 const subtitleMap = {
     'zh-Hant': '願景洞見',
     'zh-Hans': '愿景洞见',
@@ -28,14 +27,37 @@ const subtitleMap = {
 
 export default function SpeechSectionNi({ lang }) {
     const lines = speechTextNi[lang] || speechTextNi.en;
-    const subtitle = subtitleMap[lang] || subtitleMap['zh-Hant']; // fallback 繁体
+    const subtitle = subtitleMap[lang] || subtitleMap['zh-Hant'];
+
+    const desktopBgUrl =
+        'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/Ni.jpg';
+    const mobileBgUrl =
+        'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/mobile/%E6%A0%A1%E9%95%BF.png';
+
+    const [bgUrl, setBgUrl] = useState(
+        typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+            ? mobileBgUrl
+            : desktopBgUrl
+    );
+
+    useEffect(() => {
+        const mql = window.matchMedia('(max-width: 768px) and (orientation: portrait)');
+        const updateBg = (e) => {
+            setBgUrl(e.matches ? mobileBgUrl : desktopBgUrl);
+        };
+        // initial
+        updateBg(mql);
+        mql.addEventListener('change', updateBg);
+        return () => mql.removeEventListener('change', updateBg);
+    }, []);
 
     return (
         <section
             className={`hero-section ${styles.speechSectionNi}`}
             style={{
-                backgroundImage:
-                    'url(https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/Ni.jpg)',
+                backgroundImage: `url(${bgUrl})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
             }}
         >
             {/* 大標題 */}

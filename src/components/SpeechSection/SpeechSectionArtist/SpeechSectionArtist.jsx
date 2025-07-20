@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import styles from './SpeechSectionArtist.module.css';
 
@@ -32,16 +32,45 @@ const subtitleMap = {
 };
 
 export default function SpeechSectionArtist({ lang }) {
+    // 根据 lang 取文案
     const lines = speechTextArtist[lang] || speechTextArtist.en;
     const title = artistTitle[lang] || artistTitle.en;
     const subtitle = subtitleMap[lang] || subtitleMap['zh-Hant'];
+
+    // 桌面和移动竖屏背景图
+    const desktopBgUrl =
+        'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/artist.jpg';
+    const mobileBgUrl =
+        'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/mobile/%E8%89%BA%E6%9C%AF%E5%AE%B6.png';
+
+    // 动态背景图 state
+    const [bgUrl, setBgUrl] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return window.matchMedia('(max-width: 768px) and (orientation: portrait)').matches
+                ? mobileBgUrl
+                : desktopBgUrl;
+        }
+        return desktopBgUrl;
+    });
+
+    // 监听移动端竖屏切换
+    useEffect(() => {
+        const mql = window.matchMedia('(max-width: 768px) and (orientation: portrait)');
+        const updateBg = (e) => setBgUrl(e.matches ? mobileBgUrl : desktopBgUrl);
+        // 初始调用
+        updateBg(mql);
+        // 监听变化
+        mql.addEventListener('change', updateBg);
+        return () => mql.removeEventListener('change', updateBg);
+    }, []);
 
     return (
         <section
             className={`hero-section ${styles.speechSectionArtist}`}
             style={{
-                backgroundImage:
-                    'url(https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/artist.jpg)',
+                backgroundImage: `url(${bgUrl})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
             }}
         >
             {/* 多语言标题 */}
@@ -64,7 +93,6 @@ export default function SpeechSectionArtist({ lang }) {
                         <h4>Violeta Ayala</h4>
                         <p>{title}</p>
                     </div>
-
                     {/* 发言内容 */}
                     {lines.map((line, i) => (
                         <p key={i}>{line}</p>

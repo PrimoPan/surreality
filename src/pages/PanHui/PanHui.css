@@ -1,3 +1,4 @@
+/* PanHui.css */
 /* ================ PanHui 卡片 ================ */
 .panhui-wrapper {
     --card-max-height: calc(100vh - 10rem);
@@ -68,6 +69,16 @@
     margin: 0;
 }
 
+/* 超链接白色化 */
+.panhui-link,
+.panhui-link:visited {
+    color: var(--text-color);
+    text-decoration: none;
+}
+.panhui-link:hover {
+    text-decoration: underline;
+}
+
 /* 简介 */
 .panhui-bio {
     font-size: 1rem;
@@ -90,8 +101,9 @@
         text-align: center;
     }
     .panhui-avatar {
-        width: 70vw;        /* 宽度跟随视口，保持长方形比例 */
-        max-width: 320px;   /* 给个兜底 */
+        /* 缩小头像，避免占满屏幕 */
+        width: 50vw;
+        max-width: 250px;
     }
     .panhui-title h1 {
         font-size: 1.8rem;

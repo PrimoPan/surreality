@@ -1,3 +1,4 @@
+// PanHui.jsx
 import React from 'react';
 import './PanHui.css';
 import { t as _t } from '../../components/i18n';

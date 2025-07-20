@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import styles from './SpeechSectionPanHui.module.css';
 
@@ -23,22 +23,48 @@ const speechTextPanHui = {
     ],
 };
 
-// 中文副标题
 const subtitleMap = {
     'zh-Hant': '製作人說',
     'zh-Hans': '制作人说',
 };
 
 export default function SpeechSectionPanHui({ lang }) {
+    // 选取文案和副标题
     const lines = speechTextPanHui[lang] || speechTextPanHui.en;
-    const subtitle = subtitleMap[lang] || subtitleMap['zh-Hant']; // fallback 繁体
+    const subtitle = subtitleMap[lang] || subtitleMap['zh-Hant'];
+
+    // 定义桌面和移动端背景图地址
+    const desktopBgUrl =
+        'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/Panhui.jpg';
+    const mobileBgUrl =
+        'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/mobile/Ben.png';
+
+    // State 存储当前背景图
+    const [bgUrl, setBgUrl] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return window.matchMedia('(max-width: 768px) and (orientation: portrait)').matches
+                ? mobileBgUrl
+                : desktopBgUrl;
+        }
+        return desktopBgUrl;
+    });
+
+    // 监听屏幕宽度和方向变化，切换背景图
+    useEffect(() => {
+        const mql = window.matchMedia('(max-width: 768px) and (orientation: portrait)');
+        const updateBg = (e) => setBgUrl(e.matches ? mobileBgUrl : desktopBgUrl);
+        updateBg(mql); // 初始判断
+        mql.addEventListener('change', updateBg);
+        return () => mql.removeEventListener('change', updateBg);
+    }, []);
 
     return (
         <section
             className={`hero-section ${styles.speechSection}`}
             style={{
-                backgroundImage:
-                    'url(https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/Panhui.jpg)',
+                backgroundImage: `url(${bgUrl})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
             }}
         >
             {/* 多语言标题 */}
