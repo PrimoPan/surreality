@@ -171,9 +171,97 @@ a{color:inherit}
 .language-select .ant-select-selection-item {
     color: #ffffff !important;
 }
+/* 让下拉菜单中的选项文字颜色变为白色 */
+.language-select .ant-select-item-option {
+    color: #ffffff !important; /* 使所有选项文字变成白色 */
+}
+
+.language-select .ant-select-item-option-content {
+    color: #ffffff !important; /* 强制修改选项的内容文字颜色 */
+}
+/* 针对移动端的语言选择 */
+@media (max-width: 768px) {
+    .language-select .ant-select-item-option,
+    .language-select .ant-select-item-option-content {
+        color: #ffffff !important; /* 强制将非选中项文字颜色设为白色 */
+    }
+
+    /* 使已选项的文字颜色也白色 */
+    .language-select .ant-select-selection-item {
+        color: #ffffff !important;
+    }
+}
+
+/* 覆盖下拉菜单选项文字颜色 */
+.language-select .ant-select-item-option-content {
+    color: #ffffff !important;
+}
 
 /* 下拉箭头也白一点 */
 .language-select .ant-select-arrow {
     color: #ffffff !important;
 }
+/* 确保在移动端下拉菜单中的文字是白色 */
+@media (max-width: 768px) {
+    .language-select .ant-select-item-option,
+    .language-select .ant-select-item-option-content {
+        color: #ffffff !important;
+    }
 
+    /* 确保已选项文字是白色 */
+    .language-select .ant-select-selection-item {
+        color: #ffffff !important;
+    }
+
+    /* 让下拉框背景透明 */
+    .language-select .ant-select-selector {
+        background: transparent !important;
+        color: #ffffff !important;
+    }
+}
+
+/* 强制让下拉菜单的文字为白色 */
+@media (max-width: 768px) {
+    .language-select .ant-select-item-option {
+        color: #ffffff !important; /* 让下拉项的文字为白色 */
+    }
+
+    .language-select .ant-select-item-option-content {
+        color: #ffffff !important; /* 强制将下拉项内容文字设置为白色 */
+    }
+
+    /* 确保下拉框背景色和文字颜色为白色 */
+    .language-select .ant-select-selector {
+        background-color: #1f2029 !important;
+        color: #ffffff !important;
+    }
+
+    /* 确保已选项的文字颜色为白色 */
+    .language-select .ant-select-selection-item {
+        color: #ffffff !important;
+    }
+
+    /* 如果下拉箭头需要改成白色 */
+    .language-select .ant-select-arrow {
+        color: #ffffff !important;
+    }
+}
+/* 强制在移动端应用白色文字和背景色 */
+@media (max-width: 768px) {
+    /* 修改下拉项的文字颜色 */
+    .language-select-dropdown .ant-select-item-option,
+    .language-select-dropdown .ant-select-item-option-content {
+        color: #ffffff !important;
+    }
+
+    /* 确保下拉框背景色和文字颜色为白色 */
+    .language-select-dropdown .ant-select-selector {
+        background-color: #1f2029 !important;
+        color: #ffffff !important;
+    }
+
+    /* 确保已选项文字颜色为白色 */
+    .language-select-dropdown .ant-select-selection-item {
+        color: #ffffff !important;
+    }
+}

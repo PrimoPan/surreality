@@ -135,19 +135,21 @@ export default function Header({ lang, onLangChange }) {
                             }}
                             style={{
                                 color: '#ffffff',    // 控制已选中的文字颜色
-                                fontSize: '1.5rem',  // 你已有的
+                                fontSize: '1.5rem',  // 字体大小
                             }}
                             dropdownStyle={{
-                                // 控制下拉框背景和文字
-                                backgroundColor: '#1f2029',
-                                color: '#ffffff',
+                                backgroundColor: '#1f2029',  // 控制下拉框的背景颜色
+                                color: '#ffffff',    // 控制下拉框内文字颜色
                             }}
-                            dropdownClassName="language-select-dropdown"
+                            dropdownClassName="language-select-dropdown" // 加入类名
                         >
                             <Option value="en">English</Option>
                             <Option value="zh-Hans">简体中文</Option>
                             <Option value="zh-Hant">繁體中文</Option>
                         </Select>
+
+
+
                     </li>
                 </ul>
             </Drawer>
