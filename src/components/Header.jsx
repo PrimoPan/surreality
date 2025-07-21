@@ -123,31 +123,26 @@ export default function Header({ lang, onLangChange }) {
                 bodyStyle={{ background: '#1f2029', padding: '1.2rem' }}
                 headerStyle={{ display: 'none' }}
             >
-                <ul
-                    style={{
-                        listStyle: 'none',
-                        padding: 0,
-                        margin: 0,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '1.2rem',
-                    }}
-                >
+                <ul style={{ /* 不变 */ }}>
                     {renderLinks(true)}
                     <li style={{ marginTop: '1rem' }}>
                         <Select
                             className="language-select"
                             value={lang}
-                            bordered={false}
                             onChange={(v) => {
                                 onLangChange(v);
                                 setDrawerOpen(false);
                             }}
-                            dropdownMatchSelectWidth={false}
                             style={{
-                                color: '#ffffff', /* 确保语言选择文字为白色 */
-                                fontSize: '1.5rem', /* 增大字体大小 */
+                                color: '#ffffff',    // 控制已选中的文字颜色
+                                fontSize: '1.5rem',  // 你已有的
                             }}
+                            dropdownStyle={{
+                                // 控制下拉框背景和文字
+                                backgroundColor: '#1f2029',
+                                color: '#ffffff',
+                            }}
+                            dropdownClassName="language-select-dropdown"
                         >
                             <Option value="en">English</Option>
                             <Option value="zh-Hans">简体中文</Option>

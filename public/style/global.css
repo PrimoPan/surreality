@@ -155,3 +155,25 @@ a{color:inherit}
     .parallax-root .banner-content{gap:1rem}
     .parallax-root .view-news-btn{padding:.7rem 1.8rem;font-size:.9rem}
 }
+/* 在你的全局 CSS（比如 src/index.css）或者模块化 CSS 中都行 */
+.language-select {
+    /* 确保底色透明，这样下面的文字颜色才有效 */
+    background: transparent;
+}
+
+/* 触发器区域 */
+.language-select .ant-select-selector {
+    background: transparent !important;
+    color: #ffffff !important;
+}
+
+/* 选中项文字 */
+.language-select .ant-select-selection-item {
+    color: #ffffff !important;
+}
+
+/* 下拉箭头也白一点 */
+.language-select .ant-select-arrow {
+    color: #ffffff !important;
+}
+

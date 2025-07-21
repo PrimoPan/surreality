@@ -90,3 +90,13 @@
     .about-wrapper   { padding: 3rem 1rem 4rem; }
     .leader-photo    { width: 120px; min-width:120px; }
 }
+@media (max-width: 768px) {
+    /* 让 body 跟随内容增高，关闭内部滚动 */
+    html, body {
+        height: auto;
+    }
+    .about-wrapper {
+        display: block;
+        overflow-y: visible;
+    }
+}
