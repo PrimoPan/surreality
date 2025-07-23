@@ -7,7 +7,6 @@
     background-repeat: no-repeat;
 }
 
-
 .sectionTitleNi {
     position: absolute;
     top: 8%;
@@ -38,7 +37,7 @@
     left: 5%;
     width: 300px;
     height: 60vh;
-    background: rgba(31, 32, 41, 0.6);  /* 从0.85降到0.6，更透明 */
+    background: rgba(31, 32, 41, 0.6);
     padding: 1rem;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
     border-radius: 16px;
@@ -63,3 +62,16 @@
     background: rgba(255, 255, 255, 0.2);
     border-radius: 3px;
 }
+
+/* —— 新增：移动端竖屏时将气泡移动至屏幕中部 —— */
+@media (max-width: 768px) and (orientation: portrait) {
+    .speechBubbleNi {
+        top:55%;
+        left: 10%;
+        transform: translateY(-50%);
+        /* 高度改为页面高度的40% */
+        height: 35vh;
+        /* 不再对 width 做任何覆盖，让它继承基础样式或自适应 */
+    }
+}
+

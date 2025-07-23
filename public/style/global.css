@@ -264,4 +264,28 @@ a{color:inherit}
     .language-select-dropdown .ant-select-selection-item {
         color: #ffffff !important;
     }
+    /* 导航整体高度调整 */
+    .major-nav{height:var(--header-height-mobile);padding:0 .75rem}
+
+    /* 隐藏桌面版导航链接 */
+    .nav__links{display:none !important}
+
+    /* 恢复 nav-logo 并只保留第一张 logo，放大响应式显示 */
+    .major-nav .nav-logo {
+        display: flex !important;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .major-nav .nav-logo > img:nth-of-type(1) {
+        display: block !important;
+        /* 移动端放大，最小 6rem，最大 14rem，中间按 30vw */
+        width: clamp(14rem, 30vw, 17rem) !important;
+        height: auto;
+    }
+    .major-nav .nav-logo > img:nth-of-type(2),
+    .major-nav .nav-logo > .vertical {
+        display: none !important;
+    }
+
+
 }

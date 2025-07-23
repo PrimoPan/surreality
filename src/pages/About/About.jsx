@@ -52,7 +52,7 @@ const copy = {
             '社會計算與互惠互動：我們研究社會計算如何增強互惠行為，在虛擬社群中促進信任、參與和協作。',
             '生成式 AI 與大型語言模型技術：作為推動研究的核心技術，我們專注於開發可應用的生成式 AI 和 LLM 相關技術，以加強元宇宙中的交互性並拓寬高等教育的邊界。',
             'VR/AR/XR 網絡：我們研究針對 VR 應用的網絡使用創新方法，以適應用戶需求和環境條件，確保在元宇宙中的無縫體驗。',
-            'AI+ 專案：我們的 AI+ 計畫（特別是教育領域）涵蓋元宇宙教室、AI 講師及互動式 AI 講師的開發，這些項目旨在創建沉浸式、跨校園的學習環境，引入 AI 驅動的教學方法並開發實時互動 AI 讲师，從而革新教育體驗。'
+            'AI+ 專案：我們的 AI+ 計畫（特別是教育領域）涵蓋元宇宙教室、AI 講師及互動式 AI 讲师的开发，這些項目旨在創建沉浸式、跨校園的學習環境，引入 AI 驅動的教學方法並開發實時互動 AI 讲师，從而革新教育體驗。'
         ],
         pubs: '我們的團隊成果已發表於計算機科學與藝術領域的頂級期刊和會議，包括 ACM WWW、ACM SIGCOMM、ACM MobiSys、ACM MobiCom、ACM CoNEXT、IEEE INFOCOM、IEEE PerCom、IEEE ICNP、IEEE ICDCS、IJCAI、AAAI、SIGGRAPH、CHI、CSCW 等等。',
         join: '在 MC²，我們致力於運用這些跨學科方法創造變革性的體驗，以豐富人們的生活並促進更緊密的連結。期待您與我們一同探索元宇宙及其在社會中的應用所帶來的無限可能。'
@@ -60,35 +60,38 @@ const copy = {
 };
 
 /* =============================================================
- * 2. 轮播封面图片（桌面 & 移动竖屏专用）
+ * 2. 轮播封面图片（桌面 & 移动端通用）
  * =========================================================== */
 const desktopCoverImages = [
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/mc2/mc201.jpg',
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/mc2/mc201.png',
-    'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/mc2/mc203.png',
+    'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/mc2/mc203.png'
 ];
 const mobileCoverImages = Array.from({ length: 3 }, (_, i) =>
-    `https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/mobile/about/${i + 1}.png`
+    `https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/mobile/about/${i +
+    1}.png`
 );
 
 export default function About({ lang = 'en' }) {
     const locale = ['en', 'zh-Hans', 'zh-Hant'].includes(lang) ? lang : 'en';
     const t = copy[locale];
 
-    // 根据“移动端竖屏”切换封面图数组
-    const [coverImages, setCoverImages] = useState(() => {
-        if (typeof window !== 'undefined' && window.matchMedia('(max-width: 768px) and (orientation: portrait)').matches) {
-            return mobileCoverImages;
-        }
-        return desktopCoverImages;
-    });
+    // 根据窗口宽度切换封面图
+    const [coverImages, setCoverImages] = useState(() =>
+        typeof window !== 'undefined' && window.innerWidth <= 768
+            ? mobileCoverImages
+            : desktopCoverImages
+    );
 
     useEffect(() => {
-        const mql = window.matchMedia('(max-width: 768px) and (orientation: portrait)');
-        const update = e => setCoverImages(e.matches ? mobileCoverImages : desktopCoverImages);
-        update(mql);
-        mql.addEventListener('change', update);
-        return () => mql.removeEventListener('change', update);
+        const onResize = () => {
+            setCoverImages(
+                window.innerWidth <= 768 ? mobileCoverImages : desktopCoverImages
+            );
+        };
+        onResize();
+        window.addEventListener('resize', onResize);
+        return () => window.removeEventListener('resize', onResize);
     }, []);
 
     // 轮播索引
@@ -105,24 +108,26 @@ export default function About({ lang = 'en' }) {
     return (
         <>
             {/* —— 1. 头图 Parallax —— */}
-            <ParallaxSection
-                image={coverImages[coverIndex]}
-                title={
-                    locale === 'en'
-                        ? 'MC² at HKUST(GZ)'
-                        : locale === 'zh-Hans'
-                            ? '香港科技大学(广州) MC² 实验室'
-                            : '香港科技大學(广州) MC² 實驗室'
-                }
-                subtitle={
-                    locale === 'en'
-                        ? 'Center for Metaverse and Computational Creativity'
-                        : locale === 'zh-Hans'
-                            ? '元宇宙与计算创意中心'
-                            : '元宇宙與計算創意中心'
-                }
-                isParallax
-            />
+            <div className="about-hero-wrapper">
+                <ParallaxSection
+                    image={coverImages[coverIndex]}
+                    title={
+                        locale === 'en'
+                            ? 'MC² at HKUST(GZ)'
+                            : locale === 'zh-Hans'
+                                ? '香港科技大学(广州) MC² 实验室'
+                                : '香港科技大學(广州) MC² 實驗室'
+                    }
+                    subtitle={
+                        locale === 'en'
+                            ? 'Center for Metaverse and Computational Creativity'
+                            : locale === 'zh-Hans'
+                                ? '元宇宙与计算创意中心'
+                                : '元宇宙與計算創意中心'
+                    }
+                    isParallax
+                />
+            </div>
 
             {/* —— 2. 团队九宫格 —— */}
             <TeamGrid lang={locale} />

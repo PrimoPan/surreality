@@ -1,3 +1,4 @@
+// Info.jsx
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Info.css';
@@ -7,6 +8,7 @@ import { ChevronDown } from 'lucide-react';
 const pick = (obj, key, lang) =>
     obj?.[`${key}_${lang === 'zh-Hans' ? 'cn' : 'en'}`] ?? '';
 
+// 海报链接
 const posterLinks = [
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster01.jpg',
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster02.jpg',
@@ -14,6 +16,7 @@ const posterLinks = [
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster04.jpg',
 ];
 
+// 文案
 const copy = {
     en: {
         heroTitle: 'SURREALITY·幻實之境',
@@ -31,7 +34,8 @@ const copy = {
         guideDesc:
             'On-site AI “butterfly” guide supports Chinese, English, and Cantonese—responding to questions on each artwork’s background, technical details, and inspirations in real time.',
         qrTitle: 'Scan to Book Your Visit',
-        qrImg: 'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/WechatIMG1084.jpg',
+        qrImg:
+            'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/WechatIMG1084.jpg',
         vrCorner: 'VR Corner',
         vrArtistBtn: 'Artist Bio',
         vrClose: 'Close',
@@ -39,6 +43,7 @@ const copy = {
         areaTitle: 'Exhibition Areas',
         scrollPosterHint: 'Scroll down to explore the VR Corner & registration',
         scrollVRHint: 'Scroll down to explore registration',
+        bookLinkText: 'Click to Book Your Visit',
     },
     'zh-Hans': {
         heroTitle: 'SURREALITY·幻实之境',
@@ -56,7 +61,8 @@ const copy = {
         guideDesc:
             '现场 AI 蝴蝶导览员提供中文、English 及粤语三语支持，可根据观众提问，即时解读作品创作背景、技术原理与艺术灵感。',
         qrTitle: '扫码预约参观',
-        qrImg: 'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/WechatIMG1084.jpg',
+        qrImg:
+            'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/WechatIMG1084.jpg',
         vrCorner: 'VR 角',
         vrArtistBtn: '艺术家简介',
         vrClose: '关闭',
@@ -64,6 +70,7 @@ const copy = {
         areaTitle: '展区介绍',
         scrollPosterHint: '向下滚动查看 VR 角与预约',
         scrollVRHint: '向下滚动查看预约入口',
+        bookLinkText: '点击预约展览',
     },
     'zh-Hant': {
         heroTitle: 'SURREALITY·幻實之境',
@@ -81,7 +88,8 @@ const copy = {
         guideDesc:
             '現場 AI 蝴蝶導覽員提供中文、English 及廣東話三語支持，可根據觀眾提問，即時解讀作品創作背景、技術原理與藝術靈感。',
         qrTitle: '掃碼預約參觀',
-        qrImg: 'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/WechatIMG1084.jpg',
+        qrImg:
+            'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/WechatIMG1084.jpg',
         vrCorner: 'VR 角',
         vrArtistBtn: '藝術家簡介',
         vrClose: '關閉',
@@ -89,9 +97,9 @@ const copy = {
         areaTitle: '展區介紹',
         scrollPosterHint: '向下滾動查看 VR 角與預約入口',
         scrollVRHint: '向下滾動查看預約入口',
+        bookLinkText: '點擊預約展覽',
     },
 };
-
 
 /* ---------- 单张 VR 卡片 ---------- */
 const ArtworkCard = ({ item, lang, onClick, t }) => {
@@ -109,7 +117,14 @@ const ArtworkCard = ({ item, lang, onClick, t }) => {
 };
 
 /* ---------- VR Modal ---------- */
-const ArtworkModal = ({ item, lang, showBio, onToggleBio, onClose, t }) =>
+const ArtworkModal = ({
+                          item,
+                          lang,
+                          showBio,
+                          onToggleBio,
+                          onClose,
+                          t
+                      }) =>
     !item ? null : (
         <div className="vrcard-modal" onClick={onClose}>
             <div className="vrcard-modal-body" onClick={e => e.stopPropagation()}>
@@ -121,7 +136,8 @@ const ArtworkModal = ({ item, lang, showBio, onToggleBio, onClose, t }) =>
                 <h2>{pick(item, 'title', lang)}</h2>
                 <h4>{pick(item, 'artist', lang)}</h4>
                 <p className="vrcard-desc">
-                    {showBio ? pick(item, 'artist_bio', lang)
+                    {showBio
+                        ? pick(item, 'artist_bio', lang)
                         : pick(item, 'description', lang)}
                 </p>
                 <div className="vrcard-modal-actions">
@@ -142,11 +158,13 @@ function VRCornerSection({ lang, t }) {
         fetch('/data/artworks.json')
             .then(r => r.json())
             .then(all => {
-                // 只取 id 22‑31
                 const items = all.filter(x => x.id >= 22 && x.id <= 31);
-                // 固定顺序（按你的需求）
                 const order = [25, 26, 27, 29, 24, 30, 22, 23, 28, 31];
-                setData(order.map(id => items.find(x => x.id === id)).filter(Boolean));
+                setData(
+                    order
+                        .map(id => items.find(x => x.id === id))
+                        .filter(Boolean)
+                );
             })
             .catch(console.error);
     }, []);
@@ -178,7 +196,7 @@ function VRCornerSection({ lang, t }) {
 
             <div className="scroll-hint">
                 {t.scrollVRHint}
-                <ChevronDown className="scroll-icon" size={34} strokeWidth={1.8}/>
+                <ChevronDown className="scroll-icon" size={34} strokeWidth={1.8} />
             </div>
         </section>
     );
@@ -188,7 +206,7 @@ function VRCornerSection({ lang, t }) {
 export default function Info({ lang }) {
     const t = copy[lang] || copy['zh-Hans'];
     const nav = useNavigate();
-    const goto = p => { nav(p); window.scrollTo(0,0); };
+    const goto = p => { nav(p); window.scrollTo(0, 0); };
 
     return (
         <div className="info-page">
@@ -197,9 +215,12 @@ export default function Info({ lang }) {
                 <div className="info-poster-container">
                     <h2 className="info-poster-title">{t.areaTitle}</h2>
                     <div className="info-poster">
-                        {posterLinks.map((src,i)=>(
-                            <div key={i} className="poster-item"
-                                 onClick={()=>goto(['/ocean','/garden','/realms','/city'][i])}>
+                        {posterLinks.map((src, i) => (
+                            <div
+                                key={i}
+                                className="poster-item"
+                                onClick={() => goto(['/ocean','/garden','/realms','/city'][i])}
+                            >
                                 <img src={src} alt={`poster-${i+1}`} />
                             </div>
                         ))}
@@ -207,11 +228,11 @@ export default function Info({ lang }) {
                 </div>
                 <div className="scroll-hint">
                     {t.scrollPosterHint}
-                    <ChevronDown className="scroll-icon" size={34} strokeWidth={1.8}/>
+                    <ChevronDown className="scroll-icon" size={34} strokeWidth={1.8} />
                 </div>
             </section>
 
-            {/* ---- VR Corner ---- */}
+            {/* ---- VR Corner ---- */}
             <VRCornerSection lang={lang} t={t} />
 
             {/* ---- 展览说明 ---- */}
@@ -224,20 +245,45 @@ export default function Info({ lang }) {
                         <p className="info-host">{t.host}</p>
 
                         <h3>{t.techTitle}</h3>
-                        <ul className="info-list">{t.techList.map(s=><li key={s}>{s}</li>)}</ul>
+                        <ul className="info-list">
+                            {t.techList.map(s => <li key={s}>{s}</li>)}
+                        </ul>
 
                         <h3>{t.guideTitle}</h3>
                         <p className="info-guide">{t.guideDesc}</p>
 
-                        <div className="info-qr" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                        <div
+                            className="info-qr"
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                textAlign: 'center'
+                            }}
+                        >
+                            {/* 语言区分的预约链接 */}
+                            <a
+                                href="https://qnr.hkust-gz.edu.cn/vm/rfWBX5F.aspx"
+                                style={{
+                                    color: '#fff',
+                                    textDecoration: 'underline',
+                                    marginBottom: '0.5rem'
+                                }}
+                            >
+                                {t.bookLinkText}
+                            </a>
+
                             <h3>{t.qrTitle}</h3>
                             <img
                                 src={t.qrImg}
                                 alt="QR code"
-                                style={{ maxWidth: '200px', width: '100%', height: 'auto' }}  /* 控制图片大小，居中 */
+                                style={{
+                                    maxWidth: '200px',
+                                    width: '100%',
+                                    height: 'auto'
+                                }}
                             />
                         </div>
-
                     </div>
                 </div>
             </section>

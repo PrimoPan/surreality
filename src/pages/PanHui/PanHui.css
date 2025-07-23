@@ -113,3 +113,28 @@
         font-size: 1rem;
     }
 }
+@media (max-width: 768px) {
+    /* wrapper 不再限制自身滚动，由页面滚动 */
+    .panhui-wrapper {
+        overflow-y: visible;   /* 原来是 auto */
+        padding-bottom: 2rem;  /* 如需底部留白，可自行调整 */
+    }
+
+    /* card 也不再限制高度或滚动 */
+    .panhui-card {
+        max-height: none;       /* 取消 calc(100vh - 10rem) */
+        overflow-y: visible;    /* 原来是 auto */
+    }
+}
+@media (max-width: 768px) {
+    /* 给头图内容区域一个相对定位的上下文 */
+    .about-hero-wrapper {
+        position: relative;
+    }
+
+    /* 上移 ParallaxSection 的标题和副标题 10vh */
+    .about-hero-wrapper .parallax-content,
+    .about-hero-wrapper .hero-section .sectionTitle /* 根据组件真实类名可多写一个选择器 */ {
+        transform: translateY(-40vh);
+    }
+}

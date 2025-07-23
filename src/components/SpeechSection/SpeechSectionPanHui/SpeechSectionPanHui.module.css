@@ -62,3 +62,13 @@
     background: rgba(255, 255, 255, 0.2);
     border-radius: 3px;
 }
+@media (max-width: 768px) and (orientation: portrait) {
+    .speechBubble {
+        top:60%;
+        left: 15%;
+        transform: translateY(-50%);
+        /* 高度改为页面高度的40% */
+        height: 31vh;
+        /* 不再对 width 做任何覆盖，让它继承基础样式或自适应 */
+    }
+}

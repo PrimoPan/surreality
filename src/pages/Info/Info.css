@@ -292,3 +292,18 @@
         transform: translateY(6px);
     }
 }
+/* —— 取消 “双滚动” —— */
+@media (max-width: 768px) {
+    /* wrapper 不要撑满屏高，也不限制高度 */
+    .info-wrapper {
+        height: auto !important;
+        padding-bottom: 2rem; /* 如需留白，可适当调整 */
+    }
+
+    /* container 不要限制 max-height，也不要 overflow */
+    .info-container {
+        max-height: none !important;
+        overflow-y: visible !important;
+        padding: 2rem 1rem;   /* 如需更小留白，可适当调整 */
+    }
+}

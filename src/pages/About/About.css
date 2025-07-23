@@ -99,4 +99,13 @@
         display: block;
         overflow-y: visible;
     }
+    .about-hero-wrapper .parallax-root .banner-content {
+        /* 先水平居中，再垂直上移 10vh */
+        transform:  translateY(calc(-50% - 15vh)) !important;
+    }
+    /* —— 隐藏 About 页面头图中的 “View the news” 按钮 —— */
+    .about-hero-wrapper .parallax-root .view-news-btn {
+        display: none !important;
+    }
+
 }

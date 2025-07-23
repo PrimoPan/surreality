@@ -6,6 +6,7 @@
     background-position: center;  /* 关键：始终居中裁切 */
     background-repeat: no-repeat; /* 关键：防止右侧重复 */
 }
+
 .sectionTitleArtist {
     position: absolute;
     top: 8%;
@@ -13,6 +14,7 @@
     text-align: left;
     z-index: 2;
 }
+
 .sectionTitleArtist h2 {
     margin: 0;
     font-size: 2rem;
@@ -20,6 +22,7 @@
     color: #fff;
     text-transform: uppercase;
 }
+
 .sectionTitleArtist h3 {
     margin: 0;
     margin-top: 0.25rem;
@@ -32,7 +35,7 @@
 .speechBubbleArtist {
     position: absolute;
     bottom: 25%;
-    left: 5%;                /* 从 50% 调整到 60%，向右移动 */
+    left: 5%;                /* 向右微调 */
     transform: translateX(-50%);
     width: 320px;
     height: 55vh;
@@ -79,4 +82,17 @@
 .bubbleContentArtist::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 3px;
+}
+
+/* —— 新增：移动端竖屏时只调整气泡位置和高度，字体与校长页一致 —— */
+@media (max-width: 768px) and (orientation: portrait) {
+    .speechBubbleArtist {
+        top: 55%;
+        left: 10%;
+        transform: translateY(-50%);
+        /* 高度改为页面高度的 40% */
+        height: 32vh;
+        /* 宽度保持原样或自适应 */
+    }
+    /* 这里不再覆盖字体，继续使用基础 .bubbleContentArtist 中的 font-size 与 font-weight */
 }
