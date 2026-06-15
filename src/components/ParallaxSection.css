@@ -33,6 +33,19 @@
     object-position: center;
     display: block;
     background: #15161f;
+    opacity: 0;
+    transition: opacity 0.18s ease;
+}
+.bg-video.is-ready {
+    opacity: 1;
+}
+.bg-video-cover {
+    z-index: 0;
+    opacity: 1;
+    transition: opacity 0.18s ease;
+}
+.bg-video-cover.is-hidden {
+    opacity: 0;
 }
 
 /* 暗色遮罩，减少背景模糊 */

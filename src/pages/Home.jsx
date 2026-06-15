@@ -5,22 +5,18 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import ParallaxSection from '../components/ParallaxSection';
 import './Home.css';
 
-const publicUrl = process.env.PUBLIC_URL || '';
-const heroAssetBase = `${publicUrl}/videos/hero/`;
-const desktopHeroVideo = {
-    src: `${heroAssetBase}hero-desktop-hk.mp4`,
-    poster: `${heroAssetBase}hero-desktop-poster.jpg`,
-};
-const mobileHeroVideo = {
-    src: `${heroAssetBase}hero-mobile-hk.mp4`,
-    poster: `${heroAssetBase}hero-mobile-poster.jpg`,
-};
-const getHeroVideoAsset = () => {
-    if (typeof window === 'undefined') return desktopHeroVideo;
+const desktopHeroVideoUrl =
+    'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/video/XR%E5%B1%952.0-%E5%AE%A3%E4%BC%A0%E7%89%87-%E6%97%A0%E9%85%8D%E9%9F%B3%E6%97%A0%E6%A0%87-720p.mov';
+
+const mobileHeroVideoUrl =
+    'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/video/%E7%AB%96%E7%89%88%E5%AE%A3%E4%BC%A0%E7%89%87720P.mp4';
+
+const getHeroVideoUrl = () => {
+    if (typeof window === 'undefined') return desktopHeroVideoUrl;
 
     return window.matchMedia('(max-width: 768px)').matches
-        ? mobileHeroVideo
-        : desktopHeroVideo;
+        ? mobileHeroVideoUrl
+        : desktopHeroVideoUrl;
 };
 
 const manifestoBgImage =
@@ -29,6 +25,8 @@ const openCallBgImage =
     'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/photos/photo_2.png';
 const featuredArtistBaseUrl =
     'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/featured-artists/';
+const publicUrl = process.env.PUBLIC_URL || '';
+const heroVideoCoverImage = `${publicUrl}/images/hero/home-cos-video-cover.jpg`;
 const anniversaryAssetBase = `${publicUrl}/images/anniversary-gift/`;
 const anniversaryBgImage = `${anniversaryAssetBase}anniversary-campus-bg.webp`;
 
@@ -639,13 +637,13 @@ function AnniversaryGiftSection({ lang }) {
 }
 
 export default function Home({ lang }) {
-    const [heroVideoAsset, setHeroVideoAsset] = useState(getHeroVideoAsset);
+    const [heroVideoUrl, setHeroVideoUrl] = useState(getHeroVideoUrl);
     const [heroVideoMuted, setHeroVideoMuted] = useState(false);
 
     useEffect(() => {
         const mediaQuery = window.matchMedia('(max-width: 768px)');
         const updateHeroVideo = () => {
-            setHeroVideoAsset(mediaQuery.matches ? mobileHeroVideo : desktopHeroVideo);
+            setHeroVideoUrl(mediaQuery.matches ? mobileHeroVideoUrl : desktopHeroVideoUrl);
         };
 
         updateHeroVideo();
@@ -658,10 +656,10 @@ export default function Home({ lang }) {
             <section className="main-section fullpage-clamp">
                 <ParallaxSection
                     lang={lang}
-                    image={heroVideoAsset.poster}
-                    videoSrc={heroVideoAsset.src}
-                    videoPoster={heroVideoAsset.poster}
-                    videoPreload="metadata"
+                    image={heroVideoCoverImage}
+                    videoSrc={heroVideoUrl}
+                    videoPoster={heroVideoCoverImage}
+                    videoPreload="auto"
                     title="SURREALITY"
                     subtitle="See you in Hong Kong & Guangzhou, 2026"
                     isParallax={false}
@@ -671,11 +669,7 @@ export default function Home({ lang }) {
                     contentPlacement="top-left"
                     videoMuted={heroVideoMuted}
                     showAudioToggle
-                    onAudioToggle={(nextMuted) => {
-                        setHeroVideoMuted((muted) =>
-                            typeof nextMuted === 'boolean' ? nextMuted : !muted
-                        );
-                    }}
+                    onAudioToggle={() => setHeroVideoMuted((muted) => !muted)}
                 />
             </section>
 

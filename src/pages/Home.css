@@ -1237,16 +1237,20 @@
     }
 
     .featured-artist-modal-media {
-        min-height: 32svh;
-        height: 32svh;
+        min-height: min(42svh, 22rem);
+        height: min(42svh, 22rem);
     }
 
     .featured-artist-modal-media img {
-        min-height: 32svh;
+        height: 100%;
+        min-height: 0;
+        object-fit: contain;
+        object-position: center top;
+        background: #070a11;
     }
 
     .featured-artist-modal-copy {
-        max-height: 60svh;
+        max-height: 50svh;
         padding: 1.05rem 1rem 1.25rem;
     }
 

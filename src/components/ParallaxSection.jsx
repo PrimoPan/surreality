@@ -55,11 +55,16 @@ export default function ParallaxSection({
     const rootRef = useRef(null);
     const onAudioToggleRef = useRef(onAudioToggle);
     const [shouldLoadVideo, setShouldLoadVideo] = useState(true);
+    const [isVideoReady, setIsVideoReady] = useState(false);
     const hasVideo = Boolean(videoSrc && shouldLoadVideo);
 
     useEffect(() => {
         onAudioToggleRef.current = onAudioToggle;
     }, [onAudioToggle]);
+
+    useEffect(() => {
+        setIsVideoReady(false);
+    }, [videoSrc]);
 
     useEffect(() => {
         if (!disableVideoOnSaveData || typeof navigator === 'undefined') return;
@@ -172,19 +177,31 @@ export default function ParallaxSection({
             <Parallax speed={isParallax ? -20 : 0} className="bg-parallax">
                 <AnimatePresence mode="wait">
                     {hasVideo ? (
-                        <motion.video
-                            ref={videoRef}
-                            key={videoSrc}
-                            className="bg-video"
-                            src={videoSrc}
-                            poster={videoPoster}
-                            autoPlay
-                            muted={videoMuted}
-                            loop
-                            playsInline
-                            preload={videoPreload}
-                            aria-hidden="true"
-                        />
+                        <>
+                            {bgImage && (
+                                <motion.div
+                                    key={`${videoSrc}-cover`}
+                                    className={`bg-image bg-video-cover${isVideoReady ? ' is-hidden' : ''}`}
+                                    style={{ backgroundImage: `url(${bgImage})` }}
+                                />
+                            )}
+                            <motion.video
+                                ref={videoRef}
+                                key={videoSrc}
+                                className={`bg-video${isVideoReady ? ' is-ready' : ''}`}
+                                src={videoSrc}
+                                poster={videoPoster}
+                                autoPlay
+                                muted={videoMuted}
+                                loop
+                                playsInline
+                                preload={videoPreload}
+                                onLoadedData={() => setIsVideoReady(true)}
+                                onCanPlay={() => setIsVideoReady(true)}
+                                onPlaying={() => setIsVideoReady(true)}
+                                aria-hidden="true"
+                            />
+                        </>
                     ) : (
                         <motion.div
                             key={bgImage}
