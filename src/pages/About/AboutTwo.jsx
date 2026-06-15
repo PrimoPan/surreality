@@ -65,7 +65,7 @@ const featuredPeople = [
         nameEn: 'Hao Li',
         nameZhHans: '李昊',
         nameZhHant: '李昊',
-        photo: 'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/mc2/lihao.jpg',
+        photo: 'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/photos/HaoLi.JPG',
     },
     {
         role: {
@@ -345,8 +345,10 @@ export default function AboutTwo({ lang = 'en' }) {
 
                     <div className="about-two-featured">
                         <article className="about-two-person-card about-two-director" key={director.nameEn}>
-                            <img src={director.photo} alt={director.nameEn} />
-                            <div>
+                            <figure className="about-two-photo-frame">
+                                <img src={director.photo} alt={director.nameEn} />
+                            </figure>
+                            <div className="about-two-person-info">
                                 <p className="about-two-role">{director.role[locale]}</p>
                                 <LocalizedName person={director} locale={locale} />
                             </div>
@@ -355,8 +357,10 @@ export default function AboutTwo({ lang = 'en' }) {
                         <div className="about-two-planner-branches">
                             {planners.map((person) => (
                                 <article className="about-two-person-card about-two-planner" key={person.nameEn}>
-                                    <img src={person.photo} alt={person.nameEn} />
-                                    <div>
+                                    <figure className="about-two-photo-frame">
+                                        <img src={person.photo} alt={person.nameEn} />
+                                    </figure>
+                                    <div className="about-two-person-info">
                                         <p className="about-two-role">{person.role[locale]}</p>
                                         <LocalizedName person={person} locale={locale} />
                                     </div>

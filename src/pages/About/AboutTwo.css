@@ -84,21 +84,21 @@
 }
 
 .about-two-person-card {
-    display: grid;
-    align-content: end;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
     isolation: isolate;
-    padding: clamp(1.25rem, 3vw, 2.4rem);
+    padding: clamp(1.2rem, 2.4vw, 2rem);
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.11);
     box-shadow: 0 22px 52px rgba(0, 0, 0, 0.28);
 }
 
 .about-two-director {
-    width: min(560px, 100%);
-    min-height: 30rem;
+    width: min(420px, 100%);
 }
 
 .about-two-planner-branches {
@@ -135,7 +135,7 @@
 }
 
 .about-two-planner {
-    min-height: 25rem;
+    min-height: 0;
 }
 
 .about-two-planner::before {
@@ -149,33 +149,42 @@
     background: linear-gradient(180deg, transparent, rgba(0, 255, 247, 0.58));
 }
 
-.about-two-person-card img {
-    position: absolute;
-    inset: 0;
+.about-two-photo-frame {
+    width: min(100%, 300px);
+    aspect-ratio: 4 / 5;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
+}
+
+.about-two-director .about-two-photo-frame {
+    width: min(100%, 320px);
+}
+
+.about-two-photo-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -2;
+    object-position: center 18%;
+    display: block;
 }
 
-.about-two-person-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background:
-        linear-gradient(
-            180deg,
-            rgba(31, 32, 41, 0.08) 0%,
-            rgba(31, 32, 41, 0.22) 45%,
-            rgba(31, 32, 41, 0.9) 100%
-        );
+.about-two-planner .about-two-photo-frame img {
+    object-position: center 15%;
+}
+
+.about-two-person-info {
+    width: 100%;
+    padding-top: 1.25rem;
+    text-align: center;
 }
 
 .about-two-role {
     margin: 0 0 0.65rem;
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(0.98rem, 1.8vw, 1.25rem);
+    font-size: clamp(0.92rem, 1.35vw, 1.08rem);
     line-height: 1.28;
     font-weight: 600;
     color: #00fff7;
@@ -184,8 +193,8 @@
 
 .about-two-name-en {
     font-family: 'Montserrat', sans-serif;
-    font-size: clamp(2.3rem, 4.8vw, 4.5rem);
-    line-height: 0.96;
+    font-size: clamp(1.85rem, 3vw, 2.8rem);
+    line-height: 1;
     font-weight: 800;
     color: #ffffff;
 }
@@ -193,7 +202,7 @@
 .about-two-name-zh {
     margin-top: 0.35rem;
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(1.75rem, 3.5vw, 3.2rem);
+    font-size: clamp(1.35rem, 2.2vw, 2rem);
     line-height: 1.08;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.9);
@@ -271,9 +280,9 @@
         display: none;
     }
 
-    .about-two-director,
-    .about-two-planner {
-        min-height: 26rem;
+    .about-two-photo-frame,
+    .about-two-director .about-two-photo-frame {
+        width: min(100%, 280px);
     }
 }
 
@@ -282,9 +291,9 @@
         padding-inline: 1rem;
     }
 
-    .about-two-director,
-    .about-two-planner {
-        min-height: 22rem;
+    .about-two-photo-frame,
+    .about-two-director .about-two-photo-frame {
+        width: min(100%, 240px);
     }
 
     .about-two-credit-group {
