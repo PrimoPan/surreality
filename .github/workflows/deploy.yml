@@ -30,6 +30,8 @@ jobs:
         run: npm ci
 
       - name: Build static site
+        env:
+          CI: "false"
         run: npm run build
 
       - name: Validate deployment scope
