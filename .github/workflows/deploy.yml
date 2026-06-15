@@ -1,0 +1,72 @@
+name: Deploy Surreality
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: "22"
+      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+      DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+      DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+      DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+      DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Validate deployment scope
+        run: |
+          test "${DEPLOY_HOST}" = "150.109.64.159"
+          test "${DEPLOY_USER}" = "ubuntu"
+          test "${DEPLOY_PATH}" = "/var/www/surreality-world"
+
+      - name: Compute release identifier
+        run: |
+          echo "RELEASE_ID=$(date -u +'%Y%m%d%H%M%S')-${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+
+      - name: Configure SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Create remote release directory
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "${DEPLOY_PORT}" \
+            "${DEPLOY_USER}@${DEPLOY_HOST}" \
+            "mkdir -p '${DEPLOY_PATH}/releases/${RELEASE_ID}'"
+
+      - name: Upload build artifacts
+        run: |
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${DEPLOY_PORT}" \
+            build/ "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/releases/${RELEASE_ID}/"
+
+      - name: Promote release atomically
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "${DEPLOY_PORT}" \
+            "${DEPLOY_USER}@${DEPLOY_HOST}" \
+            "bash -s -- '${DEPLOY_PATH}' '${RELEASE_ID}'" \
+            < scripts/remote/promote-release.sh

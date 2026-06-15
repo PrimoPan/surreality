@@ -146,20 +146,8 @@ export default function Home({ lang }) {
             <section className="main-section">
                 <ParallaxSection
                     image={currentImage}
-                    title={
-                        lang === 'en'
-                            ? 'Surreality'
-                            : lang === 'zh-Hant'
-                                ? '幻實之境'
-                                : '幻实之境'
-                    }
-                    subtitle={
-                        lang === 'en'
-                            ? "World’s First Large-Scale AI XR Art Exhibition"
-                            : lang === 'zh-Hant'
-                                ? '全球首個大空間擴展現實 AI 藝術展'
-                                : '全球首个大空间扩展现实 AI 艺术展'
-                    }
+                    title="SURREALITY 2.0"
+                    subtitle="See you in 2026"
                     isParallax
                 />
             </section>

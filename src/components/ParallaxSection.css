@@ -46,17 +46,21 @@
     transform: translateY(-50%);
 }
 .banner-content h1 {
-    font-size: clamp(2.5rem, 6vw, 6rem);
+    font-size: clamp(3.1rem, 8vw, 7.8rem);
     font-weight: 900;
-    letter-spacing: 0.05em;
+    letter-spacing: 0;
+    line-height: 0.95;
     text-transform: uppercase;
-    margin-bottom: 1rem;
+    margin-bottom: 1.15rem;
+    text-shadow: 0 6px 28px rgba(0, 0, 0, 0.5);
 }
 .tagline {
-    font-size: clamp(1rem, 2.5vw, 1.75rem);
-    font-weight: 400;
-    opacity: 0.85;
-    margin-bottom: 2.5rem;
+    font-size: clamp(1.18rem, 2.8vw, 2.2rem);
+    font-weight: 600;
+    line-height: 1.25;
+    opacity: 0.92;
+    margin-bottom: 2.7rem;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.58);
 }
 
 /* CTA 按钮 */
@@ -87,4 +91,21 @@
     opacity: 0.8;
     pointer-events: none;
     z-index: 3;
+}
+
+@media (max-width: 600px) {
+    .banner-content {
+        max-width: 94vw;
+    }
+
+    .banner-content h1 {
+        font-size: clamp(2.85rem, 16vw, 4.6rem);
+        line-height: 0.98;
+        margin-bottom: 0.85rem;
+    }
+
+    .tagline {
+        font-size: clamp(1.1rem, 6vw, 1.45rem);
+        margin-bottom: 2rem;
+    }
 }
