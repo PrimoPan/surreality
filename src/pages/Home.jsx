@@ -11,7 +11,7 @@ export default function Home({ lang }) {
                 lang={lang}
                 videoSrc={heroVideoUrl}
                 title="SURREALITY 2.0"
-                subtitle="See you in 2026"
+                subtitle="See you in Hong Kong & Guangzhou, 2026"
                 isParallax={false}
                 showCta={false}
                 showScrollHint={false}
