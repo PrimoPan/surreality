@@ -30,6 +30,9 @@ export default function ParallaxSection({
                                             lang = 'en',
                                             image,
                                             videoSrc,
+                                            videoType,
+                                            videoFallbackSrc,
+                                            videoFallbackType = 'video/mp4',
                                             videoPoster,
                                             videoPreload = 'metadata',
                                             title,
@@ -53,9 +56,14 @@ export default function ParallaxSection({
     const hasAnimated = useRef(false);
     const videoRef = useRef(null);
     const rootRef = useRef(null);
+    const onAudioToggleRef = useRef(onAudioToggle);
     const [shouldLoadVideo, setShouldLoadVideo] = useState(true);
     const [isVideoReady, setIsVideoReady] = useState(false);
     const hasVideo = Boolean(videoSrc && shouldLoadVideo);
+
+    useEffect(() => {
+        onAudioToggleRef.current = onAudioToggle;
+    }, [onAudioToggle]);
 
     useEffect(() => {
         setIsVideoReady(false);
@@ -86,10 +94,24 @@ export default function ParallaxSection({
         if (!videoRef.current || !hasVideo) return;
 
         const video = videoRef.current;
+        let isCancelled = false;
+
+        const playMutedFallback = () => {
+            if (isCancelled || videoMuted) return;
+
+            video.muted = true;
+            onAudioToggleRef.current?.(true);
+            video.play().catch(() => {
+                // If even muted autoplay is blocked, the poster remains visible.
+            });
+        };
+
         video.muted = videoMuted;
-        video.play().catch(() => {
-            // Browsers may block unmuted autoplay until the viewer interacts.
-        });
+        video.play().catch(playMutedFallback);
+
+        return () => {
+            isCancelled = true;
+        };
     }, [hasVideo, videoMuted, videoSrc]);
 
     const handleCtaClick = () => {
@@ -149,9 +171,9 @@ export default function ParallaxSection({
                             )}
                             <motion.video
                                 ref={videoRef}
-                                key={videoSrc}
+                                key={`${videoSrc}-${videoFallbackSrc || ''}`}
                                 className={`bg-video${isVideoReady ? ' is-ready' : ''}`}
-                                src={videoSrc}
+                                src={videoFallbackSrc ? undefined : videoSrc}
                                 poster={videoPoster}
                                 autoPlay
                                 muted={videoMuted}
@@ -162,7 +184,14 @@ export default function ParallaxSection({
                                 onCanPlay={() => setIsVideoReady(true)}
                                 onPlaying={() => setIsVideoReady(true)}
                                 aria-hidden="true"
-                            />
+                            >
+                                {videoFallbackSrc ? (
+                                    <>
+                                        <source src={videoSrc} type={videoType} />
+                                        <source src={videoFallbackSrc} type={videoFallbackType} />
+                                    </>
+                                ) : null}
+                            </motion.video>
                         </>
                     ) : (
                         <motion.div

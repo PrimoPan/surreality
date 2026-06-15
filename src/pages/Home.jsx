@@ -670,6 +670,8 @@ export default function Home({ lang }) {
                     lang={lang}
                     image={heroVideoCoverImage}
                     videoSrc={heroVideoUrl}
+                    videoType={heroVideoUrl === desktopHeroVideoUrl ? 'video/quicktime' : 'video/mp4'}
+                    videoFallbackSrc={heroVideoUrl === desktopHeroVideoUrl ? mobileHeroVideoUrl : undefined}
                     videoPoster={heroVideoCoverImage}
                     videoPreload="auto"
                     title="SURREALITY"
@@ -681,7 +683,7 @@ export default function Home({ lang }) {
                     contentPlacement="top-left"
                     videoMuted={heroVideoMuted}
                     showAudioToggle
-                    onAudioToggle={() => setHeroVideoMuted((muted) => !muted)}
+                    onAudioToggle={setHeroVideoMuted}
                 />
             </section>
 
