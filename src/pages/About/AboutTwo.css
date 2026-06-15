@@ -87,14 +87,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 8px;
+    border-radius: 0;
     overflow: visible;
     position: relative;
     isolation: isolate;
-    padding: clamp(1.2rem, 2.4vw, 2rem);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.11);
-    box-shadow: 0 22px 52px rgba(0, 0, 0, 0.28);
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
 }
 
 .about-two-director {
@@ -120,9 +120,9 @@
     margin: 0;
     overflow: hidden;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
+    background: transparent;
+    border: 0;
+    box-shadow: none;
 }
 
 .about-two-director .about-two-photo-frame {
