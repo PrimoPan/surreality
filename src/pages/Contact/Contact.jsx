@@ -14,6 +14,7 @@ export default function Contact({ lang = 'en' }) {
                 'Guangzhou, Guangdong, China',
             ],
             emailLabel: 'Email:',
+            websiteLabel: 'Website:',
         },
         'zh-Hans': {
             header: '联系我们',
@@ -23,6 +24,7 @@ export default function Contact({ lang = 'en' }) {
                 '广东省广州市南沙区东涌镇笃学路 1 号',
             ],
             emailLabel: '邮箱：',
+            websiteLabel: '官方网站：',
         },
         'zh-Hant': {
             header: '聯絡我們',
@@ -32,10 +34,12 @@ export default function Contact({ lang = 'en' }) {
                 '中華人民共和國廣東省廣州市南沙區東涌鎮篤學路 1 號',
             ],
             emailLabel: '郵箱：',
+            websiteLabel: '官方網站：',
         },
     };
-    const { header, locationLabel, addressLines, emailLabel } =
+    const { header, locationLabel, addressLines, emailLabel, websiteLabel } =
     texts[lang] || texts.en;
+    const labWebsite = 'https://mc2-lab.space/';
 
     /* —— 2. OpenStreetMap iframe URL —— */
     const lat = 22.887358;
@@ -75,6 +79,13 @@ export default function Contact({ lang = 'en' }) {
                     <div className="contact-block">
                         <h3>{emailLabel}</h3>
                         <a href="mailto:mc2@hkust-gz.edu.cn">mc2@hkust-gz.edu.cn</a>
+                    </div>
+
+                    <div className="contact-block">
+                        <h3>{websiteLabel}</h3>
+                        <a href={labWebsite} target="_blank" rel="noopener noreferrer">
+                            {labWebsite}
+                        </a>
                     </div>
                 </div>
 
