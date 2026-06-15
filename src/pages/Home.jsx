@@ -3,13 +3,24 @@ import { Parallax } from 'react-scroll-parallax';
 import ParallaxSection from '../components/ParallaxSection';
 import './Home.css';
 
-const heroVideoUrl =
-    'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/video/surreality-QxMgBRgVHrY-1080p.mp4';
+const desktopHeroVideoUrl =
+    'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/video/XR%E5%B1%952.0-%E5%AE%A3%E4%BC%A0%E7%89%87-%E6%97%A0%E9%85%8D%E9%9F%B3%E6%97%A0%E6%A0%87-720p.mov';
 
-const manifestoBgImages = [
-    'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/photos/photo_01.png',
-    'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/photos/photo_2.png',
-];
+const mobileHeroVideoUrl =
+    'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/video/%E7%AB%96%E7%89%88%E5%AE%A3%E4%BC%A0%E7%89%87720P.mp4';
+
+const getHeroVideoUrl = () => {
+    if (typeof window === 'undefined') return desktopHeroVideoUrl;
+
+    return window.matchMedia('(max-width: 768px)').matches
+        ? mobileHeroVideoUrl
+        : desktopHeroVideoUrl;
+};
+
+const manifestoBgImage =
+    'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/photos/photo_01.png';
+const openCallBgImage =
+    'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/photos/photo_2.png';
 
 const manifestoCopy = {
     en: {
@@ -41,37 +52,69 @@ const manifestoCopy = {
     },
 };
 
-const manifestoCarouselDelay = 7500;
+const openCallCopy = {
+    en: {
+        eyebrow: 'Open Call Overview',
+        title: 'International open call across campuses',
+        intro: 'New commissions, audience favorites, and internationally shown creators come together.',
+        bullets: [
+            '50+ works across two campuses, including 40 new commissions and selected classics.',
+            '70+ artists from 23 countries and regions.',
+            'Creators recognized by the Emmys, Venice Immersive, Lumen Prize, SXSW XR, and more.',
+            'Featured works have appeared at MoMA, Tate Modern, Centre Pompidou, ZKM, and other leading institutions.',
+        ],
+        metrics: [
+            { value: '90+', label: 'Submissions' },
+            { value: '23', label: 'Countries', prefix: 'from' },
+            { value: '~50', label: 'Exhibited Works' },
+        ],
+    },
+    'zh-Hans': {
+        eyebrow: '公开征件概览',
+        title: '跨校区展开的国际征集',
+        intro: '项目汇聚全新创作、经典回归之作，以及具备国际履历的创作者。',
+        bullets: [
+            '两校区展出 50+ 件作品，包含约 40 件全新创作与精选经典。',
+            '70+ 位全球艺术家，来自 23 个国家与地区。',
+            '创作者曾获艾美奖、威尼斯沉浸式单元、流明奖、SXSW XR 等认可。',
+            '作品曾亮相 MoMA、泰特现代、蓬皮杜中心、ZKM 等重要机构。',
+        ],
+        metrics: [
+            { value: '90+', label: '投稿件数' },
+            { value: '23', label: '国家地区', prefix: '来自' },
+            { value: '~50', label: '展出作品' },
+        ],
+    },
+    'zh-Hant': {
+        eyebrow: '公開徵件概覽',
+        title: '跨校區展開的國際徵集',
+        intro: '項目匯聚全新創作、經典回歸之作，以及具備國際履歷的創作者。',
+        bullets: [
+            '兩校區展出 50+ 件作品，包含約 40 件全新創作與精選經典。',
+            '70+ 位全球藝術家，來自 23 個國家與地區。',
+            '創作者曾獲艾美獎、威尼斯沉浸式單元、流明獎、SXSW XR 等認可。',
+            '作品曾亮相 MoMA、泰特現代、龐畢度中心、ZKM 等重要機構。',
+        ],
+        metrics: [
+            { value: '90+', label: '投稿件數' },
+            { value: '23', label: '國家地區', prefix: '來自' },
+            { value: '~50', label: '展出作品' },
+        ],
+    },
+};
 
 function ManifestoSection({ lang }) {
-    const [activeImageIndex, setActiveImageIndex] = useState(0);
     const copy = manifestoCopy[lang] || manifestoCopy.en;
 
     useEffect(() => {
-        manifestoBgImages.forEach((src) => {
-            const image = new Image();
-            image.src = src;
-        });
-    }, []);
-
-    useEffect(() => {
-        const id = setInterval(() => {
-            setActiveImageIndex((index) => (index + 1) % manifestoBgImages.length);
-        }, manifestoCarouselDelay);
-
-        return () => clearInterval(id);
+        const image = new Image();
+        image.src = manifestoBgImage;
     }, []);
 
     return (
         <section className="main-section home-manifesto-section" aria-labelledby="surreality-manifesto-title">
             <Parallax speed={-20} className="home-manifesto-bg" aria-hidden="true">
-                {manifestoBgImages.map((src, index) => (
-                    <div
-                        key={src}
-                        className={`home-manifesto-bg__image${index === activeImageIndex ? ' is-active' : ''}`}
-                        style={{ backgroundImage: `url(${src})` }}
-                    />
-                ))}
+                <div className="home-manifesto-bg__image" style={{ backgroundImage: `url(${manifestoBgImage})` }} />
             </Parallax>
             <div className="home-manifesto-overlay" />
 
@@ -101,14 +144,70 @@ function ManifestoSection({ lang }) {
     );
 }
 
+function OpenCallSection({ lang }) {
+    const copy = openCallCopy[lang] || openCallCopy.en;
+
+    useEffect(() => {
+        const image = new Image();
+        image.src = openCallBgImage;
+    }, []);
+
+    return (
+        <section className="main-section home-open-call-section" aria-labelledby="open-call-title">
+            <Parallax speed={-14} className="home-open-call-bg" aria-hidden="true">
+                <div className="home-open-call-bg__image" style={{ backgroundImage: `url(${openCallBgImage})` }} />
+            </Parallax>
+            <div className="home-open-call-overlay" />
+
+            <div className="home-open-call-content">
+                <Parallax speed={-4} className="home-open-call-copy home-open-call-parallax">
+                    <p className="home-open-call-eyebrow">{copy.eyebrow}</p>
+                    <h2 id="open-call-title" className="home-open-call-title">
+                        {copy.title}
+                    </h2>
+                    <p className="home-open-call-intro">{copy.intro}</p>
+                    <ul className="home-open-call-list">
+                        {copy.bullets.map((bullet) => (
+                            <li key={bullet}>{bullet}</li>
+                        ))}
+                    </ul>
+                </Parallax>
+
+                <Parallax speed={-7} className="home-open-call-metrics home-open-call-parallax" aria-label={copy.eyebrow}>
+                    {copy.metrics.map((metric) => (
+                        <div className="home-open-call-metric" key={metric.label}>
+                            {metric.prefix && <span className="home-open-call-metric__prefix">{metric.prefix}</span>}
+                            <strong>{metric.value}</strong>
+                            <span>{metric.label}</span>
+                        </div>
+                    ))}
+                </Parallax>
+            </div>
+        </section>
+    );
+}
+
 export default function Home({ lang }) {
+    const [heroVideoUrl, setHeroVideoUrl] = useState(getHeroVideoUrl);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(max-width: 768px)');
+        const updateHeroVideo = () => {
+            setHeroVideoUrl(mediaQuery.matches ? mobileHeroVideoUrl : desktopHeroVideoUrl);
+        };
+
+        updateHeroVideo();
+        mediaQuery.addEventListener('change', updateHeroVideo);
+        return () => mediaQuery.removeEventListener('change', updateHeroVideo);
+    }, []);
+
     return (
         <>
             <section className="main-section fullpage-clamp">
                 <ParallaxSection
                     lang={lang}
                     videoSrc={heroVideoUrl}
-                    title="SURREALITY 2.0"
+                    title="SURREALITY"
                     subtitle="See you in Hong Kong & Guangzhou, 2026"
                     isParallax={false}
                     showCta={false}
@@ -118,6 +217,8 @@ export default function Home({ lang }) {
             </section>
 
             <ManifestoSection lang={lang} />
+
+            <OpenCallSection lang={lang} />
         </>
     );
 }

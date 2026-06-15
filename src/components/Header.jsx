@@ -1,57 +1,49 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Select, Drawer } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 const HKUST_35_LOGO_URL =
     'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/photos/Standard%2035A%20Logo%20-%20FC%20%28W%29%20Bilingual%20Traditional%20Chinese.png';
+const HKUST_GZ_LOGO_URL =
+    'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/photos/USTGZ.png';
 
 /**
  * 顶部导航栏
  */
 export default function Header({ lang, onLangChange }) {
     const nav = useNavigate();
-    const location = useLocation();
     const [drawerOpen, setDrawerOpen] = React.useState(false);
-    const isLegacyRoute = location.pathname.startsWith('/surreality-1-0');
-    const routeFor = (path) => (isLegacyRoute ? `/surreality-1-0${path === '/' ? '' : path}` : path);
 
     /* ---------- 三语菜单 ---------- */
     const menuItems = {
         en: [
-            { key: routeFor('/'),        label: 'Home'         },
-            { key: routeFor('/info'),    label: 'Information'  },
-            { key: routeFor('/about'),   label: 'About Us'     },
-            { key: routeFor('/contact'), label: 'Contact'      },
-            { key: '/surreality-1-0', label: 'Review Surreality 1.0' },
+            { key: '/',        label: 'Home'         },
+            { key: '/info',    label: 'Information'  },
+            { key: '/about',   label: 'About Us'     },
+            { key: '/contact', label: 'Contact'      },
         ],
         'zh-Hans': [
-            { key: routeFor('/'),        label: '首页'       },
-            { key: routeFor('/info'),    label: '展览信息'   },
-            { key: routeFor('/about'),   label: '关于我们'   },
-            { key: routeFor('/contact'), label: '联系我们'   },
-            { key: '/surreality-1-0', label: '回顾 Surreality 1.0' },
+            { key: '/',        label: '首页'       },
+            { key: '/info',    label: '展览信息'   },
+            { key: '/about',   label: '关于我们'   },
+            { key: '/contact', label: '联系我们'   },
         ],
         'zh-Hant': [
-            { key: routeFor('/'),        label: '首頁'       },
-            { key: routeFor('/info'),    label: '展覽資訊'   },
-            { key: routeFor('/about'),   label: '關於我們'   },
-            { key: routeFor('/contact'), label: '聯絡我們'   },
-            { key: '/surreality-1-0', label: '回顧 Surreality 1.0' },
+            { key: '/',        label: '首頁'       },
+            { key: '/info',    label: '展覽資訊'   },
+            { key: '/about',   label: '關於我們'   },
+            { key: '/contact', label: '聯絡我們'   },
         ],
     };
 
     /* ---------- 统一渲染函数 ---------- */
     const renderLinks = (isDrawer = false) =>
-        menuItems[lang].map(({ key, label, variant }) => (
+        menuItems[lang].map(({ key, label }) => (
             <li
                 key={key}
-                className={
-                    isDrawer
-                        ? variant === 'review' ? 'drawer-review-link' : ''
-                        : `nav__link${variant === 'review' ? ' nav__link--review' : ''}`
-                }
+                className={isDrawer ? '' : 'nav__link'}
                 style={isDrawer ? { cursor: 'pointer' } : {}}
                 onClick={() => {
                     nav(key);          // 跳转路由
@@ -82,7 +74,7 @@ export default function Header({ lang, onLangChange }) {
                     />
                     <div className="vertical" />
                     <img
-                        src="https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/UST-GZ-EN.png"
+                        src={HKUST_GZ_LOGO_URL}
                         alt="HKUST GZ"
                     />
                 </nav>

@@ -19,7 +19,7 @@ const text = {
         heroTitle: 'MC² at HKUST(GZ)',
         heroSubtitle: 'Center for Metaverse and Computational Creativity',
         heroCta: 'Learn About the Lab',
-        teamTitle: 'Surreality 2.0 Team',
+        teamTitle: 'Surreality Team',
         featuredTitle: 'Core Team',
         creditsTitle: 'Staff Credits',
         specialThanks: 'Special Thanks',
@@ -28,7 +28,7 @@ const text = {
         heroTitle: '香港科技大学(广州) MC² 实验室',
         heroSubtitle: '元宇宙与计算创意中心',
         heroCta: '了解实验室',
-        teamTitle: 'Surreality 2.0 团队',
+        teamTitle: 'Surreality 团队',
         featuredTitle: '核心团队',
         creditsTitle: '制作团队',
         specialThanks: '特别鸣谢',
@@ -37,7 +37,7 @@ const text = {
         heroTitle: '香港科技大學(廣州) MC² 實驗室',
         heroSubtitle: '元宇宙與計算創意中心',
         heroCta: '了解實驗室',
-        teamTitle: 'Surreality 2.0 團隊',
+        teamTitle: 'Surreality 團隊',
         featuredTitle: '核心團隊',
         creditsTitle: '製作團隊',
         specialThanks: '特別鳴謝',
@@ -277,13 +277,10 @@ function LocalizedName({ person, locale }) {
     );
 }
 
-function CreditNames({ group, locale }) {
-    const chineseNames = locale === 'zh-Hant' ? group.namesZhHant : group.namesZhHans;
-
+function CreditNames({ group }) {
     return (
         <div className="about-two-credit-names">
             <p>{group.namesEn.join(', ')}</p>
-            <p>{chineseNames.join('，')}</p>
         </div>
     );
 }
@@ -377,7 +374,7 @@ export default function AboutTwo({ lang = 'en' }) {
                         {creditGroups.map((group) => (
                             <article className="about-two-credit-group" key={group.role.en}>
                                 <h3>{group.role[locale]}</h3>
-                                <CreditNames group={group} locale={locale} />
+                                <CreditNames group={group} />
                             </article>
                         ))}
                     </div>
