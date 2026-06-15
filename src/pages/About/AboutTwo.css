@@ -1,0 +1,293 @@
+/* Surreality 2.0 About */
+
+.about-two-hero-wrapper .view-news-btn {
+    min-width: 10rem;
+}
+
+.about-two-team {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 18% 10%, rgba(0, 255, 247, 0.1), transparent 26rem),
+        radial-gradient(circle at 86% 24%, rgba(74, 144, 226, 0.12), transparent 28rem),
+        #1f2029;
+    color: #e6e6e6;
+    padding: clamp(4rem, 8vw, 7rem) 1.5rem clamp(5rem, 9vw, 8rem);
+    scroll-snap-align: start;
+}
+
+.about-two-team::before,
+.about-two-team::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    border: 1px solid rgba(0, 255, 247, 0.08);
+    border-radius: 50%;
+}
+
+.about-two-team::before {
+    width: 58rem;
+    height: 58rem;
+    top: -25rem;
+    left: -18rem;
+}
+
+.about-two-team::after {
+    width: 70rem;
+    height: 70rem;
+    right: -24rem;
+    bottom: -30rem;
+    box-shadow:
+        0 0 0 1.25rem rgba(0, 255, 247, 0.025),
+        0 0 0 2.8rem rgba(74, 144, 226, 0.025);
+}
+
+.about-two-shell {
+    position: relative;
+    z-index: 1;
+    width: min(1180px, 100%);
+    margin: 0 auto;
+}
+
+.about-two-section-header {
+    text-align: center;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.about-two-section-header p {
+    margin: 0 0 0.65rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #00fff7;
+}
+
+.about-two-section-header h2 {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 5.2rem);
+    line-height: 0.98;
+    font-weight: 800;
+    letter-spacing: 0;
+    color: #ffffff;
+    text-shadow: 0 0 22px rgba(0, 255, 247, 0.14);
+}
+
+.about-two-featured {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.about-two-person-card {
+    display: grid;
+    align-content: end;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    isolation: isolate;
+    padding: clamp(1.25rem, 3vw, 2.4rem);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    box-shadow: 0 22px 52px rgba(0, 0, 0, 0.28);
+}
+
+.about-two-director {
+    width: min(560px, 100%);
+    min-height: 30rem;
+}
+
+.about-two-planner-branches {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 4rem);
+    width: min(980px, 100%);
+    margin-top: clamp(4rem, 7vw, 5.5rem);
+}
+
+.about-two-planner-branches::before,
+.about-two-planner-branches::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 247, 0.58), transparent);
+}
+
+.about-two-planner-branches::before {
+    top: calc(clamp(4rem, 7vw, 5.5rem) * -0.42);
+    left: 24%;
+    right: 24%;
+    height: 1px;
+}
+
+.about-two-planner-branches::after {
+    top: calc(clamp(4rem, 7vw, 5.5rem) * -0.92);
+    left: 50%;
+    width: 1px;
+    height: clamp(2.2rem, 4vw, 3.2rem);
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, rgba(0, 255, 247, 0.64), transparent);
+}
+
+.about-two-planner {
+    min-height: 25rem;
+}
+
+.about-two-planner::before {
+    content: "";
+    position: absolute;
+    top: -2.4rem;
+    left: 50%;
+    width: 1px;
+    height: 2.4rem;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, transparent, rgba(0, 255, 247, 0.58));
+}
+
+.about-two-person-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.about-two-person-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(31, 32, 41, 0.08) 0%,
+            rgba(31, 32, 41, 0.22) 45%,
+            rgba(31, 32, 41, 0.9) 100%
+        );
+}
+
+.about-two-role {
+    margin: 0 0 0.65rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.98rem, 1.8vw, 1.25rem);
+    line-height: 1.28;
+    font-weight: 600;
+    color: #00fff7;
+    text-shadow: 0 0 10px rgba(0, 255, 247, 0.22);
+}
+
+.about-two-name-en {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.3rem, 4.8vw, 4.5rem);
+    line-height: 0.96;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.about-two-name-zh {
+    margin-top: 0.35rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.75rem, 3.5vw, 3.2rem);
+    line-height: 1.08;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.about-two-section-header--credits {
+    margin-bottom: clamp(1.5rem, 4vw, 3rem);
+}
+
+.about-two-credits {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(3rem, 7vw, 7rem);
+    row-gap: clamp(3rem, 6vw, 5.5rem);
+}
+
+.about-two-credit-group {
+    text-align: center;
+}
+
+.about-two-credit-group h3 {
+    margin: 0 0 clamp(1rem, 2vw, 1.6rem);
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.45rem, 2.8vw, 2.55rem);
+    line-height: 1.16;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.about-two-credit-names p {
+    margin: 0.22rem 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.3rem, 2.35vw, 2.35rem);
+    line-height: 1.3;
+    font-weight: 400;
+    color: rgba(230, 230, 230, 0.86);
+}
+
+.about-two-credit-names p + p {
+    font-size: clamp(1.16rem, 2.1vw, 2rem);
+    color: rgba(230, 230, 230, 0.76);
+}
+
+.about-two-thanks {
+    margin: clamp(5rem, 9vw, 8rem) auto 0;
+    width: min(760px, 100%);
+    text-align: center;
+}
+
+.about-two-thanks h2 {
+    margin: 0 0 1.35rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    color: #00fff7;
+}
+
+.about-two-thanks-list p {
+    margin: 0.4rem 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+    line-height: 1.28;
+    color: rgba(255, 255, 255, 0.86);
+}
+
+@media (max-width: 920px) {
+    .about-two-planner-branches,
+    .about-two-credits {
+        grid-template-columns: 1fr;
+    }
+
+    .about-two-planner-branches::before,
+    .about-two-planner-branches::after,
+    .about-two-planner::before {
+        display: none;
+    }
+
+    .about-two-director,
+    .about-two-planner {
+        min-height: 26rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .about-two-team {
+        padding-inline: 1rem;
+    }
+
+    .about-two-director,
+    .about-two-planner {
+        min-height: 22rem;
+    }
+
+    .about-two-credit-group {
+        text-align: left;
+    }
+}

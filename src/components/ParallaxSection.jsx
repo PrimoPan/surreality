@@ -43,6 +43,14 @@ export default function ParallaxSection({
     const bgImage = image || '/assets/hero/bg.jpg';
     const ctaText = ctaLabel || t.cta;
     const hasAnimated = useRef(false);
+    const handleCtaClick = () => {
+        if (/^https?:\/\//i.test(ctaTo)) {
+            window.location.assign(ctaTo);
+            return;
+        }
+
+        navigate(ctaTo);
+    };
 
     const textVariants = {
         hidden: { opacity: 0, y: 40 },
@@ -108,7 +116,7 @@ export default function ParallaxSection({
                 {showCta && (
                     <motion.button
                         className="view-news-btn"
-                        onClick={() => navigate(ctaTo)}
+                        onClick={handleCtaClick}
                         variants={textVariants}
                         initial={hasAnimated.current ? undefined : 'hidden'}
                         animate={hasAnimated.current ? undefined : 'visible'}
