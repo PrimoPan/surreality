@@ -99,8 +99,8 @@
     }
 
     .banner-content h1 {
-        font-size: clamp(2.85rem, 16vw, 4.6rem);
-        line-height: 0.98;
+        font-size: clamp(2.3rem, 12.5vw, 3.2rem);
+        line-height: 1.05;
         margin-bottom: 0.85rem;
     }
 
