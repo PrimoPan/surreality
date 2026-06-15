@@ -36,6 +36,9 @@ export default function App() {
                 <Routes>
                     <Route path="/"                 element={<Home               lang={lang} />} />
                     <Route path="/surreality-1-0"   element={<SurrealityOneHome  lang={lang} />} />
+                    <Route path="/surreality-1-0/about"   element={<About        lang={lang} />} />
+                    <Route path="/surreality-1-0/info"    element={<Info         lang={lang} />} />
+                    <Route path="/surreality-1-0/contact" element={<Contact      lang={lang} />} />
                     <Route path="/about"            element={<About              lang={lang} />} />
                     <Route path="/info"             element={<Info               lang={lang} />} />
                     <Route path="/news"             element={<News               lang={lang} />} />

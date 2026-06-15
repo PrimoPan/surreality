@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Select, Drawer } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 
@@ -10,29 +10,32 @@ const { Option } = Select;
  */
 export default function Header({ lang, onLangChange }) {
     const nav = useNavigate();
+    const location = useLocation();
     const [drawerOpen, setDrawerOpen] = React.useState(false);
+    const isLegacyRoute = location.pathname.startsWith('/surreality-1-0');
+    const routeFor = (path) => (isLegacyRoute ? `/surreality-1-0${path === '/' ? '' : path}` : path);
 
     /* ---------- 三语菜单 ---------- */
     const menuItems = {
         en: [
-            { key: '/',        label: 'Home'         },
-            { key: '/info',    label: 'Information'  },
-            { key: '/about',   label: 'About Us'     },
-            { key: '/contact', label: 'Contact'      },
+            { key: routeFor('/'),        label: 'Home'         },
+            { key: routeFor('/info'),    label: 'Information'  },
+            { key: routeFor('/about'),   label: 'About Us'     },
+            { key: routeFor('/contact'), label: 'Contact'      },
             { key: '/surreality-1-0', label: 'Review Surreality 1.0', variant: 'review' },
         ],
         'zh-Hans': [
-            { key: '/',        label: '首页'       },
-            { key: '/info',    label: '展览信息'   },
-            { key: '/about',   label: '关于我们'   },
-            { key: '/contact', label: '联系我们'   },
+            { key: routeFor('/'),        label: '首页'       },
+            { key: routeFor('/info'),    label: '展览信息'   },
+            { key: routeFor('/about'),   label: '关于我们'   },
+            { key: routeFor('/contact'), label: '联系我们'   },
             { key: '/surreality-1-0', label: '回顾 Surreality 1.0', variant: 'review' },
         ],
         'zh-Hant': [
-            { key: '/',        label: '首頁'       },
-            { key: '/info',    label: '展覽資訊'   },
-            { key: '/about',   label: '關於我們'   },
-            { key: '/contact', label: '聯絡我們'   },
+            { key: routeFor('/'),        label: '首頁'       },
+            { key: routeFor('/info'),    label: '展覽資訊'   },
+            { key: routeFor('/about'),   label: '關於我們'   },
+            { key: routeFor('/contact'), label: '聯絡我們'   },
             { key: '/surreality-1-0', label: '回顧 Surreality 1.0', variant: 'review' },
         ],
     };
