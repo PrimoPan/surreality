@@ -22,21 +22,21 @@ export default function Header({ lang, onLangChange }) {
             { key: routeFor('/info'),    label: 'Information'  },
             { key: routeFor('/about'),   label: 'About Us'     },
             { key: routeFor('/contact'), label: 'Contact'      },
-            { key: '/surreality-1-0', label: 'Review Surreality 1.0', variant: 'review' },
+            { key: '/surreality-1-0', label: 'Review Surreality 1.0' },
         ],
         'zh-Hans': [
             { key: routeFor('/'),        label: '首页'       },
             { key: routeFor('/info'),    label: '展览信息'   },
             { key: routeFor('/about'),   label: '关于我们'   },
             { key: routeFor('/contact'), label: '联系我们'   },
-            { key: '/surreality-1-0', label: '回顾 Surreality 1.0', variant: 'review' },
+            { key: '/surreality-1-0', label: '回顾 Surreality 1.0' },
         ],
         'zh-Hant': [
             { key: routeFor('/'),        label: '首頁'       },
             { key: routeFor('/info'),    label: '展覽資訊'   },
             { key: routeFor('/about'),   label: '關於我們'   },
             { key: routeFor('/contact'), label: '聯絡我們'   },
-            { key: '/surreality-1-0', label: '回顧 Surreality 1.0', variant: 'review' },
+            { key: '/surreality-1-0', label: '回顧 Surreality 1.0' },
         ],
     };
 

@@ -58,9 +58,9 @@ const featuredPeople = [
     },
     {
         role: {
-            en: 'Technical Lead and Executive Curation',
-            'zh-Hans': '技术负责和执行策展',
-            'zh-Hant': '技術負責和執行策展',
+            en: 'Exhibition Lead / Curatorial Team',
+            'zh-Hans': '展览负责人 / 策展团队',
+            'zh-Hant': '展覽負責人 / 策展團隊',
         },
         nameEn: 'Hao Li',
         nameZhHans: '李昊',
@@ -69,9 +69,9 @@ const featuredPeople = [
     },
     {
         role: {
-            en: 'Unity Development (Art Direction) and Exhibition Planning',
-            'zh-Hans': 'Unity 开发（美术方向）与展区策划',
-            'zh-Hant': 'Unity 開發（美術方向）與展區策劃',
+            en: 'Exhibition Lead / Curatorial Team',
+            'zh-Hans': '展览负责人 / 策展团队',
+            'zh-Hant': '展覽負責人 / 策展團隊',
         },
         nameEn: 'Shuyue Li',
         nameZhHans: '李姝玥',
