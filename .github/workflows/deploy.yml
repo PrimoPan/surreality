@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_VERSION: "22"
-      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-      DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
-      DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-      DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+      DEPLOY_HOST: "150.109.64.159"
+      DEPLOY_PORT: "22"
+      DEPLOY_USER: "ubuntu"
+      DEPLOY_PATH: "/var/www/surreality-world"
       DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
     steps:
       - name: Check out repository
