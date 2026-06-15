@@ -21,18 +21,21 @@ export default function Header({ lang, onLangChange }) {
         en: [
             { key: '/',        label: 'Home'         },
             { key: '/info',    label: 'Information'  },
+            { key: '/agenda',  label: 'Agenda'       },
             { key: '/about',   label: 'About Us'     },
             { key: '/contact', label: 'Contact'      },
         ],
         'zh-Hans': [
             { key: '/',        label: '首页'       },
             { key: '/info',    label: '展览信息'   },
+            { key: '/agenda',  label: '日程'       },
             { key: '/about',   label: '关于我们'   },
             { key: '/contact', label: '联系我们'   },
         ],
         'zh-Hant': [
             { key: '/',        label: '首頁'       },
             { key: '/info',    label: '展覽資訊'   },
+            { key: '/agenda',  label: '日程'       },
             { key: '/about',   label: '關於我們'   },
             { key: '/contact', label: '聯絡我們'   },
         ],
@@ -87,9 +90,9 @@ export default function Header({ lang, onLangChange }) {
                             <Select
                                 className="language-select"
                                 value={lang}
-                                bordered={false}
+                                variant="borderless"
                                 onChange={onLangChange}
-                                dropdownMatchSelectWidth={false}
+                                popupMatchSelectWidth={false}
                                 style={{
                                     color: '#ffffff', /* 确保语言选择文字为白色 */
                                     fontSize: '1.1rem', /* 增大字体大小 */
@@ -124,8 +127,10 @@ export default function Header({ lang, onLangChange }) {
                 closable
                 onClose={() => setDrawerOpen(false)}
                 open={drawerOpen}
-                bodyStyle={{ background: '#1f2029', padding: '1.2rem' }}
-                headerStyle={{ display: 'none' }}
+                styles={{
+                    body: { background: '#1f2029', padding: '1.2rem' },
+                    header: { display: 'none' },
+                }}
             >
                 <ul style={{ /* 不变 */ }}>
                     {renderLinks(true)}

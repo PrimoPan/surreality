@@ -12,10 +12,12 @@ import AboutTwo from './pages/About/AboutTwo';
 import Info from './pages/Info/Info';
 import News from './pages/News/News';
 import Contact from './pages/Contact/Contact';
+import Agenda from './pages/Agenda/Agenda';
 import DigitalGarden from './pages/DigitalGarden/DigitalGarden';
 import SymbioticRealms from './pages/SymbioticRealms/SymbioticRealms';
 import City from './pages/City/City';
 import Ocean from './pages/Ocean/Ocean';
+import MRExhibition from './pages/MRExhibition/MRExhibition';
 
 if (typeof window !== 'undefined') {
     Modal.setAppElement('#root');
@@ -37,10 +39,12 @@ export default function App() {
                     <Route path="/about"            element={<AboutTwo           lang={lang} />} />
                     <Route path="/info"             element={<Info               lang={lang} />} />
                     <Route path="/news"             element={<News               lang={lang} />} />
+                    <Route path="/agenda"           element={<Agenda             lang={lang} />} />
                     <Route path="/ocean"            element={<Ocean              lang={lang} />} />
                     <Route path="/garden"           element={<DigitalGarden      lang={lang} />} />
                     <Route path="/realms"           element={<SymbioticRealms     lang={lang} />} />
                     <Route path="/city"             element={<City               lang={lang} />} />
+                    <Route path="/exhibition/:campus/:area" element={<MRExhibition lang={lang} />} />
                     <Route path="/contact"          element={<Contact            lang={lang} />} />
                 </Routes>
             </ParallaxProvider>

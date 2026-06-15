@@ -3,11 +3,12 @@ import ExhibitionSection from '../../components/ExhibitionSection/ExhibitionSect
 
 export default function SymbioticRealms({ lang }) {
     return (
-        <ExhibitionSection
-            titleEn="Exhibition Area 3: Symbiotic Realms"
-            titleZh="展区三：共生意境"
-            idRange={[10, 15]}   // ← 若作品 ID 另有区间，只改这里
-            lang={lang}
-        />
+            <ExhibitionSection
+                titleEn="Exhibition Area 3: Symbiotic Realms"
+                titleZh="展区三：共生意境"
+                campus="guangzhou"
+                area={3}
+                lang={lang}
+            />
     );
 }

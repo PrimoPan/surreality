@@ -23,7 +23,7 @@
     border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 16px;
     padding: 3rem;
-    box-shadow: 0 0 20px rgba(0, 255, 247, 0.07);
+    box-shadow: 0 0 20px rgba(223, 125, 56, 0.08);
 }
 
 /* === 领航人 (Pan Hui) ================= */
@@ -67,7 +67,7 @@
 .about-container h3 {
     margin: 2.8rem 0 1.2rem;
     font-size: 1.35rem;
-    color: #00fff7;
+    color: #df7d38;
     font-weight: 700;
 }
 

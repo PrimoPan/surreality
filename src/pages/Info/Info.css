@@ -2,56 +2,117 @@
    Info Page + VR Corner (mobile-first)
    ==================================== */
 
-/* ---------- 展区海报四宫格 ---------- */
+/* ---------- 展区海报 ---------- */
 .info-poster-full {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: var(--bg-color);
+    background:
+        radial-gradient(circle at 16% 18%, rgba(242, 188, 142, 0.12), transparent 30%),
+        linear-gradient(145deg, #171821 0%, var(--bg-color) 48%, #161a24 100%);
+    overflow: hidden;
 }
 
 .info-poster-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem 0;
+    width: min(100%, 1360px);
+    padding: clamp(4.5rem, 8vh, 6rem) 2rem 2rem;
 }
 
 .info-poster-title {
     font-size: clamp(2.6rem, 6vw, 3.6rem);
     font-weight: 900;
-    margin-bottom: 2rem;
+    margin-bottom: clamp(1.5rem, 3.8vh, 2.4rem);
     text-align: center;
+    text-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
+}
+
+.info-poster-groups {
+    display: grid;
+    gap: clamp(1.2rem, 2.8vh, 1.8rem);
+    width: 100%;
+}
+
+.area-poster-group {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.area-poster-heading {
+    color: #f2bc8e;
+    font-size: clamp(1rem, 1.7vw, 1.25rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.25;
+    text-align: left;
 }
 
 .info-poster {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.4rem;
-    max-width: 1280px;
-    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 190px));
+    gap: clamp(0.85rem, 1.5vw, 1.25rem);
+    justify-content: center;
+    width: 100%;
 }
 
 .poster-item {
-    flex: 1 1 22%;
-    max-width: 22%;
-    transition: transform 0.25s;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+    height: clamp(160px, 25vh, 245px);
+    overflow: hidden;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+    width: 100%;
 }
 
 .poster-item img {
+    display: block;
+    height: 100%;
     width: 100%;
-    border-radius: 12px;
     object-fit: cover;
 }
 
-.poster-item:hover {
-    transform: scale(1.05);
+.poster-item--link {
+    cursor: pointer;
+}
+
+.poster-item--link:focus-visible {
+    border-color: rgba(242, 188, 142, 0.8);
+    outline: none;
+}
+
+.poster-item--link:hover {
+    border-color: rgba(242, 188, 142, 0.5);
+    box-shadow: 0 22px 54px rgba(0, 0, 0, 0.34);
+    transform: translateY(-4px);
 }
 
 @media (max-width: 768px) {
+    .info-poster-container {
+        padding: 5rem 1rem 2rem;
+    }
+
+    .info-poster {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .poster-item {
-        flex: 1 1 45%;
-        max-width: 45%;
+        aspect-ratio: 3 / 4;
+        height: auto;
+    }
+
+    .area-poster-heading {
+        text-align: center;
+    }
+}
+
+@media (max-width: 340px) {
+    .info-poster {
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
@@ -102,6 +163,18 @@
     object-fit: cover;
 }
 
+.vrcard-image-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: rgba(255, 255, 255, 0.055);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.76);
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    text-align: center;
+}
+
 .vrcard-body {
     flex: 1;
     padding: 1rem 1.2rem;
@@ -114,12 +187,14 @@
     font-weight: 600;
     line-height: 1.35;
     margin-bottom: 0.4rem;
+    overflow-wrap: anywhere;
 }
 
 .vrcard-author {
     font-size: 0.8rem;
     opacity: 0.75;
     margin-bottom: 0.6rem;
+    overflow-wrap: anywhere;
 }
 
 .vrcard-learn {
@@ -146,6 +221,7 @@
 @media (max-width: 600px) {
     .vr-grid {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        padding: 0 1rem;
     }
 }
 
@@ -175,24 +251,29 @@
 .vrcard-modal-img {
     width: 100%;
     border-radius: 10px;
-    object-fit: cover;
+    object-fit: contain;
+    max-height: min(58vh, 620px);
+    background: rgba(255, 255, 255, 0.045);
     margin-bottom: 1.6rem;
 }
 
 .vrcard-modal-body h2 {
     font-size: 2rem;
     margin-bottom: 0.4rem;
+    overflow-wrap: anywhere;
 }
 
 .vrcard-modal-body h4 {
     font-weight: 500;
     margin-bottom: 1rem;
     opacity: 0.85;
+    overflow-wrap: anywhere;
 }
 
 .vrcard-desc {
     white-space: pre-line;
     line-height: 1.8;
+    overflow-wrap: anywhere;
 }
 
 .vrcard-modal-actions {
@@ -214,6 +295,23 @@
 
 .vrcard-modal-actions button:hover {
     background: rgba(255, 255, 255, 0.18);
+}
+
+@media (max-width: 600px) {
+    .vrcard-modal-body {
+        width: min(94vw, 820px);
+        padding: 1.25rem;
+        border-radius: 12px;
+    }
+
+    .vrcard-modal-body h2 {
+        font-size: 1.45rem;
+    }
+
+    .vrcard-modal-actions {
+        flex-direction: column;
+        gap: 0.65rem;
+    }
 }
 
 /* ---------- Info 文本主体 ---------- */
@@ -267,6 +365,41 @@
 
 .info-list li {
     margin: 0.35rem 0;
+}
+
+.info-guide {
+    margin-bottom: 1.7rem;
+}
+
+.info-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(100%, 28rem);
+    margin: 2rem auto 0;
+    padding: 1.35rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(242, 188, 142, 0.24);
+    border-radius: 8px;
+}
+
+.info-qr h3 {
+    margin: 0;
+}
+
+.info-qr p {
+    margin: 0.2rem 0 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.info-qr img {
+    width: min(100%, 220px);
+    height: auto;
+    background: #fff;
+    border-radius: 4px;
 }
 
 /* ---------- Scroll 提示 ---------- */

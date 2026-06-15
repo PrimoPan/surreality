@@ -4,31 +4,61 @@
 
 /* —— 返回按钮 —— */
 .dg-back-wrapper{
-    width:100%;
+    position: sticky;
+    top: calc(var(--header-height) + .75rem);
+    z-index: 30;
+    width: min(calc(100% - 3rem), 1280px);
+    min-height: 52px;
     display:flex;
-    justify-content:center;
-    /* ↓ 头部高度 + 16px 间隙，可按需调整 */
-    margin-top: calc(var(--header-height) + 16px);
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: calc(var(--header-height) + 1rem) auto 0;
+    padding: .45rem .55rem;
+    background: rgba(31, 32, 41, .82);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 8px;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 42px rgba(0,0,0,.2);
 }
 
 .dg-back-btn{
-    background: none;
-    border: none;
+    height: 40px;
+    padding: 0 .75rem;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 8px;
     color: var(--text-color);
     font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: .3rem;
-    opacity: .8;
-    transition: opacity .2s;
+    gap: .45rem;
+    white-space: nowrap;
+    transition: background .2s, border-color .2s, transform .2s;
 }
-.dg-back-btn:hover{ opacity: 1; }
+.dg-back-btn:hover{
+    background: rgba(255,255,255,.14);
+    border-color: rgba(255,255,255,.22);
+    transform: translateY(-1px);
+}
+.dg-back-context{
+    color: rgba(255,255,255,.72);
+    font-size: .92rem;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.dg-floating-back{
+    display: none;
+}
 
 /* —— 整体包裹 —— */
 .dg-wrapper{
     min-height: calc(100vh - var(--header-height));
-    padding: 3rem 1.5rem 5rem;
+    padding: 2.1rem 1.5rem 5rem;
     background: var(--bg-color);
     display: flex;
     flex-direction: column;
@@ -40,9 +70,11 @@
 .dg-title{
     font-size: clamp(2.4rem, 6vw, 4rem);
     font-weight: 900;
-    letter-spacing: .04em;
+    letter-spacing: 0;
     margin-bottom: 2.2rem;
     text-align: center;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
 }
 
 /* —— 手风琴列表 —— */
@@ -76,6 +108,7 @@
     font-size: 1.05rem;
     font-weight: 600;
     line-height: 1.4;
+    overflow-wrap: anywhere;
 }
 .dg-icon{
     font-size: 1.3rem;
@@ -88,6 +121,7 @@
 .dg-panel{
     display: flex;
     gap: 2rem;
+    align-items: flex-start;
     padding: 1.1rem 0 2rem;
     animation: fade .35s ease;
 }
@@ -96,22 +130,42 @@
 .dg-img{
     width: 40%;
     max-width: 340px;
+    max-height: 520px;
     border-radius: 12px;
-    object-fit: cover;
+    object-fit: contain;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.1);
+}
+.dg-img-placeholder{
+    min-height: 240px;
+    display: grid;
+    place-items: center;
+    color: rgba(255,255,255,.7);
+    text-align: center;
+    padding: 1rem;
 }
 .dg-text{
     flex: 1;
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 .dg-text h3{
     font-size: 1.4rem;
     font-weight: 700;
     margin-bottom: .4rem;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
 }
 .dg-author{
     font-size: .9rem;
     opacity: .75;
+    margin-bottom: .45rem;
+    overflow-wrap: anywhere;
+}
+.dg-year{
+    color: rgba(255,255,255,.72);
+    font-size: .86rem;
     margin-bottom: 1rem;
 }
 .dg-desc{
@@ -119,10 +173,112 @@
     line-height: 1.75;
     margin-bottom: 1.4rem;
     white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+.dg-panel-actions{
+    display: flex;
+    justify-content: flex-start;
+    margin-top: .35rem;
+}
+.dg-collapse-btn{
+    min-height: 42px;
+    padding: 0 .8rem;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 8px;
+    background: rgba(255,255,255,.07);
+    color: var(--text-color);
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s, border-color .2s, transform .2s;
+}
+.dg-collapse-btn:hover{
+    background: rgba(255,255,255,.13);
+    border-color: rgba(255,255,255,.24);
+    transform: translateY(-1px);
 }
 
 /* —— 响应式 —— */
 @media(max-width: 960px){
     .dg-panel{ flex-direction: column; }
     .dg-img{ width: 100%; max-width: none; }
+}
+
+@media(max-width: 900px){
+    .dg-back-wrapper{
+        top: calc(var(--header-height) + .45rem);
+        width: calc(100% - 2rem);
+        min-height: 46px;
+        margin: calc(var(--header-height) + .75rem) auto 0;
+        padding: .35rem;
+        justify-content: flex-start;
+    }
+    .dg-back-btn{
+        width: 100%;
+        height: 42px;
+        justify-content: center;
+        background: rgba(255,255,255,.94);
+        color: #1f2029;
+        border-color: rgba(255,255,255,.3);
+    }
+    .dg-back-context{
+        display: none;
+    }
+    .dg-wrapper{
+        padding: 1.1rem 1rem calc(5.8rem + env(safe-area-inset-bottom));
+    }
+    .dg-title{
+        font-size: clamp(2rem, 11vw, 3rem);
+        margin-bottom: 1.4rem;
+    }
+    .dg-toggle{
+        column-gap: .7rem;
+        padding: 1rem 0;
+    }
+    .dg-name{
+        font-size: 1rem;
+    }
+    .dg-panel{
+        gap: 1rem;
+        padding-bottom: 2.25rem;
+    }
+    .dg-img{
+        max-height: 46vh;
+    }
+    .dg-text h3{
+        font-size: 1.2rem;
+    }
+    .dg-panel-actions{
+        justify-content: stretch;
+        margin-top: .15rem;
+    }
+    .dg-collapse-btn{
+        width: 100%;
+        justify-content: center;
+        min-height: 46px;
+    }
+    .dg-floating-back{
+        position: fixed;
+        left: 1rem;
+        right: auto;
+        bottom: max(.85rem, calc(env(safe-area-inset-bottom) + .65rem));
+        z-index: 90;
+        min-height: 50px;
+        padding: 0 .95rem;
+        border: 1px solid rgba(255,255,255,.18);
+        border-radius: 8px;
+        background: rgba(255,255,255,.94);
+        color: #1f2029;
+        box-shadow: 0 16px 42px rgba(0,0,0,.34);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        font-size: .98rem;
+        font-weight: 800;
+        white-space: nowrap;
+        cursor: pointer;
+    }
 }

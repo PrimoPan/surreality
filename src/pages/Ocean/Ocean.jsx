@@ -9,7 +9,8 @@ export default function Ocean({ lang }) {
             <ExhibitionSection
                 titleEn="Exhibition Area 1: Ocean Of Origins"
                 titleZh="展区一：溯源之海"
-                idRange={[1, 2]}   // 若作品 ID 区间有所变动，可在此调整
+                campus="guangzhou"
+                area={1}
                 lang={lang}
             />
         </div>

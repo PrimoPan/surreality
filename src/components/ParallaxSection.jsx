@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronsDown, Volume2, VolumeX } from 'lucide-react';
 import './ParallaxSection.css';
 
 /**
@@ -13,7 +14,7 @@ import './ParallaxSection.css';
 const uiText = {
     en: {
         cta: 'View the news!',
-        scroll: 'Scroll ↓',
+        scroll: 'Scroll to explore ↓',
     },
     'zh-Hans': {
         cta: '查看新闻！',
@@ -37,12 +38,28 @@ export default function ParallaxSection({
                                             showScrollHint = true,
                                             showCta = true,
                                             contentPlacement = 'center',
+                                            videoMuted = true,
+                                            showAudioToggle = false,
+                                            onAudioToggle,
+                                            scrollHintTargetId,
                                         }) {
     const navigate = useNavigate();
     const t = uiText[lang] || uiText.en;
     const bgImage = image || '/assets/hero/bg.jpg';
     const ctaText = ctaLabel || t.cta;
     const hasAnimated = useRef(false);
+    const videoRef = useRef(null);
+    const rootRef = useRef(null);
+
+    useEffect(() => {
+        if (!videoRef.current || !videoSrc) return;
+
+        videoRef.current.muted = videoMuted;
+        videoRef.current.play().catch(() => {
+            // Browsers may block unmuted autoplay until the viewer interacts.
+        });
+    }, [videoMuted, videoSrc]);
+
     const handleCtaClick = () => {
         if (/^https?:\/\//i.test(ctaTo)) {
             window.location.assign(ctaTo);
@@ -51,6 +68,27 @@ export default function ParallaxSection({
 
         navigate(ctaTo);
     };
+    const handleAudioToggle = () => {
+        const nextMuted = !videoMuted;
+        if (videoRef.current) {
+            videoRef.current.muted = nextMuted;
+        }
+        onAudioToggle?.();
+        if (nextMuted || videoRef.current?.paused) {
+            videoRef.current?.play().catch(() => {
+                // Browsers may still require another interaction before audio playback.
+            });
+        }
+    };
+    const handleScrollHintClick = () => {
+        const currentSection =
+            rootRef.current?.parentElement?.closest('section') || rootRef.current;
+        const target = scrollHintTargetId
+            ? document.getElementById(scrollHintTargetId)
+            : currentSection?.nextElementSibling;
+
+        target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
 
     const textVariants = {
         hidden: { opacity: 0, y: 40 },
@@ -58,17 +96,21 @@ export default function ParallaxSection({
     };
 
     return (
-        <section className={`parallax-root${videoSrc ? ' parallax-root--video' : ''}`}>
+        <section
+            ref={rootRef}
+            className={`parallax-root${videoSrc ? ' parallax-root--video' : ''}`}
+        >
             {/* 背景层 */}
             <Parallax speed={isParallax ? -20 : 0} className="bg-parallax">
                 <AnimatePresence mode="wait">
                     {videoSrc ? (
                         <motion.video
+                            ref={videoRef}
                             key={videoSrc}
                             className="bg-video"
                             src={videoSrc}
                             autoPlay
-                            muted
+                            muted={videoMuted}
                             loop
                             playsInline
                             preload="auto"
@@ -127,11 +169,42 @@ export default function ParallaxSection({
                 )}
             </div>
 
+            {videoSrc && showAudioToggle && (
+                <button
+                    className="hero-audio-toggle"
+                    type="button"
+                    onClick={handleAudioToggle}
+                    aria-label={videoMuted ? 'Unmute video' : 'Mute video'}
+                    aria-pressed={videoMuted}
+                >
+                    {videoMuted ? (
+                        <VolumeX size={22} aria-hidden="true" />
+                    ) : (
+                        <Volume2 size={22} aria-hidden="true" />
+                    )}
+                </button>
+            )}
+
             {/* Scroll hint */}
             {showScrollHint && (
-                <Parallax speed={isParallax ? -4 : 0} className="scroll-hint">
-                    <span>{t.scroll}</span>
-                </Parallax>
+                <div className="scroll-hint">
+                    <Parallax speed={isParallax ? -4 : 0} className="scroll-hint__motion">
+                        <button
+                            type="button"
+                            className="scroll-hint__button"
+                            onClick={handleScrollHintClick}
+                            aria-label={t.scroll.replace('↓', '').trim()}
+                        >
+                            <span>{t.scroll.replace('↓', '').trim()}</span>
+                            <ChevronsDown
+                                className="scroll-hint__arrow"
+                                size={20}
+                                strokeWidth={2.2}
+                                aria-hidden="true"
+                            />
+                        </button>
+                    </Parallax>
+                </div>
             )}
         </section>
     );

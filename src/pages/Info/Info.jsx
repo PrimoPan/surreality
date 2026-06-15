@@ -3,39 +3,134 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Info.css';
 import { ChevronDown } from 'lucide-react';
+import { t as pickText } from '../../components/i18n';
+
+const guangzhouRegistrationQr = '/images/guangzhou-registration-qr.jpg';
 
 // 三语字段选择器
-const pick = (obj, key, lang) =>
-    obj?.[`${key}_${lang === 'zh-Hans' ? 'cn' : 'en'}`] ?? '';
+const pick = (obj, key, lang) => pickText(obj || {}, key, lang);
 
-// 海报链接
-const posterLinks = [
-    'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster01.jpg',
-    'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster02.jpg',
-    'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster03.jpg',
-    'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster04.jpg',
+const getPosterUrl = (item) => item?.poster_url || item?.local_poster_url || '';
+
+const ArtworkImage = ({ item, className = '', alt, fallbackText }) => {
+    const [src, setSrc] = useState(getPosterUrl(item));
+    const [failed, setFailed] = useState(false);
+
+    useEffect(() => {
+        setSrc(getPosterUrl(item));
+        setFailed(false);
+    }, [item]);
+
+    if (!src || failed) {
+        return (
+            <div className={`${className} vrcard-image-placeholder`}>
+                {fallbackText}
+            </div>
+        );
+    }
+
+    return (
+        <img
+            src={src}
+            alt={alt}
+            className={className}
+            onError={() => {
+                if (item?.local_poster_url && src !== item.local_poster_url) {
+                    setSrc(item.local_poster_url);
+                } else {
+                    setFailed(true);
+                }
+            }}
+        />
+    );
+};
+
+// 2026 展区海报
+const areaPosterGroups = [
+    {
+        id: 'hong-kong',
+        label: {
+            en: 'Hong Kong Exhibition Area',
+            'zh-Hans': '香港展区',
+            'zh-Hant': '香港展區',
+        },
+        posters: [
+            {
+                id: 'hk-living-currents',
+                title: 'Living Currents',
+                src: 'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/surreality-posters/05-area-01-living-currents-web.webp',
+                path: '/exhibition/hong-kong/area-1',
+            },
+            {
+                id: 'hk-future-fables',
+                title: 'Future Fables',
+                src: 'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/surreality-posters/06-area-02-future-fables-web.webp',
+                path: '/exhibition/hong-kong/area-2',
+            },
+            {
+                id: 'hk-beyond-mind',
+                title: 'Beyond Mind',
+                src: 'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/surreality-posters/07-area-03-beyond-mind-web.webp',
+                path: '/exhibition/hong-kong/area-3',
+            },
+        ],
+    },
+    {
+        id: 'guangzhou',
+        label: {
+            en: 'Guangzhou Exhibition Area',
+            'zh-Hans': '广州展区',
+            'zh-Hant': '廣州展區',
+        },
+        posters: [
+            {
+                id: 'gz-awakening',
+                title: 'Awakening',
+                src: 'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/surreality-posters/01-awakening-web.webp',
+                path: '/exhibition/guangzhou/area-1',
+            },
+            {
+                id: 'gz-surreal-garden',
+                title: 'Surreal Garden',
+                src: 'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/surreality-posters/02-surreal-garden-web.webp',
+                path: '/exhibition/guangzhou/area-2',
+            },
+            {
+                id: 'gz-threshold-realms',
+                title: 'Threshold Realms',
+                src: 'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/surreality-posters/03-threshold-realms-web.webp',
+                path: '/exhibition/guangzhou/area-3',
+            },
+            {
+                id: 'gz-algorithmic-theatre',
+                title: 'Algorithmic Theatre',
+                src: 'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/surreality-posters/04-algorithmic-theatre-web.webp',
+                path: '/exhibition/guangzhou/area-4',
+            },
+        ],
+    },
 ];
 
 // 文案
 const copy = {
     en: {
         heroTitle: 'SURREALITY·幻實之境',
-        heroSub: 'World’s First Large-Scale XR AI Art Exhibition',
-        period: 'June 26 – August 26, 2025',
+        heroSub: 'SURREALITY 2026: Large-Scale XR AI Art Exhibition across Hong Kong and Guangzhou',
+        period: 'June 16 – 18, 2026',
         host:
-            'Hosted by Hong Kong University of Science and Technology (Guangzhou) and organized by the Center for Metaverse and Computational Creativity (MC²). Selected for the official “Sino-French Spring of Culture 2025” program, proudly supported by the Consulate General of France in Guangzhou and the Institut français.',
-        techTitle: 'Featured Technologies',
+            'SURREALITY 2026 unfolds across HKUST and HKUST(GZ), bringing together seven thematic exhibition areas, VR experiences, artist talks, forums, and guided visits. Presented in celebration of HKUST’s 35th anniversary, the exhibition explores how AI, XR, immersive media, and computational creativity reshape perception, storytelling, and the relationship between virtual and physical worlds.',
+        techTitle: '2026 Exhibition Highlights',
         techList: [
-            'Generative AI & Deep Learning: real-time image generation and evolution.',
-            'Large-Scale XR: seamless AR/VR headset integration with spatial interaction.',
-            'Spatial Audio & Multimodal Experience: immersive audio, scent, and haptic feedback.',
+            'Two-city exhibition: three Hong Kong areas and four Guangzhou areas form a connected cross-campus journey.',
+            'Large-scale XR & immersive media: AR/VR, spatial interaction, AI-generated worlds, and sensory experience.',
+            'Public programs: opening events, artist sharing, international forum sessions, guided tours, and VR Corner works.',
         ],
-        guideTitle: 'AI Butterfly Guide',
+        guideTitle: 'Visit & Registration',
         guideDesc:
-            'On-site AI “butterfly” guide supports Chinese, English, and Cantonese—responding to questions on each artwork’s background, technical details, and inspirations in real time.',
-        qrTitle: 'Scan to Book Your Visit',
-        qrImg:
-            'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/WechatIMG1084.jpg',
+            'Visitors can explore the exhibition areas and VR Corner, join selected public programs, and follow the agenda for Hong Kong and Guangzhou activities.',
+        qrTitle: 'Guangzhou Activity Registration',
+        qrNote: '(For Guangzhou activity registration only)',
+        qrImg: guangzhouRegistrationQr,
         vrCorner: 'VR Corner',
         vrArtistBtn: 'Artist Bio',
         vrClose: 'Close',
@@ -43,26 +138,26 @@ const copy = {
         areaTitle: 'Exhibition Areas',
         scrollPosterHint: 'Scroll down to explore the VR Corner & registration',
         scrollVRHint: 'Scroll down to explore registration',
-        bookLinkText: 'Click to Book Your Visit',
+        bookLinkText: 'Guangzhou Activity Registration',
     },
     'zh-Hans': {
         heroTitle: 'SURREALITY·幻实之境',
-        heroSub: '全球首个大空间扩展现实（XR）人工智能（AI）艺术展',
-        period: '2025 年 6 月 26 日 – 8 月 26 日',
+        heroSub: 'SURREALITY 2026：跨越香港与广州的大空间 XR AI 艺术展',
+        period: '2026 年 6 月 16 日 – 18 日',
         host:
-            '本次展览由香港科技大学（广州）主办，元宇宙与计算创意研究中心（MC²）承办，并入选 2025 年「中法文化之春」官方系列活动，获法国驻广州总领事馆及法国文化中心鼎力支持。',
-        techTitle: '展览技术亮点',
+            'SURREALITY 2026 将在香港科技大学与香港科技大学（广州）两地展开，呈现七个主题展区、VR Corner、艺术家分享、论坛与导览活动。本次展览为香港科技大学35周年校庆献礼，聚焦 AI、XR、沉浸式媒体与计算创意如何重塑感知、叙事，以及虚拟与现实之间的关系。',
+        techTitle: '2026 展览亮点',
         techList: [
-            '生成式 AI 与深度学习：实时生成与演化影像。',
-            '大空间扩展现实（XR）：AR/VR 头显与空间交互无缝融合。',
-            '空间音频与多模态体验：沉浸式声音、气味与触觉反馈。',
+            '双城展览：香港三个展区与广州四个展区共同构成跨校区展览旅程。',
+            '大空间 XR 与沉浸式媒体：AR/VR、空间交互、AI 生成世界与多感官体验。',
+            '公共活动：开幕活动、艺术家分享、国际论坛、展区导览与 VR Corner 作品。',
         ],
-        guideTitle: 'AI 蝴蝶导览员',
+        guideTitle: '参观与注册',
         guideDesc:
-            '现场 AI 蝴蝶导览员提供中文、English 及粤语三语支持，可根据观众提问，即时解读作品创作背景、技术原理与艺术灵感。',
-        qrTitle: '扫码预约参观',
-        qrImg:
-            'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/WechatIMG1084.jpg',
+            '观众可根据日程参与香港与广州两地活动，体验展区、VR Corner、艺术家交流与论坛内容。',
+        qrTitle: '广州活动注册',
+        qrNote: '（仅为广州活动注册）',
+        qrImg: guangzhouRegistrationQr,
         vrCorner: 'VR 角',
         vrArtistBtn: '艺术家简介',
         vrClose: '关闭',
@@ -70,26 +165,26 @@ const copy = {
         areaTitle: '展区介绍',
         scrollPosterHint: '向下滚动查看 VR 角与预约',
         scrollVRHint: '向下滚动查看预约入口',
-        bookLinkText: '点击预约展览',
+        bookLinkText: '广州活动注册',
     },
     'zh-Hant': {
         heroTitle: 'SURREALITY·幻實之境',
-        heroSub: '全球首個大空間擴展現實（XR）人工智能（AI）藝術展',
-        period: '2025 年 6 月 26 日 – 8 月 26 日',
+        heroSub: 'SURREALITY 2026：跨越香港與廣州的大空間 XR AI 藝術展',
+        period: '2026 年 6 月 16 日 – 18 日',
         host:
-            '本次展覽由香港科技大學（廣州）主辦，元宇宙與計算創意研究中心（MC²）承辦，並入選 2025 年「中法文化之春」官方系列活動，獲法國駐廣州總領事館及法國文化中心鼎力支持。',
-        techTitle: '展覽技術亮點',
+            'SURREALITY 2026 將在香港科技大學與香港科技大學（廣州）兩地展開，呈現七個主題展區、VR Corner、藝術家分享、論壇與導覽活動。本次展覽為香港科技大學35周年校慶獻禮，聚焦 AI、XR、沉浸式媒體與計算創意如何重塑感知、敘事，以及虛擬與現實之間的關係。',
+        techTitle: '2026 展覽亮點',
         techList: [
-            '生成式 AI 與深度學習：即時生成與演化影像。',
-            '大空間擴展現實（XR）：AR/VR 頭顯與空間互動無縫融合。',
-            '空間音頻與多模態體驗：沉浸式聲音、氣味與觸覺回饋。',
+            '雙城展覽：香港三個展區與廣州四個展區共同構成跨校區展覽旅程。',
+            '大空間 XR 與沉浸式媒體：AR/VR、空間互動、AI 生成世界與多感官體驗。',
+            '公共活動：開幕活動、藝術家分享、國際論壇、展區導覽與 VR Corner 作品。',
         ],
-        guideTitle: 'AI 蝴蝶導覽員',
+        guideTitle: '參觀與註冊',
         guideDesc:
-            '現場 AI 蝴蝶導覽員提供中文、English 及廣東話三語支持，可根據觀眾提問，即時解讀作品創作背景、技術原理與藝術靈感。',
-        qrTitle: '掃碼預約參觀',
-        qrImg:
-            'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/WechatIMG1084.jpg',
+            '觀眾可根據日程參與香港與廣州兩地活動，體驗展區、VR Corner、藝術家交流與論壇內容。',
+        qrTitle: '廣州活動註冊',
+        qrNote: '（僅為廣州活動註冊）',
+        qrImg: guangzhouRegistrationQr,
         vrCorner: 'VR 角',
         vrArtistBtn: '藝術家簡介',
         vrClose: '關閉',
@@ -97,7 +192,7 @@ const copy = {
         areaTitle: '展區介紹',
         scrollPosterHint: '向下滾動查看 VR 角與預約入口',
         scrollVRHint: '向下滾動查看預約入口',
-        bookLinkText: '點擊預約展覽',
+        bookLinkText: '廣州活動註冊',
     },
 };
 
@@ -106,7 +201,11 @@ const ArtworkCard = ({ item, lang, onClick, t }) => {
     const firstAuthor = pick(item, 'artist', lang).split(/[，,]/)[0]?.trim();
     return (
         <div className="vrcard" onClick={() => onClick(item)}>
-            <img src={item.poster_url} alt={pick(item, 'title', lang)} />
+            <ArtworkImage
+                item={item}
+                alt={pick(item, 'title', lang)}
+                fallbackText={pick(item, 'title', lang)}
+            />
             <div className="vrcard-body">
                 <h3 className="vrcard-title">{pick(item, 'title', lang)}</h3>
                 <p className="vrcard-author">{firstAuthor}</p>
@@ -128,10 +227,11 @@ const ArtworkModal = ({
     !item ? null : (
         <div className="vrcard-modal" onClick={onClose}>
             <div className="vrcard-modal-body" onClick={e => e.stopPropagation()}>
-                <img
+                <ArtworkImage
+                    item={item}
                     className="vrcard-modal-img"
-                    src={item.poster_url}
                     alt={pick(item, 'title', lang)}
+                    fallbackText={pick(item, 'title', lang)}
                 />
                 <h2>{pick(item, 'title', lang)}</h2>
                 <h4>{pick(item, 'artist', lang)}</h4>
@@ -155,17 +255,9 @@ function VRCornerSection({ lang, t }) {
     const [showBio, setBio] = useState(false);
 
     useEffect(() => {
-        fetch('/data/artworks.json')
+        fetch('/data/vr-corner-2026.json')
             .then(r => r.json())
-            .then(all => {
-                const items = all.filter(x => x.id >= 22 && x.id <= 31);
-                const order = [25, 26, 27, 29, 24, 30, 22, 23, 28, 31];
-                setData(
-                    order
-                        .map(id => items.find(x => x.id === id))
-                        .filter(Boolean)
-                );
-            })
+            .then(all => setData(all))
             .catch(console.error);
     }, []);
 
@@ -214,15 +306,38 @@ export default function Info({ lang }) {
             <section className="main-section info-poster-full">
                 <div className="info-poster-container">
                     <h2 className="info-poster-title">{t.areaTitle}</h2>
-                    <div className="info-poster">
-                        {posterLinks.map((src, i) => (
-                            <div
-                                key={i}
-                                className="poster-item"
-                                onClick={() => goto(['/ocean','/garden','/realms','/city'][i])}
-                            >
-                                <img src={src} alt={`poster-${i+1}`} />
-                            </div>
+                    <div className="info-poster-groups">
+                        {areaPosterGroups.map(group => (
+                            <section className="area-poster-group" key={group.id}>
+                                <h3 className="area-poster-heading">
+                                    {group.label[lang] || group.label.en}
+                                </h3>
+                                <div className="info-poster">
+                                    {group.posters.map(item => (
+                                        <div
+                                            key={item.id}
+                                            className={`poster-item${item.path ? ' poster-item--link' : ''}`}
+                                            onClick={item.path ? () => goto(item.path) : undefined}
+                                            onKeyDown={item.path ? (e) => {
+                                                if (e.key === 'Enter' || e.key === ' ') {
+                                                    e.preventDefault();
+                                                    goto(item.path);
+                                                }
+                                            } : undefined}
+                                            role={item.path ? 'button' : undefined}
+                                            tabIndex={item.path ? 0 : undefined}
+                                            aria-label={item.path ? `${item.title} ${t.learnMore}` : item.title}
+                                        >
+                                            <img
+                                                src={item.src}
+                                                alt={item.title}
+                                                loading="eager"
+                                                decoding="async"
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
                         ))}
                     </div>
                 </div>
@@ -252,36 +367,12 @@ export default function Info({ lang }) {
                         <h3>{t.guideTitle}</h3>
                         <p className="info-guide">{t.guideDesc}</p>
 
-                        <div
-                            className="info-qr"
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                textAlign: 'center'
-                            }}
-                        >
-                            {/* 语言区分的预约链接 */}
-                            <a
-                                href="https://qnr.hkust-gz.edu.cn/vm/rfWBX5F.aspx"
-                                style={{
-                                    color: '#fff',
-                                    textDecoration: 'underline',
-                                    marginBottom: '0.5rem'
-                                }}
-                            >
-                                {t.bookLinkText}
-                            </a>
-
+                        <div className="info-qr">
                             <h3>{t.qrTitle}</h3>
+                            <p>{t.qrNote}</p>
                             <img
                                 src={t.qrImg}
-                                alt="QR code"
-                                style={{
-                                    maxWidth: '200px',
-                                    width: '100%',
-                                    height: 'auto'
-                                }}
+                                alt={t.qrTitle}
                             />
                         </div>
                     </div>

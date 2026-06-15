@@ -55,6 +55,7 @@ const featuredPeople = [
         nameZhHans: '许彬',
         nameZhHant: '許彬',
         photo: 'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/3051752581882_.pic_hd.jpg',
+        profileUrl: 'https://mc2-lab.space/leader',
     },
     {
         role: {
@@ -342,12 +343,23 @@ export default function AboutTwo({ lang = 'en' }) {
 
                     <div className="about-two-featured">
                         <article className="about-two-person-card about-two-director" key={director.nameEn}>
-                            <figure className="about-two-photo-frame">
-                                <img src={director.photo} alt={director.nameEn} />
-                            </figure>
+                            <a
+                                className="about-two-profile-link about-two-profile-link--photo"
+                                href={director.profileUrl}
+                                aria-label={`${director.nameEn} profile`}
+                            >
+                                <figure className="about-two-photo-frame">
+                                    <img src={director.photo} alt={director.nameEn} />
+                                </figure>
+                            </a>
                             <div className="about-two-person-info">
                                 <p className="about-two-role">{director.role[locale]}</p>
-                                <LocalizedName person={director} locale={locale} />
+                                <a
+                                    className="about-two-profile-link about-two-profile-link--name"
+                                    href={director.profileUrl}
+                                >
+                                    <LocalizedName person={director} locale={locale} />
+                                </a>
                             </div>
                         </article>
 

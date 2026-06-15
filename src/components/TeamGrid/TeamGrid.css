@@ -133,11 +133,11 @@
 }
 
 .overlay-text {
-    color: #4a90e2;      /* 海軍藍文字 */
+    color: #f2bc8e;
     font-size: 0.9rem;
     margin: 0.2rem 0;
     font-weight: 500;
-    text-shadow: 0 0 6px rgba(74, 144, 226, 0.7);
+    text-shadow: 0 0 6px rgba(223, 125, 56, 0.55);
     text-align: center;
     padding: 0 0.5rem;
 }

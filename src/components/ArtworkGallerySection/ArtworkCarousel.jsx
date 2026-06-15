@@ -5,6 +5,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-coverflow';
 import './ArtworkGallerySection.css';
+import { t } from '../i18n';
 
 export default function ArtworkCarousel({ artworks = [], lang, activeId, onOpen }) {
     if (!artworks.length) return <div style={{ color: 'white' }}>No artworks loaded.</div>;
@@ -45,16 +46,16 @@ export default function ArtworkCarousel({ artworks = [], lang, activeId, onOpen 
                     >
                         <img
                             src={art.poster_url}
-                            alt={lang === 'en' ? art.title_en : art.title_cn}
+                            alt={t(art, 'title', lang)}
                             className="artwork-window-img"
                             onError={(e) => {
                                 e.target.src = 'https://dummyimage.com/320x220/252533/fff&text=No+Image';
                             }}
                         />
                         <div className="artwork-window-caption">
-                            <h4>{lang === 'en' ? art.title_en : art.title_cn}</h4>
+                            <h4>{t(art, 'title', lang)}</h4>
                             <div className="artist-name">
-                                {lang === 'en' ? art.artist_en : art.artist_cn}
+                                {t(art, 'artist', lang)}
                             </div>
                         </div>
                         <div className="artwork-card-glow" />
@@ -96,26 +97,25 @@ function ArtworkExpandInfo({ artwork, lang }) {
                         style={{ width: '100%', borderRadius: 8, marginBottom: 12 }}
                     />
                     <div style={{ fontWeight: 700, marginBottom: 6 }}>
-                        {lang === 'en' ? artwork.title_en : artwork.title_cn}
+                        {t(artwork, 'title', lang)}
                     </div>
                     <div
                         style={{ fontWeight: 400, color: '#47d8fa', marginBottom: 10 }}
                     >
-                        {lang === 'en' ? artwork.artist_en : artwork.artist_cn}
+                        {t(artwork, 'artist', lang)}
                     </div>
                     <div style={{ fontSize: 15, lineHeight: 1.6 }}>
-                        {lang === 'en' ? artwork.description_en : artwork.description_cn}
+                        {t(artwork, 'description', lang)}
                     </div>
                 </div>
             ) : (
                 <div className="expand-desc">
                     <div style={{ fontWeight: 700, marginBottom: 8 }}>
-                        {lang === 'en' ? artwork.artist_en : artwork.artist_cn}
+                        {t(artwork, 'artist', lang)}
                     </div>
                     <div style={{ fontSize: 15, lineHeight: 1.65 }}>
-                        {lang === 'en'
-                            ? artwork.artist_bio_en || '(No artist bio)'
-                            : artwork.artist_bio_cn || '(暂无艺术家简介)'}
+                        {t(artwork, 'artist_bio', lang) ||
+                            (lang === 'en' ? '(No artist bio)' : '(暂无艺术家简介)')}
                     </div>
                 </div>
             )}

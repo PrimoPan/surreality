@@ -14,7 +14,7 @@ export function t(obj, key, lang) {
     // 简体和英文直接映射
     const isEn = lang === 'en';
     const suffix = isEn ? 'en' : 'cn';
-    let txt = obj[`${key}_${suffix}`] || '';
+    let txt = obj[`${key}_${suffix}`] || obj[`${key}_${isEn ? 'cn' : 'en'}`] || '';
     // 繁体环境下，把简体再转换一次
     if (lang === 'zh-Hant' && txt) {
         txt = s2t(txt);

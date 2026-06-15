@@ -79,6 +79,21 @@
     text-align: left;
     display: block;
 }
+.parallax-root .banner-content--top-left {
+    position: absolute;
+    z-index: 2;
+    left: clamp(1.5rem, 5vw, 5rem);
+    right: auto;
+    top: calc(var(--header-height) + clamp(2rem, 7vh, 5rem));
+    bottom: auto;
+    transform: none;
+    width: min(50rem, 66vw);
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    display: block;
+}
 .banner-content h1 {
     font-size: clamp(3.1rem, 8vw, 7.8rem);
     font-weight: 900;
@@ -94,6 +109,12 @@
     margin-bottom: 0.75rem;
     text-shadow: 0 8px 34px rgba(0, 0, 0, 0.72);
 }
+.banner-content--top-left h1 {
+    font-size: clamp(2.8rem, 5.7vw, 6.4rem);
+    line-height: 0.94;
+    margin-bottom: 0.75rem;
+    text-shadow: 0 8px 34px rgba(0, 0, 0, 0.72);
+}
 .tagline {
     font-size: clamp(1.18rem, 2.8vw, 2.2rem);
     font-weight: 600;
@@ -103,6 +124,12 @@
     text-shadow: 0 4px 18px rgba(0, 0, 0, 0.58);
 }
 .banner-content--corner .tagline {
+    font-size: clamp(1.08rem, 1.9vw, 1.6rem);
+    margin-bottom: 0;
+    opacity: 0.95;
+    text-shadow: 0 6px 22px rgba(0, 0, 0, 0.75);
+}
+.banner-content--top-left .tagline {
     font-size: clamp(1.08rem, 1.9vw, 1.6rem);
     margin-bottom: 0;
     opacity: 0.95;
@@ -127,16 +154,144 @@
     background: rgba(255, 255, 255, 0.4);
 }
 
+.hero-audio-toggle {
+    position: absolute;
+    left: clamp(1.25rem, 3vw, 2rem);
+    bottom: clamp(1.25rem, 3vh, 2rem);
+    z-index: 4;
+    width: 2.8rem;
+    height: 2.8rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    background: rgba(8, 11, 18, 0.52);
+    color: #fff;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.hero-audio-toggle:hover,
+.hero-audio-toggle:focus-visible {
+    transform: translateY(-2px);
+    border-color: rgba(242, 188, 142, 0.56);
+    background: rgba(242, 188, 142, 0.18);
+    outline: none;
+}
+
 /* Scroll hint */
 .scroll-hint {
     position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.9rem;
-    opacity: 0.8;
-    pointer-events: none;
-    z-index: 3;
+    bottom: clamp(1.35rem, 4.2vh, 2.9rem);
+    left: 0;
+    right: 0;
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    opacity: 1;
+}
+
+.scroll-hint__motion {
+    display: block;
+    width: max-content;
+}
+
+.scroll-hint__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.56rem;
+    min-height: 3.15rem;
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    border-radius: 999px;
+    padding: 0.72rem 1.1rem 0.72rem 1.28rem;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08)),
+        rgba(8, 11, 18, 0.46);
+    color: rgba(255, 255, 255, 0.96);
+    font: inherit;
+    font-size: clamp(0.98rem, 1.3vw, 1.16rem);
+    font-weight: 680;
+    letter-spacing: 0;
+    line-height: 1;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.82);
+    cursor: pointer;
+    opacity: 1;
+    box-shadow:
+        0 12px 34px rgba(0, 0, 0, 0.36),
+        0 0 0 1px rgba(242, 188, 142, 0.08),
+        0 0 32px rgba(242, 188, 142, 0.16);
+    backdrop-filter: blur(12px);
+    animation: scroll-hint-pulse 2.2s ease-in-out infinite;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.scroll-hint__button:hover,
+.scroll-hint__button:focus-visible {
+    animation-play-state: paused;
+    border-color: rgba(242, 188, 142, 0.66);
+    background:
+        linear-gradient(180deg, rgba(242, 188, 142, 0.24), rgba(255, 255, 255, 0.1)),
+        rgba(8, 11, 18, 0.58);
+    color: #fff;
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.44),
+        0 0 0 1px rgba(242, 188, 142, 0.22),
+        0 0 44px rgba(242, 188, 142, 0.26);
+    transform: translateY(-3px);
+    outline: none;
+}
+
+.scroll-hint__button:focus-visible {
+    box-shadow:
+        0 0 0 3px rgba(242, 188, 142, 0.34),
+        0 16px 40px rgba(0, 0, 0, 0.44),
+        0 0 44px rgba(242, 188, 142, 0.26);
+}
+
+.scroll-hint__arrow {
+    flex: 0 0 auto;
+    color: #f2bc8e;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.72));
+    animation: scroll-hint-drift 1.35s ease-in-out infinite;
+}
+
+@keyframes scroll-hint-pulse {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(5px);
+    }
+}
+
+@keyframes scroll-hint-drift {
+    0%,
+    100% {
+        transform: translateY(-2px);
+    }
+
+    50% {
+        transform: translateY(5px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-hint__button,
+    .scroll-hint__arrow {
+        animation: none;
+    }
 }
 
 @media (max-width: 600px) {
@@ -152,6 +307,14 @@
         transform: translateX(-50%);
     }
 
+    .parallax-root .banner-content--top-left {
+        left: 1rem;
+        top: calc(var(--header-height-mobile) + 2.2rem);
+        width: min(88vw, 25rem);
+        text-align: left;
+        transform: none;
+    }
+
     .banner-content h1 {
         font-size: clamp(2.3rem, 12.5vw, 3.2rem);
         line-height: 1.05;
@@ -159,6 +322,11 @@
     }
 
     .banner-content--corner h1 {
+        font-size: clamp(2.25rem, 12vw, 3rem);
+        line-height: 1.02;
+    }
+
+    .banner-content--top-left h1 {
         font-size: clamp(2.25rem, 12vw, 3rem);
         line-height: 1.02;
     }
@@ -171,5 +339,27 @@
     .banner-content--corner .tagline {
         font-size: clamp(1rem, 4.8vw, 1.2rem);
         margin-bottom: 0;
+    }
+
+    .banner-content--top-left .tagline {
+        font-size: clamp(1rem, 4.8vw, 1.2rem);
+        margin-bottom: 0;
+    }
+
+    .hero-audio-toggle {
+        left: 1rem;
+        bottom: 1rem;
+        width: 2.65rem;
+        height: 2.65rem;
+    }
+
+    .parallax-root .scroll-hint {
+        bottom: max(1.1rem, calc(env(safe-area-inset-bottom) + 0.75rem));
+    }
+
+    .scroll-hint__button {
+        font-size: clamp(0.94rem, 4vw, 1.05rem);
+        min-height: 3rem;
+        padding: 0.68rem 0.96rem 0.68rem 1.08rem;
     }
 }
