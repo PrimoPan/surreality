@@ -1,0 +1,228 @@
+.home-manifesto-section {
+    overflow: hidden;
+    isolation: isolate;
+    background: #070a11;
+}
+
+.home-manifesto-bg {
+    position: absolute !important;
+    inset: -12vh 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.home-manifesto-bg__image {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0;
+    transform: scale(1.04);
+    filter: brightness(1.18) saturate(1.08);
+    transition: opacity 1.4s ease;
+    will-change: opacity;
+}
+
+.home-manifesto-bg__image.is-active {
+    opacity: 1;
+}
+
+.home-manifesto-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(4, 7, 13, 0.82) 0%,
+            rgba(6, 10, 18, 0.68) 46%,
+            rgba(5, 9, 17, 0.52) 100%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.28) 0%,
+            rgba(0, 0, 0, 0.06) 44%,
+            rgba(0, 0, 0, 0.38) 100%
+        );
+}
+
+.home-manifesto-content {
+    position: relative;
+    z-index: 2;
+    min-height: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(24rem, 0.72fr);
+    gap: clamp(2rem, 5vw, 5.5rem);
+    align-items: center;
+    padding:
+        clamp(6.8rem, 12vh, 8.5rem)
+        clamp(2rem, 4.8vw, 5rem)
+        clamp(3rem, 6vh, 5rem);
+}
+
+.home-manifesto-copy {
+    width: 100%;
+    max-width: 68rem;
+}
+
+.home-manifesto-title {
+    color: #f2bc8e;
+    font-size: clamp(2.8rem, 5vw, 5.8rem);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: 0;
+    margin: 0 0 clamp(2.1rem, 5vh, 3.4rem);
+    text-shadow: 0 10px 34px rgba(0, 0, 0, 0.54);
+}
+
+.home-manifesto-body {
+    display: grid;
+    gap: clamp(1.65rem, 3.6vh, 3rem);
+    max-width: 58rem;
+}
+
+.home-manifesto-body p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: clamp(1.18rem, 1.78vw, 2rem);
+    font-weight: 300;
+    line-height: 1.68;
+    text-wrap: pretty;
+    text-shadow: 0 6px 22px rgba(0, 0, 0, 0.64);
+}
+
+.home-manifesto-quote-wrap {
+    width: 100%;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+}
+
+.home-manifesto-quote {
+    width: 100%;
+    min-height: min(56vh, 34rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+}
+
+.home-manifesto-quote-mark {
+    color: #f2bc8e;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(6rem, 10vw, 12rem);
+    font-weight: 700;
+    line-height: 0.62;
+    margin: 0 0 clamp(0.8rem, 2vh, 1.4rem);
+    text-shadow: 0 12px 34px rgba(0, 0, 0, 0.44);
+}
+
+.home-manifesto-quote blockquote {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.95);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.9rem, 3.25vw, 3.8rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.38;
+    text-shadow: 0 8px 26px rgba(0, 0, 0, 0.68);
+}
+
+.home-manifesto-quote figcaption {
+    align-self: flex-end;
+    margin-top: clamp(1.5rem, 4vh, 3rem);
+    color: #f2bc8e;
+    font-size: clamp(1.12rem, 1.7vw, 1.9rem);
+    font-weight: 300;
+    line-height: 1.2;
+    text-shadow: 0 8px 22px rgba(0, 0, 0, 0.62);
+}
+
+@media (max-width: 1180px) {
+    .home-manifesto-content {
+        grid-template-columns: 1fr;
+        gap: clamp(2rem, 5vh, 3.5rem);
+        align-content: center;
+    }
+
+    .home-manifesto-copy {
+        max-width: 62rem;
+    }
+
+    .home-manifesto-quote {
+        min-height: auto;
+        max-width: 52rem;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-manifesto-section {
+        min-height: 100svh;
+    }
+
+    .home-manifesto-bg {
+        inset: -8vh -12vw;
+    }
+
+    .home-manifesto-bg__image {
+        background-position: 52% center;
+    }
+
+    .home-manifesto-overlay {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(4, 7, 13, 0.82) 0%,
+                rgba(5, 9, 17, 0.62) 48%,
+                rgba(4, 7, 13, 0.82) 100%
+            );
+    }
+
+    .home-manifesto-content {
+        min-height: 100svh;
+        padding: 5.8rem 1.25rem 3.25rem;
+        gap: 2.25rem;
+    }
+
+    .home-manifesto-title {
+        font-size: clamp(2.2rem, 10.5vw, 3.45rem);
+        margin-bottom: 1.9rem;
+    }
+
+    .home-manifesto-body {
+        gap: 1.25rem;
+    }
+
+    .home-manifesto-body p {
+        font-size: clamp(0.98rem, 4vw, 1.24rem);
+        line-height: 1.68;
+    }
+
+    .home-manifesto-quote-mark {
+        font-size: clamp(4.7rem, 20vw, 6.6rem);
+        margin-bottom: 0.45rem;
+    }
+
+    .home-manifesto-quote blockquote {
+        font-size: clamp(1.42rem, 6vw, 2.15rem);
+        line-height: 1.45;
+    }
+
+    .home-manifesto-quote figcaption {
+        margin-top: 1rem;
+        font-size: clamp(1rem, 4.6vw, 1.35rem);
+    }
+}
+
+@media (max-width: 420px) {
+    .home-manifesto-content {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
+    .home-manifesto-title {
+        font-size: clamp(2rem, 10.5vw, 2.85rem);
+    }
+}
