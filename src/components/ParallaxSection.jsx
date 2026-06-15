@@ -53,14 +53,9 @@ export default function ParallaxSection({
     const hasAnimated = useRef(false);
     const videoRef = useRef(null);
     const rootRef = useRef(null);
-    const onAudioToggleRef = useRef(onAudioToggle);
     const [shouldLoadVideo, setShouldLoadVideo] = useState(true);
     const [isVideoReady, setIsVideoReady] = useState(false);
     const hasVideo = Boolean(videoSrc && shouldLoadVideo);
-
-    useEffect(() => {
-        onAudioToggleRef.current = onAudioToggle;
-    }, [onAudioToggle]);
 
     useEffect(() => {
         setIsVideoReady(false);
@@ -91,32 +86,10 @@ export default function ParallaxSection({
         if (!videoRef.current || !hasVideo) return;
 
         const video = videoRef.current;
-        let isCancelled = false;
-
-        const playMutedFallback = () => {
-            if (isCancelled || videoMuted) return;
-
-            video.muted = true;
-            onAudioToggleRef.current?.(true);
-            video.play().catch(() => {
-                // If even muted playback is blocked, the poster remains visible.
-            });
-        };
-
         video.muted = videoMuted;
-        video.play()
-            .then(() => {
-                window.setTimeout(() => {
-                    if (!isCancelled && !videoMuted && video.paused) {
-                        playMutedFallback();
-                    }
-                }, 250);
-            })
-            .catch(playMutedFallback);
-
-        return () => {
-            isCancelled = true;
-        };
+        video.play().catch(() => {
+            // Browsers may block unmuted autoplay until the viewer interacts.
+        });
     }, [hasVideo, videoMuted, videoSrc]);
 
     const handleCtaClick = () => {
@@ -135,23 +108,12 @@ export default function ParallaxSection({
 
         if (!video) return;
 
-        const keepVideoMoving = () => {
-            if (!nextMuted && video.paused) {
-                video.muted = true;
-                onAudioToggleRef.current?.(true);
-            }
-
+        video.muted = nextMuted;
+        if (nextMuted || video.paused) {
             video.play().catch(() => {
                 // Browsers may still require another interaction before audio playback.
             });
-        };
-
-        video.muted = nextMuted;
-        video.play()
-            .then(() => {
-                window.setTimeout(keepVideoMoving, 250);
-            })
-            .catch(keepVideoMoving);
+        }
     };
     const handleScrollHintClick = () => {
         const currentSection =

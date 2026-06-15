@@ -26,7 +26,15 @@ const openCallBgImage =
 const featuredArtistBaseUrl =
     'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/featured-artists/';
 const publicUrl = process.env.PUBLIC_URL || '';
-const heroVideoCoverImage = `${publicUrl}/images/hero/home-cos-video-cover.jpg`;
+const desktopHeroVideoCoverImage = `${publicUrl}/images/hero/home-cos-video-cover.jpg`;
+const mobileHeroVideoCoverImage = `${publicUrl}/images/hero/home-cos-video-cover-mobile.jpg`;
+const getHeroVideoCoverImage = () => {
+    if (typeof window === 'undefined') return desktopHeroVideoCoverImage;
+
+    return window.matchMedia('(max-width: 768px)').matches
+        ? mobileHeroVideoCoverImage
+        : desktopHeroVideoCoverImage;
+};
 const anniversaryAssetBase = `${publicUrl}/images/anniversary-gift/`;
 const anniversaryBgImage = `${anniversaryAssetBase}anniversary-campus-bg.webp`;
 
@@ -638,12 +646,16 @@ function AnniversaryGiftSection({ lang }) {
 
 export default function Home({ lang }) {
     const [heroVideoUrl, setHeroVideoUrl] = useState(getHeroVideoUrl);
+    const [heroVideoCoverImage, setHeroVideoCoverImage] = useState(getHeroVideoCoverImage);
     const [heroVideoMuted, setHeroVideoMuted] = useState(false);
 
     useEffect(() => {
         const mediaQuery = window.matchMedia('(max-width: 768px)');
         const updateHeroVideo = () => {
             setHeroVideoUrl(mediaQuery.matches ? mobileHeroVideoUrl : desktopHeroVideoUrl);
+            setHeroVideoCoverImage(
+                mediaQuery.matches ? mobileHeroVideoCoverImage : desktopHeroVideoCoverImage
+            );
         };
 
         updateHeroVideo();
