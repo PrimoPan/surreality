@@ -19,27 +19,34 @@ export default function Header({ lang, onLangChange }) {
             { key: '/info',    label: 'Information'  },
             { key: '/about',   label: 'About Us'     },
             { key: '/contact', label: 'Contact'      },
+            { key: '/surreality-1-0', label: 'Review Surreality 1.0', variant: 'review' },
         ],
         'zh-Hans': [
             { key: '/',        label: '首页'       },
             { key: '/info',    label: '展览信息'   },
             { key: '/about',   label: '关于我们'   },
             { key: '/contact', label: '联系我们'   },
+            { key: '/surreality-1-0', label: '回顾 Surreality 1.0', variant: 'review' },
         ],
         'zh-Hant': [
             { key: '/',        label: '首頁'       },
             { key: '/info',    label: '展覽資訊'   },
             { key: '/about',   label: '關於我們'   },
             { key: '/contact', label: '聯絡我們'   },
+            { key: '/surreality-1-0', label: '回顧 Surreality 1.0', variant: 'review' },
         ],
     };
 
     /* ---------- 统一渲染函数 ---------- */
     const renderLinks = (isDrawer = false) =>
-        menuItems[lang].map(({ key, label }) => (
+        menuItems[lang].map(({ key, label, variant }) => (
             <li
                 key={key}
-                className={isDrawer ? '' : 'nav__link'}
+                className={
+                    isDrawer
+                        ? variant === 'review' ? 'drawer-review-link' : ''
+                        : `nav__link${variant === 'review' ? ' nav__link--review' : ''}`
+                }
                 style={isDrawer ? { cursor: 'pointer' } : {}}
                 onClick={() => {
                     nav(key);          // 跳转路由

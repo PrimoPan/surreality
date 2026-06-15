@@ -28,13 +28,20 @@ const uiText = {
 export default function ParallaxSection({
                                             lang = 'en',
                                             image,
+                                            videoSrc,
                                             title,
                                             subtitle,
+                                            ctaLabel,
+                                            ctaTo = '/news',
                                             isParallax = true,
+                                            showScrollHint = true,
+                                            showCta = true,
+                                            contentPlacement = 'center',
                                         }) {
     const navigate = useNavigate();
     const t = uiText[lang] || uiText.en;
     const bgImage = image || '/assets/hero/bg.jpg';
+    const ctaText = ctaLabel || t.cta;
     const hasAnimated = useRef(false);
 
     const textVariants = {
@@ -43,15 +50,29 @@ export default function ParallaxSection({
     };
 
     return (
-        <section className="parallax-root">
+        <section className={`parallax-root${videoSrc ? ' parallax-root--video' : ''}`}>
             {/* 背景层 */}
             <Parallax speed={isParallax ? -20 : 0} className="bg-parallax">
                 <AnimatePresence mode="wait">
-                    <motion.div
-                        key={bgImage}
-                        className="bg-image"
-                        style={{ backgroundImage: `url(${bgImage})` }}
-                    />
+                    {videoSrc ? (
+                        <motion.video
+                            key={videoSrc}
+                            className="bg-video"
+                            src={videoSrc}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            preload="auto"
+                            aria-hidden="true"
+                        />
+                    ) : (
+                        <motion.div
+                            key={bgImage}
+                            className="bg-image"
+                            style={{ backgroundImage: `url(${bgImage})` }}
+                        />
+                    )}
                 </AnimatePresence>
             </Parallax>
 
@@ -59,7 +80,7 @@ export default function ParallaxSection({
             <div className="dark-overlay" />
 
             {/* 文字 + CTA */}
-            <div className="banner-content">
+            <div className={`banner-content banner-content--${contentPlacement}`}>
                 <Parallax speed={isParallax ? -12 : 0}>
                     <motion.h1
                         variants={textVariants}
@@ -84,22 +105,26 @@ export default function ParallaxSection({
                     </Parallax>
                 )}
 
-                <motion.button
-                    className="view-news-btn"
-                    onClick={() => navigate('/news')}
-                    variants={textVariants}
-                    initial={hasAnimated.current ? undefined : 'hidden'}
-                    animate={hasAnimated.current ? undefined : 'visible'}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                >
-                    {t.cta}
-                </motion.button>
+                {showCta && (
+                    <motion.button
+                        className="view-news-btn"
+                        onClick={() => navigate(ctaTo)}
+                        variants={textVariants}
+                        initial={hasAnimated.current ? undefined : 'hidden'}
+                        animate={hasAnimated.current ? undefined : 'visible'}
+                        whileHover={{ scale: 1.05, y: -2 }}
+                    >
+                        {ctaText}
+                    </motion.button>
+                )}
             </div>
 
             {/* Scroll hint */}
-            <Parallax speed={isParallax ? -4 : 0} className="scroll-hint">
-                <span>{t.scroll}</span>
-            </Parallax>
+            {showScrollHint && (
+                <Parallax speed={isParallax ? -4 : 0} className="scroll-hint">
+                    <span>{t.scroll}</span>
+                </Parallax>
+            )}
         </section>
     );
 }

@@ -77,6 +77,18 @@ html,body,#root{
 .nav__links{list-style:none;display:flex;gap:1rem;align-items:center;font-size:.9rem}
 .nav__link a{color:var(--nav-text);opacity:.8;text-decoration:none;transition:opacity .2s}
 .nav__link a:hover,.nav__link.active a{opacity:1}
+.nav__link--review{
+    padding:.45rem .8rem;border:1px solid rgba(255,255,255,.32);
+    border-radius:999px;background:rgba(255,255,255,.11);
+    backdrop-filter:blur(8px);transition:background .2s,transform .2s;
+}
+.nav__link--review:hover{
+    background:rgba(255,255,255,.22);transform:translateY(-1px);
+}
+.drawer-review-link{
+    margin:.75rem 0;padding:.7rem 1rem;border:1px solid rgba(255,255,255,.3);
+    border-radius:999px;background:rgba(255,255,255,.1);text-align:center;
+}
 
 /* ---- 修复汉堡菜单按钮字体颜色和增大字体 ---- */
 .mobile-menu-btn{

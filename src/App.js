@@ -8,6 +8,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Header from './components/Header';
 
 import Home from './pages/Home';
+import SurrealityOneHome from './pages/SurrealityOneHome';
 import About from './pages/About/About';
 import Info from './pages/Info/Info';
 import News from './pages/News/News';
@@ -33,15 +34,16 @@ export default function App() {
                 <Header lang={lang} onLangChange={setLang} />
 
                 <Routes>
-                    <Route path="/"        element={<Home           lang={lang} />} />
-                    <Route path="/about"   element={<About          lang={lang} />} />
-                    <Route path="/info"    element={<Info           lang={lang} />} />
-                    <Route path="/news"    element={<News           lang={lang} />} />
-                    <Route path="/ocean"   element={<Ocean          lang={lang} />} />
-                    <Route path="/garden"  element={<DigitalGarden  lang={lang} />} />
-                    <Route path="/realms"  element={<SymbioticRealms lang={lang} />} />
-                    <Route path="/city"    element={<City           lang={lang} />} />
-                    <Route path="/contact" element={<Contact        lang={lang} />} />
+                    <Route path="/"                 element={<Home               lang={lang} />} />
+                    <Route path="/surreality-1-0"   element={<SurrealityOneHome  lang={lang} />} />
+                    <Route path="/about"            element={<About              lang={lang} />} />
+                    <Route path="/info"             element={<Info               lang={lang} />} />
+                    <Route path="/news"             element={<News               lang={lang} />} />
+                    <Route path="/ocean"            element={<Ocean              lang={lang} />} />
+                    <Route path="/garden"           element={<DigitalGarden      lang={lang} />} />
+                    <Route path="/realms"           element={<SymbioticRealms     lang={lang} />} />
+                    <Route path="/city"             element={<City               lang={lang} />} />
+                    <Route path="/contact"          element={<Contact            lang={lang} />} />
                 </Routes>
             </ParallaxProvider>
         </BrowserRouter>
