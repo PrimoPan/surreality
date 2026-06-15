@@ -30,11 +30,11 @@ const anniversaryAssetBase = `${publicUrl}/images/anniversary-gift/`;
 const anniversaryBgImage = `${anniversaryAssetBase}anniversary-campus-bg.webp`;
 
 const anniversaryInstitutionLogos = [
-    { id: 'hkust', src: `${anniversaryAssetBase}hkust-35.webp`, alt: 'HKUST 35th Anniversary and The Hong Kong University of Science and Technology' },
-    { id: 'hkust-gz', src: `${anniversaryAssetBase}hkust-gz.webp`, alt: 'The Hong Kong University of Science and Technology (Guangzhou)' },
-    { id: 'mc2', src: `${anniversaryAssetBase}mc2.webp`, alt: 'Center for Metaverse and Computational Creativity' },
-    { id: 'cma', src: `${anniversaryAssetBase}cma.webp`, alt: 'Computational Media and Arts' },
-    { id: 'eia', src: `${anniversaryAssetBase}eia.webp`, alt: 'Division of Emerging Interdisciplinary Areas' },
+    { id: 'hkust', src: `${anniversaryAssetBase}hkust-35.png`, alt: 'HKUST 35th Anniversary and The Hong Kong University of Science and Technology' },
+    { id: 'hkust-gz', src: `${anniversaryAssetBase}hkust-gz.png`, alt: 'The Hong Kong University of Science and Technology (Guangzhou)' },
+    { id: 'mc2', src: `${anniversaryAssetBase}mc2.png`, alt: 'Center for Metaverse and Computational Creativity' },
+    { id: 'cma', src: `${anniversaryAssetBase}cma.png`, alt: 'Computational Media and Arts' },
+    { id: 'eia', src: `${anniversaryAssetBase}eia.png`, alt: 'Division of Emerging Interdisciplinary Areas' },
 ];
 
 const manifestoCopy = {
@@ -565,7 +565,7 @@ function AnniversaryGiftSection({ lang }) {
     useEffect(() => {
         [
             anniversaryBgImage,
-            `${anniversaryAssetBase}institutions-strip.webp`,
+            `${anniversaryAssetBase}institutions-strip.png`,
             ...anniversaryInstitutionLogos.map((logo) => logo.src),
         ].forEach((src) => {
             const image = new Image();
@@ -621,7 +621,7 @@ function AnniversaryGiftSection({ lang }) {
                 <div className="home-anniversary-institutions" aria-label={copy.institutionAlt}>
                     <img
                         className="home-anniversary-institutions-strip"
-                        src={`${anniversaryAssetBase}institutions-strip.webp`}
+                        src={`${anniversaryAssetBase}institutions-strip.png`}
                         alt={copy.institutionAlt}
                     />
                     <div className="home-anniversary-institutions-grid">
