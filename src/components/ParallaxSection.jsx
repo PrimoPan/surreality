@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -30,6 +30,8 @@ export default function ParallaxSection({
                                             lang = 'en',
                                             image,
                                             videoSrc,
+                                            videoPoster,
+                                            videoPreload = 'metadata',
                                             title,
                                             subtitle,
                                             ctaLabel,
@@ -39,6 +41,7 @@ export default function ParallaxSection({
                                             showCta = true,
                                             contentPlacement = 'center',
                                             videoMuted = true,
+                                            disableVideoOnSaveData = true,
                                             showAudioToggle = false,
                                             onAudioToggle,
                                             scrollHintTargetId,
@@ -50,15 +53,66 @@ export default function ParallaxSection({
     const hasAnimated = useRef(false);
     const videoRef = useRef(null);
     const rootRef = useRef(null);
+    const onAudioToggleRef = useRef(onAudioToggle);
+    const [shouldLoadVideo, setShouldLoadVideo] = useState(true);
+    const hasVideo = Boolean(videoSrc && shouldLoadVideo);
 
     useEffect(() => {
-        if (!videoRef.current || !videoSrc) return;
+        onAudioToggleRef.current = onAudioToggle;
+    }, [onAudioToggle]);
 
-        videoRef.current.muted = videoMuted;
-        videoRef.current.play().catch(() => {
-            // Browsers may block unmuted autoplay until the viewer interacts.
-        });
-    }, [videoMuted, videoSrc]);
+    useEffect(() => {
+        if (!disableVideoOnSaveData || typeof navigator === 'undefined') return;
+
+        const connection =
+            navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+
+        if (!connection) return;
+
+        const updateVideoPreference = () => {
+            const effectiveType = connection.effectiveType || '';
+            const isConstrainedNetwork =
+                connection.saveData || effectiveType === 'slow-2g' || effectiveType === '2g';
+
+            setShouldLoadVideo(!isConstrainedNetwork);
+        };
+
+        updateVideoPreference();
+        connection.addEventListener?.('change', updateVideoPreference);
+        return () => connection.removeEventListener?.('change', updateVideoPreference);
+    }, [disableVideoOnSaveData]);
+
+    useEffect(() => {
+        if (!videoRef.current || !hasVideo) return;
+
+        const video = videoRef.current;
+        let isCancelled = false;
+
+        const playMutedFallback = () => {
+            if (isCancelled || videoMuted) return;
+
+            video.muted = true;
+            onAudioToggleRef.current?.(true);
+            video.play().catch(() => {
+                // If even muted playback is blocked, the poster remains visible.
+            });
+        };
+
+        video.muted = videoMuted;
+        video.play()
+            .then(() => {
+                window.setTimeout(() => {
+                    if (!isCancelled && !videoMuted && video.paused) {
+                        playMutedFallback();
+                    }
+                }, 250);
+            })
+            .catch(playMutedFallback);
+
+        return () => {
+            isCancelled = true;
+        };
+    }, [hasVideo, videoMuted, videoSrc]);
 
     const handleCtaClick = () => {
         if (/^https?:\/\//i.test(ctaTo)) {
@@ -70,15 +124,29 @@ export default function ParallaxSection({
     };
     const handleAudioToggle = () => {
         const nextMuted = !videoMuted;
-        if (videoRef.current) {
-            videoRef.current.muted = nextMuted;
-        }
-        onAudioToggle?.();
-        if (nextMuted || videoRef.current?.paused) {
-            videoRef.current?.play().catch(() => {
+        const video = videoRef.current;
+
+        onAudioToggle?.(nextMuted);
+
+        if (!video) return;
+
+        const keepVideoMoving = () => {
+            if (!nextMuted && video.paused) {
+                video.muted = true;
+                onAudioToggleRef.current?.(true);
+            }
+
+            video.play().catch(() => {
                 // Browsers may still require another interaction before audio playback.
             });
-        }
+        };
+
+        video.muted = nextMuted;
+        video.play()
+            .then(() => {
+                window.setTimeout(keepVideoMoving, 250);
+            })
+            .catch(keepVideoMoving);
     };
     const handleScrollHintClick = () => {
         const currentSection =
@@ -103,17 +171,18 @@ export default function ParallaxSection({
             {/* 背景层 */}
             <Parallax speed={isParallax ? -20 : 0} className="bg-parallax">
                 <AnimatePresence mode="wait">
-                    {videoSrc ? (
+                    {hasVideo ? (
                         <motion.video
                             ref={videoRef}
                             key={videoSrc}
                             className="bg-video"
                             src={videoSrc}
+                            poster={videoPoster}
                             autoPlay
                             muted={videoMuted}
                             loop
                             playsInline
-                            preload="auto"
+                            preload={videoPreload}
                             aria-hidden="true"
                         />
                     ) : (
@@ -169,7 +238,7 @@ export default function ParallaxSection({
                 )}
             </div>
 
-            {videoSrc && showAudioToggle && (
+            {hasVideo && showAudioToggle && (
                 <button
                     className="hero-audio-toggle"
                     type="button"
