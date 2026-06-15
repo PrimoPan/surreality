@@ -4,6 +4,8 @@ import { Select, Drawer } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
+const HKUST_35_LOGO_URL =
+    'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/photos/Standard%2035A%20Logo%20-%20FC%20%28W%29%20Bilingual%20Traditional%20Chinese.png';
 
 /**
  * 顶部导航栏
@@ -72,16 +74,16 @@ export default function Header({ lang, onLangChange }) {
         <>
             {/* ===== 顶部条 ===== */}
             <div className="major-nav">
-                {/* 仅保留后两个 Logo */}
+                {/* 科大 35 周年 Logo 需置于广州 Logo 之前 */}
                 <nav className="nav-logo">
                     <img
-                        src="https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/UST-GZ-EN.png"
-                        alt="HKUST GZ"
+                        src={HKUST_35_LOGO_URL}
+                        alt="HKUST 35th Anniversary"
                     />
                     <div className="vertical" />
                     <img
-                        src="https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/UST-EN.png"
-                        alt="HKUST"
+                        src="https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/UST-GZ-EN.png"
+                        alt="HKUST GZ"
                     />
                 </nav>
 
