@@ -369,7 +369,7 @@ const content = {
         acknowledgments: [
             '<b>President｜</b>Prof. Lionel Ni',
             '<b>Exhibition Director｜</b>Prof. Pan Hui',
-            '<b>Curation & Execution｜</b>Zhao Yawei, Li Hao, Gao Qinyong, Long Junkun, Li Shuyue, Liang Yuqi, Mao Yuanyuan, Huang Yining, Gu Wenqing, Pan Dongyijie, Chen Zixuan, Zhang Yishuai, Lei Xiaokang, Wang Anqi',
+            '<b>Curation & Execution｜</b>Zhao Yawei, Li Hao, Gao Qinyong, Long Junkun, Li Shuyue, Liang Yuqi, Mao Yuanyuan, Huang Yining, Gu Wenqing, Dongyijie Primo Pan, Chen Zixuan, Zhang Yishuai, Lei Xiaokang, Wang Anqi',
             '<b>Volunteers (alphabetical order)｜</b>Chai Wenjye, Chen Hongxi, Fang Kairong, Fu Zihao, Hong Zesheng, Jiang Yuyang, Li Mingchen, Liang Jiaxin, Liu Bonan, Liu Shiqi, Men Yunlei, Pang Ching Christie, Qi Zhenchao, Sun Jia, Wang Xuetong, Xu Wenbo, Yang Simin, Yang Xiaoyu, Yang Zeyu, Yan Zhe, Yin Zhizhuo, Yu Ao, Zhang Qianwen, Zhang Pu, Zhao Zhuoran, Zhu Yiming, and all unnamed volunteers whose dedication made this event possible.',
             '<b>Organized by｜</b>Hong Kong University of Science and Technology(Guangzhou)',
             '<b>Curated by｜</b>Center for Metaverse and Computational Creativity (MC²)',
