@@ -1,16 +1,94 @@
 // Info.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Info.css';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Search, X } from 'lucide-react';
+import { Converter } from 'opencc-js';
 import { t as pickText } from '../../components/i18n';
 
 const guangzhouRegistrationQr = '/images/guangzhou-registration-qr.jpg';
+const toSimplified = Converter({ from: 'tw', to: 'cn' });
+const searchTokenPattern = /[\p{L}\p{N}]+/gu;
 
 // 三语字段选择器
 const pick = (obj, key, lang) => pickText(obj || {}, key, lang);
 
-const getPosterUrl = (item) => item?.poster_url || item?.local_poster_url || '';
+const getPosterUrl = (item) =>
+    item?.image_url || item?.poster_url || item?.local_image_url || item?.local_poster_url || '';
+
+const getFallbackPosterUrl = (item) => item?.local_image_url || item?.local_poster_url || '';
+
+const normalizeSearchText = (value) =>
+    toSimplified(String(value || ''))
+        .normalize('NFKC')
+        .toLowerCase()
+        .replace(/[^\p{L}\p{N}]+/gu, '');
+
+const getSearchTokens = (value) =>
+    Array.from(toSimplified(String(value || '')).normalize('NFKC').toLowerCase().matchAll(searchTokenPattern))
+        .map(match => normalizeSearchText(match[0]))
+        .filter(Boolean);
+
+const isTightSubsequence = (needle, haystack) => {
+    if (!needle) return true;
+    for (let start = 0; start < haystack.length; start += 1) {
+        if (haystack[start] !== needle[0]) continue;
+        let queryIndex = 1;
+        let end = start;
+        while (end + 1 < haystack.length && queryIndex < needle.length) {
+            end += 1;
+            if (haystack[end] === needle[queryIndex]) queryIndex += 1;
+        }
+        if (queryIndex === needle.length && end - start + 1 <= needle.length + 3) {
+            return true;
+        }
+    }
+    return false;
+};
+
+const scoreSearchMatch = (item, query, lang) => {
+    const normalizedQuery = normalizeSearchText(query);
+    if (!normalizedQuery) return 0;
+
+    const queryTokens = getSearchTokens(query);
+    const fields = [
+        pick(item, 'title', lang),
+        item.title_en,
+        item.title_cn,
+        item.title_tw,
+        pick(item, 'artist', lang),
+        item.artist_en,
+        item.artist_cn,
+        item.artist_tw,
+    ].filter(Boolean);
+
+    let bestScore = 0;
+    for (const field of fields) {
+        const normalizedField = normalizeSearchText(field);
+        if (!normalizedField) continue;
+        if (normalizedField === normalizedQuery) bestScore = Math.max(bestScore, 120);
+        if (normalizedField.startsWith(normalizedQuery)) bestScore = Math.max(bestScore, 100);
+        if (normalizedField.includes(normalizedQuery)) {
+            const positionPenalty = Math.min(normalizedField.indexOf(normalizedQuery), 20);
+            bestScore = Math.max(bestScore, 86 - positionPenalty);
+        }
+        if (queryTokens.length > 1 && queryTokens.every(token => normalizedField.includes(token))) {
+            bestScore = Math.max(bestScore, 72);
+        }
+        if (normalizedQuery.length >= 2 && isTightSubsequence(normalizedQuery, normalizedField)) {
+            bestScore = Math.max(bestScore, 48);
+        }
+    }
+
+    return bestScore;
+};
+
+const getSourceLabel = (item, lang) => {
+    if (item.sourceType === 'vr') return 'VR Corner';
+    const campus = pick(item, 'campus_label', lang) || item.campus || '';
+    const area = lang === 'en' ? `Area ${item.area}` : pickText({ area_cn: `展区 ${item.area}` }, 'area', lang);
+    return [campus, area].filter(Boolean).join(' · ');
+};
 
 const ArtworkImage = ({ item, className = '', alt, fallbackText }) => {
     const [src, setSrc] = useState(getPosterUrl(item));
@@ -35,8 +113,9 @@ const ArtworkImage = ({ item, className = '', alt, fallbackText }) => {
             alt={alt}
             className={className}
             onError={() => {
-                if (item?.local_poster_url && src !== item.local_poster_url) {
-                    setSrc(item.local_poster_url);
+                const fallback = getFallbackPosterUrl(item);
+                if (fallback && src !== fallback) {
+                    setSrc(fallback);
                 } else {
                     setFailed(true);
                 }
@@ -133,12 +212,19 @@ const copy = {
         qrImg: guangzhouRegistrationQr,
         vrCorner: 'VR Corner',
         vrArtistBtn: 'Artist Bio',
+        vrArtworkBtn: 'Artwork Info',
         vrClose: 'Close',
         learnMore: 'Learn more',
         areaTitle: 'Exhibition Areas',
         scrollPosterHint: 'Scroll down to explore the VR Corner & registration',
         scrollVRHint: 'Scroll down to explore registration',
         bookLinkText: 'Guangzhou Activity Registration',
+        searchPlaceholder: 'Search artworks...',
+        searchEmpty: 'No matching artworks',
+        searchLoading: 'Loading artworks...',
+        searchError: 'Unable to load artworks',
+        searchResultsLabel: 'Artwork search results',
+        searchClear: 'Clear search',
     },
     'zh-Hans': {
         heroTitle: 'SURREALITY·幻实之境',
@@ -160,12 +246,19 @@ const copy = {
         qrImg: guangzhouRegistrationQr,
         vrCorner: 'VR 角',
         vrArtistBtn: '艺术家简介',
+        vrArtworkBtn: '作品简介',
         vrClose: '关闭',
         learnMore: '了解更多',
         areaTitle: '展区介绍',
         scrollPosterHint: '向下滚动查看 VR 角与预约',
         scrollVRHint: '向下滚动查看预约入口',
         bookLinkText: '广州活动注册',
+        searchPlaceholder: '搜索作品名...',
+        searchEmpty: '没有找到匹配作品',
+        searchLoading: '正在加载作品...',
+        searchError: '作品加载失败',
+        searchResultsLabel: '作品搜索结果',
+        searchClear: '清空搜索',
     },
     'zh-Hant': {
         heroTitle: 'SURREALITY·幻實之境',
@@ -187,12 +280,19 @@ const copy = {
         qrImg: guangzhouRegistrationQr,
         vrCorner: 'VR 角',
         vrArtistBtn: '藝術家簡介',
+        vrArtworkBtn: '作品簡介',
         vrClose: '關閉',
         learnMore: '了解更多',
         areaTitle: '展區介紹',
         scrollPosterHint: '向下滾動查看 VR 角與預約入口',
         scrollVRHint: '向下滾動查看預約入口',
         bookLinkText: '廣州活動註冊',
+        searchPlaceholder: '搜尋作品名...',
+        searchEmpty: '沒有找到匹配作品',
+        searchLoading: '正在載入作品...',
+        searchError: '作品載入失敗',
+        searchResultsLabel: '作品搜尋結果',
+        searchClear: '清空搜尋',
     },
 };
 
@@ -241,12 +341,121 @@ const ArtworkModal = ({
                         : pick(item, 'description', lang)}
                 </p>
                 <div className="vrcard-modal-actions">
-                    <button onClick={onToggleBio}>{t.vrArtistBtn}</button>
+                    <button onClick={onToggleBio}>
+                        {showBio ? t.vrArtworkBtn : t.vrArtistBtn}
+                    </button>
                     <button onClick={onClose}>{t.vrClose}</button>
                 </div>
             </div>
         </div>
     );
+
+/* ---------- Artwork Search ---------- */
+function ArtworkSearchSection({ lang, t }) {
+    const [artworks, setArtworks] = useState([]);
+    const [query, setQuery] = useState('');
+    const [selected, setSelected] = useState(null);
+    const [showBio, setBio] = useState(false);
+    const [status, setStatus] = useState('loading');
+
+    useEffect(() => {
+        let active = true;
+        Promise.all([
+            fetch('/data/mr-artworks-2026.json').then(r => r.json()),
+            fetch('/data/vr-corner-2026.json').then(r => r.json()),
+        ])
+            .then(([mr, vr]) => {
+                if (!active) return;
+                const merged = [
+                    ...mr.map(item => ({ ...item, sourceType: 'mr', searchId: `mr-${item.id}` })),
+                    ...vr.map(item => ({ ...item, sourceType: 'vr', searchId: `vr-${item.id}` })),
+                ];
+                setArtworks(merged);
+                setStatus('ready');
+            })
+            .catch(() => {
+                if (active) setStatus('error');
+            });
+
+        return () => {
+            active = false;
+        };
+    }, []);
+
+    const trimmedQuery = query.trim();
+    const results = useMemo(() => {
+        if (!trimmedQuery) return [];
+        return artworks
+            .map(item => ({ item, score: scoreSearchMatch(item, trimmedQuery, lang) }))
+            .filter(result => result.score > 0)
+            .sort((a, b) => b.score - a.score || pick(a.item, 'title', lang).localeCompare(pick(b.item, 'title', lang)))
+            .map(result => result.item);
+    }, [artworks, lang, trimmedQuery]);
+
+    const showEmpty = trimmedQuery && status === 'ready' && results.length === 0;
+
+    return (
+        <div className="info-search-section">
+            <div className="info-search-shell">
+                <div className="info-search-box">
+                    <Search className="info-search-icon" size={22} strokeWidth={2} aria-hidden="true" />
+                    <input
+                        value={query}
+                        onChange={event => setQuery(event.target.value)}
+                        className="info-search-input"
+                        placeholder={t.searchPlaceholder}
+                        aria-label={t.searchPlaceholder}
+                        autoComplete="off"
+                    />
+                    {query && (
+                        <button
+                            type="button"
+                            className="info-search-clear"
+                            onClick={() => setQuery('')}
+                            aria-label={t.searchClear}
+                        >
+                            <X size={20} strokeWidth={2.2} aria-hidden="true" />
+                        </button>
+                    )}
+                </div>
+
+                {trimmedQuery && (
+                    <div className="info-search-results" aria-label={t.searchResultsLabel}>
+                        {status === 'loading' && <p className="info-search-state">{t.searchLoading}</p>}
+                        {status === 'error' && <p className="info-search-state">{t.searchError}</p>}
+                        {showEmpty && <p className="info-search-state">{t.searchEmpty}</p>}
+                        {results.map(item => (
+                            <button
+                                type="button"
+                                className="info-search-result"
+                                key={item.searchId}
+                                onClick={() => {
+                                    setSelected(item);
+                                    setBio(false);
+                                }}
+                            >
+                                <span className="info-search-result-main">
+                                    <span className="info-search-result-title">{pick(item, 'title', lang)}</span>
+                                    <span className="info-search-result-artist">{pick(item, 'artist', lang)}</span>
+                                </span>
+                                <span className="info-search-result-source">{getSourceLabel(item, lang)}</span>
+                            </button>
+                        ))}
+                    </div>
+                )}
+            </div>
+
+            <ArtworkModal
+                item={selected}
+                lang={lang}
+                showBio={showBio}
+                onToggleBio={() => setBio(b => !b)}
+                onClose={() => setSelected(null)}
+                t={t}
+            />
+        </div>
+    );
+}
 
 /* ---------- VR Corner Section ---------- */
 function VRCornerSection({ lang, t }) {
@@ -305,6 +514,9 @@ export default function Info({ lang }) {
             {/* ---- 展区海报 ---- */}
             <section className="main-section info-poster-full">
                 <div className="info-poster-container">
+                    {/* ---- 作品搜索 ---- */}
+                    <ArtworkSearchSection lang={lang} t={t} />
+
                     <h2 className="info-poster-title">{t.areaTitle}</h2>
                     <div className="info-poster-groups">
                         {areaPosterGroups.map(group => (

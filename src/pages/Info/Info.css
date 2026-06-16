@@ -2,6 +2,199 @@
    Info Page + VR Corner (mobile-first)
    ==================================== */
 
+/* ---------- 作品搜索 ---------- */
+.info-search-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0 0 clamp(1.1rem, 2.6vh, 1.7rem);
+    overflow: visible;
+    z-index: 20;
+}
+
+.info-search-shell {
+    position: relative;
+    width: min(100%, 620px);
+    display: flex;
+    flex-direction: column;
+}
+
+.info-search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.075);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(12px);
+}
+
+.info-search-box:focus-within {
+    border-color: rgba(242, 188, 142, 0.72);
+    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(242, 188, 142, 0.12);
+}
+
+.info-search-icon {
+    flex: 0 0 auto;
+    margin-left: 1.25rem;
+    color: rgba(255, 255, 255, 0.68);
+}
+
+.info-search-input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 0.78rem 3.2rem 0.78rem 0.75rem;
+    background: transparent;
+    border: 0;
+    color: var(--text-color);
+    font: inherit;
+    font-size: clamp(0.94rem, 1.6vw, 1.04rem);
+    outline: none;
+}
+
+.info-search-input::placeholder {
+    color: rgba(255, 255, 255, 0.58);
+}
+
+.info-search-clear {
+    position: absolute;
+    right: 0.75rem;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.info-search-clear:hover,
+.info-search-clear:focus-visible {
+    background: rgba(255, 255, 255, 0.16);
+    outline: none;
+}
+
+.info-search-results {
+    position: absolute;
+    top: calc(100% + 0.55rem);
+    left: 0;
+    right: 0;
+    z-index: 30;
+    width: 100%;
+    max-height: min(45vh, 360px);
+    overflow-y: auto;
+    background: rgba(31, 32, 41, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(14px);
+}
+
+.info-search-result {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    min-height: 62px;
+    padding: 0.75rem 0.9rem;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-color);
+    text-align: left;
+    cursor: pointer;
+}
+
+.info-search-result:last-child {
+    border-bottom: 0;
+}
+
+.info-search-result:hover,
+.info-search-result:focus-visible {
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+}
+
+.info-search-result-main {
+    min-width: 0;
+    display: grid;
+    gap: 0.25rem;
+}
+
+.info-search-result-title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.info-search-result-artist {
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.86rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.info-search-result-source {
+    flex: 0 0 auto;
+    max-width: 42%;
+    padding: 0.35rem 0.65rem;
+    color: #f2bc8e;
+    background: rgba(242, 188, 142, 0.11);
+    border: 1px solid rgba(242, 188, 142, 0.24);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    line-height: 1.25;
+    text-align: center;
+}
+
+.info-search-state {
+    padding: 1.25rem;
+    color: rgba(255, 255, 255, 0.72);
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .info-search-section {
+        margin-bottom: 1.1rem;
+    }
+
+    .info-search-box {
+        min-height: 48px;
+    }
+
+    .info-search-icon {
+        margin-left: 1rem;
+    }
+
+    .info-search-input {
+        padding-right: 3.2rem;
+    }
+
+    .info-search-results {
+        max-height: 42vh;
+    }
+
+    .info-search-result {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.55rem;
+        min-height: 76px;
+    }
+
+    .info-search-result-source {
+        max-width: 100%;
+    }
+}
+
 /* ---------- 展区海报 ---------- */
 .info-poster-full {
     display: flex;
