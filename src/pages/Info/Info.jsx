@@ -46,37 +46,43 @@ const isTightSubsequence = (needle, haystack) => {
     return false;
 };
 
+const buildSearchFields = (item, lang) => [
+    { value: pick(item, 'title', lang), weight: 1, fuzzy: true },
+    { value: item.title_en, weight: 1, fuzzy: true },
+    { value: item.title_cn, weight: 1, fuzzy: true },
+    { value: item.title_tw, weight: 1, fuzzy: true },
+    { value: pick(item, 'artist', lang), weight: 0.86, fuzzy: true },
+    { value: item.artist_en, weight: 0.86, fuzzy: true },
+    { value: item.artist_cn, weight: 0.86, fuzzy: true },
+    { value: item.artist_tw, weight: 0.86, fuzzy: true },
+    { value: pick(item, 'artist_bio', lang), weight: 0.58, fuzzy: false },
+    { value: item.artist_bio_en, weight: 0.58, fuzzy: false },
+    { value: item.artist_bio_cn, weight: 0.58, fuzzy: false },
+    { value: item.artist_bio_tw, weight: 0.58, fuzzy: false },
+].filter(field => field.value);
+
 const scoreSearchMatch = (item, query, lang) => {
     const normalizedQuery = normalizeSearchText(query);
     if (!normalizedQuery) return 0;
 
     const queryTokens = getSearchTokens(query);
-    const fields = [
-        pick(item, 'title', lang),
-        item.title_en,
-        item.title_cn,
-        item.title_tw,
-        pick(item, 'artist', lang),
-        item.artist_en,
-        item.artist_cn,
-        item.artist_tw,
-    ].filter(Boolean);
+    const fields = buildSearchFields(item, lang);
 
     let bestScore = 0;
     for (const field of fields) {
-        const normalizedField = normalizeSearchText(field);
+        const normalizedField = normalizeSearchText(field.value);
         if (!normalizedField) continue;
-        if (normalizedField === normalizedQuery) bestScore = Math.max(bestScore, 120);
-        if (normalizedField.startsWith(normalizedQuery)) bestScore = Math.max(bestScore, 100);
+        if (normalizedField === normalizedQuery) bestScore = Math.max(bestScore, 120 * field.weight);
+        if (normalizedField.startsWith(normalizedQuery)) bestScore = Math.max(bestScore, 100 * field.weight);
         if (normalizedField.includes(normalizedQuery)) {
             const positionPenalty = Math.min(normalizedField.indexOf(normalizedQuery), 20);
-            bestScore = Math.max(bestScore, 86 - positionPenalty);
+            bestScore = Math.max(bestScore, (86 - positionPenalty) * field.weight);
         }
         if (queryTokens.length > 1 && queryTokens.every(token => normalizedField.includes(token))) {
-            bestScore = Math.max(bestScore, 72);
+            bestScore = Math.max(bestScore, 72 * field.weight);
         }
-        if (normalizedQuery.length >= 2 && isTightSubsequence(normalizedQuery, normalizedField)) {
-            bestScore = Math.max(bestScore, 48);
+        if (field.fuzzy && normalizedQuery.length >= 2 && isTightSubsequence(normalizedQuery, normalizedField)) {
+            bestScore = Math.max(bestScore, 48 * field.weight);
         }
     }
 
