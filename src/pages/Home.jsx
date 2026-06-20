@@ -155,7 +155,7 @@ const anniversaryGiftCopy = {
     en: {
         eyebrow: 'A Gift from MC²',
         title: 'Celebrating HKUST’s 35th Anniversary',
-        resonance: 'One HKUST, two campuses in resonance',
+        resonance: 'Unified HKUST, Complementary Campuses',
         hkustLabel: 'HKUST',
         hkustMode: 'Mixed Reality',
         hkustGzLabel: 'HKUST(GZ)',
