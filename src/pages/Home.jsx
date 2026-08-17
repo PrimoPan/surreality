@@ -3,6 +3,7 @@ import { Parallax } from 'react-scroll-parallax';
 import Modal from 'react-modal';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import ParallaxSection from '../components/ParallaxSection';
+import EditionPortalLink from '../components/EditionPortalLink';
 import './Home.css';
 
 const desktopHeroVideoUrl =
@@ -684,6 +685,12 @@ export default function Home({ lang }) {
                     videoMuted={heroVideoMuted}
                     showAudioToggle
                     onAudioToggle={setHeroVideoMuted}
+                />
+                <EditionPortalLink
+                    lang={lang}
+                    context="previous"
+                    edition="SURREALITY 1.0"
+                    to="/surreality-1-0"
                 />
             </section>
 

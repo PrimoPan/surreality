@@ -5,6 +5,7 @@ import SpeechSectionNi from '../components/SpeechSection/SpeechSectionNi/SpeechS
 import SpeechSectionArtist from '../components/SpeechSection/SpeechSectionArtist/SpeechSectionArtist';
 import VideoSection from '../components/VideoSection';
 import CoreTechSection from '../components/CoreTechSection';
+import EditionPortalLink from '../components/EditionPortalLink';
 
 const desktopImages = [
     'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/001.jpg',
@@ -145,6 +146,7 @@ export default function SurrealityOneHome({ lang }) {
             {/* ── ① 首屏：Parallax + 轮播 ───────────────────────── */}
             <section className="main-section">
                 <ParallaxSection
+                    lang={lang}
                     image={currentImage}
                     title={
                         lang === 'en'
@@ -161,6 +163,13 @@ export default function SurrealityOneHome({ lang }) {
                                 : '全球首个大空间扩展现实 AI 艺术展'
                     }
                     isParallax
+                    showCta={false}
+                />
+                <EditionPortalLink
+                    lang={lang}
+                    context="current"
+                    edition="SURREALITY 2.0"
+                    to="/"
                 />
             </section>
 

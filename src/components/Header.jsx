@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Select, Drawer } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 
@@ -14,30 +14,36 @@ const HKUST_GZ_LOGO_URL =
  */
 export default function Header({ lang, onLangChange }) {
     const nav = useNavigate();
+    const location = useLocation();
     const [drawerOpen, setDrawerOpen] = React.useState(false);
+    const isLegacyRoute = location.pathname.startsWith('/surreality-1-0');
+    const routeFor = (path) => {
+        if (!isLegacyRoute) return path;
+        return path === '/' ? '/surreality-1-0' : `/surreality-1-0${path}`;
+    };
 
     /* ---------- 三语菜单 ---------- */
     const menuItems = {
         en: [
-            { key: '/',        label: 'Home'         },
-            { key: '/info',    label: 'Information'  },
-            { key: '/agenda',  label: 'Agenda'       },
-            { key: '/about',   label: 'About Us'     },
-            { key: '/contact', label: 'Contact'      },
+            { key: routeFor('/'),        label: 'Home'         },
+            { key: routeFor('/info'),    label: 'Information'  },
+            ...(!isLegacyRoute ? [{ key: '/agenda', label: 'Agenda' }] : []),
+            { key: routeFor('/about'),   label: 'About Us'     },
+            { key: routeFor('/contact'), label: 'Contact'      },
         ],
         'zh-Hans': [
-            { key: '/',        label: '首页'       },
-            { key: '/info',    label: '展览信息'   },
-            { key: '/agenda',  label: '日程'       },
-            { key: '/about',   label: '关于我们'   },
-            { key: '/contact', label: '联系我们'   },
+            { key: routeFor('/'),        label: '首页'       },
+            { key: routeFor('/info'),    label: '展览信息'   },
+            ...(!isLegacyRoute ? [{ key: '/agenda', label: '日程' }] : []),
+            { key: routeFor('/about'),   label: '关于我们'   },
+            { key: routeFor('/contact'), label: '联系我们'   },
         ],
         'zh-Hant': [
-            { key: '/',        label: '首頁'       },
-            { key: '/info',    label: '展覽資訊'   },
-            { key: '/agenda',  label: '日程'       },
-            { key: '/about',   label: '關於我們'   },
-            { key: '/contact', label: '聯絡我們'   },
+            { key: routeFor('/'),        label: '首頁'       },
+            { key: routeFor('/info'),    label: '展覽資訊'   },
+            ...(!isLegacyRoute ? [{ key: '/agenda', label: '日程' }] : []),
+            { key: routeFor('/about'),   label: '關於我們'   },
+            { key: routeFor('/contact'), label: '聯絡我們'   },
         ],
     };
 
