@@ -1,5 +1,78 @@
 /* Surreality About */
 
+html:has(.central-about-hero) { scroll-snap-type: none; }
+.central-about-hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: clamp(30rem, 84svh, 58rem);
+    overflow: hidden;
+    padding: calc(var(--header-height) + 2rem) 6vw 3rem;
+    background: #091826;
+    color: #f5f8fc;
+}
+.central-about-hero__art,
+.central-about-hero::after {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: min(68%, 96svh, 1086px);
+    height: 100%;
+    z-index: -1;
+}
+.central-about-hero__art {
+    object-fit: cover;
+    object-position: center 28%;
+}
+.central-about-hero::after {
+    content: '';
+    background: linear-gradient(90deg, #091826, rgba(9,24,38,.86) 10%, rgba(9,24,38,.2) 34%, transparent 54%);
+}
+.central-about-hero__copy {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+}
+.central-about-hero h1 {
+    max-width: 10ch;
+    font-size: clamp(3.1rem, 6.7vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -.045em;
+}
+.central-about-hero p {
+    margin: 1rem 0 1.6rem;
+    max-width: 35ch;
+    font-size: clamp(1rem, 1.6vw, 1.45rem);
+    line-height: 1.45;
+    color: #deebf7;
+}
+.central-about-hero a {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    min-height: 44px;
+    color: #e6f3ff;
+    font-size: .95rem;
+    text-decoration: none;
+}
+.central-about-hero a:hover,
+.central-about-hero a:focus-visible { text-decoration: underline; text-underline-offset: .24em; }
+@media (max-width: 740px) and (orientation: portrait) {
+    .central-about-hero {
+        min-height: clamp(30rem, 90svh, 63rem);
+        align-items: flex-end;
+        padding: calc(var(--header-height-mobile) + 2rem) 6vw max(1.4rem, env(safe-area-inset-bottom));
+    }
+    .central-about-hero__art, .central-about-hero::after { width: 100%; }
+    .central-about-hero__art { object-position: 49% 49%; }
+    .central-about-hero::after {
+        background: linear-gradient(0deg, #091826 0%, rgba(9,24,38,.87) 12%, rgba(9,24,38,.46) 24%, transparent 43%);
+    }
+    .central-about-hero h1 { max-width: none; font-size: clamp(2rem, 9vw, 4rem); }
+    .central-about-hero p { margin: .5rem 0 .2rem; font-size: 1rem; }
+}
+
 .about-two-project {
     padding: clamp(3rem, 8vw, 7rem) 1.5rem;
     background: #101b29;
