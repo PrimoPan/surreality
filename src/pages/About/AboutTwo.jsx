@@ -62,7 +62,7 @@ const centralTeam = [
     {
         role: ['Administration, Venue and Project Coordination', '行政、場地與項目協調', '行政、场地与项目协调'],
         members: [
-            { en: 'Jingyi Liang', hant: '梁經怡', hans: '梁经怡' },
+            { en: 'Jingyi Liang', hant: '梁經怡', hans: '梁经怡', photo: 'jingyi-liang.webp' },
             { en: 'Yuyang Jiang', hant: '蔣雨洋', hans: '蒋雨洋', photo: 'yuyang-jiang.webp' },
         ],
     },
