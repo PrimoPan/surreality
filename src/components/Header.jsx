@@ -1,172 +1,88 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Select, Drawer } from 'antd';
-import { MenuOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Drawer } from 'antd';
+import { Menu, X } from 'lucide-react';
+import './Header.css';
 
-const { Option } = Select;
-const HKUST_35_LOGO_URL =
-    'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/photos/Standard%2035A%20Logo%20-%20FC%20%28W%29%20Bilingual%20Traditional%20Chinese.png';
-const HKUST_GZ_LOGO_URL =
-    'https://surreality-1419044809.cos.ap-hongkong.myqcloud.com/photos/USTGZ.png';
+const labels = {
+    en: { home: 'Home', works: 'Artworks', info: 'Information', visit: 'Visit', agenda: 'Agenda', central: 'Central exhibition', past: 'Past exhibitions', about: 'About us', contact: 'Contact', language: 'Language', menu: 'Menu', close: 'Close menu' },
+    'zh-Hans': { home: '首页', works: '展出作品', info: '展览信息', visit: '参观信息', agenda: '日程', central: '中环展览', past: '往届展览', about: '关于我们', contact: '联系我们', language: '语言', menu: '菜单', close: '关闭菜单' },
+    'zh-Hant': { home: '首頁', works: '展出作品', info: '展覽資訊', visit: '參觀資訊', agenda: '日程', central: '中環展覽', past: '往屆展覽', about: '關於我們', contact: '聯絡我們', language: '語言', menu: '選單', close: '關閉選單' },
+};
 
-/**
- * 顶部导航栏
- */
+const editionMetadata = new Map(Object.entries({
+    'surreality-2-0': {
+        title: 'SURREALITY 2.0 · Hong Kong & Guangzhou, 2026',
+        description: 'The June 2026 SURREALITY exhibition at HKUST and HKUST(GZ). Explore the works, seven exhibition areas and programme.',
+    },
+    'surreality-1-0': {
+        title: 'SURREALITY 1.0 · Guangzhou, 2025',
+        description: 'The 2025 SURREALITY exhibition at HKUST(GZ). Explore the works and four exhibition areas.',
+    },
+}));
+
 export default function Header({ lang, onLangChange }) {
-    const nav = useNavigate();
-    const location = useLocation();
-    const [drawerOpen, setDrawerOpen] = React.useState(false);
-    const isLegacyRoute = location.pathname.startsWith('/surreality-1-0');
-    const routeFor = (path) => {
-        if (!isLegacyRoute) return path;
-        return path === '/' ? '/surreality-1-0' : `/surreality-1-0${path}`;
-    };
-
-    /* ---------- 三语菜单 ---------- */
-    const menuItems = {
-        en: [
-            { key: routeFor('/'),        label: 'Home'         },
-            { key: routeFor('/info'),    label: 'Information'  },
-            ...(!isLegacyRoute ? [{ key: '/agenda', label: 'Agenda' }] : []),
-            { key: routeFor('/about'),   label: 'About Us'     },
-            { key: routeFor('/contact'), label: 'Contact'      },
-        ],
-        'zh-Hans': [
-            { key: routeFor('/'),        label: '首页'       },
-            { key: routeFor('/info'),    label: '展览信息'   },
-            ...(!isLegacyRoute ? [{ key: '/agenda', label: '日程' }] : []),
-            { key: routeFor('/about'),   label: '关于我们'   },
-            { key: routeFor('/contact'), label: '联系我们'   },
-        ],
-        'zh-Hant': [
-            { key: routeFor('/'),        label: '首頁'       },
-            { key: routeFor('/info'),    label: '展覽資訊'   },
-            ...(!isLegacyRoute ? [{ key: '/agenda', label: '日程' }] : []),
-            { key: routeFor('/about'),   label: '關於我們'   },
-            { key: routeFor('/contact'), label: '聯絡我們'   },
-        ],
-    };
-
-    /* ---------- 统一渲染函数 ---------- */
-    const renderLinks = (isDrawer = false) =>
-        menuItems[lang].map(({ key, label }) => (
-            <li
-                key={key}
-                className={isDrawer ? '' : 'nav__link'}
-                style={isDrawer ? { cursor: 'pointer' } : {}}
-                onClick={() => {
-                    nav(key);          // 跳转路由
-                    if (isDrawer) setDrawerOpen(false);
-                }}
-            >
-                <span
-                    style={{
-                        color: '#ffffff', /* 始终保持白色字体 */
-                        fontWeight: 'bold', /* 加粗字体 */
-                        fontSize: isDrawer ? '1.5rem' : '1rem', /* 调整字体大小 */
-                    }}
-                >
-                    {label}
-                </span>
-            </li>
-        ));
+    const [open, setOpen] = useState(false);
+    const { pathname } = useLocation();
+    const edition = pathname.split('/')[1];
+    const firstEdition = edition === 'surreality-1-0';
+    const secondEdition = edition === 'surreality-2-0';
+    const archive = firstEdition || secondEdition;
+    useEffect(() => {
+        const metadata = editionMetadata.get(edition);
+        if (!metadata) return;
+        const tag = document.querySelector('meta[name="description"]');
+        const originalTitle = document.title;
+        const originalDescription = tag?.content;
+        document.title = metadata.title;
+        if (tag) tag.content = metadata.description;
+        return () => {
+            document.title = originalTitle;
+            if (tag) tag.content = originalDescription;
+        };
+    }, [edition]);
+    const prefix = archive ? `/${edition}` : '';
+    const l = labels[lang];
+    const links = [
+        [prefix || '/', secondEdition ? 'SURREALITY 2.0' : l.home], [prefix + '/info', archive ? l.info : l.works],
+        ...(!firstEdition ? [[prefix + '/agenda', secondEdition ? l.agenda : l.visit]] : []),
+        [prefix + '/about', l.about], [prefix + '/contact', l.contact],
+        ...(archive ? [['/', l.central]] : [['/#past-exhibitions', l.past]]),
+        ...(secondEdition ? [['/surreality-1-0', 'SURREALITY 1.0']] : []),
+    ];
+    const navLinks = links.map(([path, title]) => path.includes('#') ? (
+        <Link key={path} to={path} onClick={() => setOpen(false)}>{title}</Link>
+    ) : (
+        <NavLink key={path} to={path} end onClick={() => setOpen(false)}>{title}</NavLink>
+    ));
+    const language = (
+        <select className="exhibition-lang" value={lang} aria-label={l.language} onChange={e => {
+            onLangChange(e.target.value);
+            setOpen(false);
+        }}>
+            <option value="en">English</option>
+            <option value="zh-Hans">简体中文</option>
+            <option value="zh-Hant">繁體中文</option>
+        </select>
+    );
 
     return (
         <>
-            {/* ===== 顶部条 ===== */}
-            <div className="major-nav">
-                {/* 科大 35 周年 Logo 需置于广州 Logo 之前 */}
-                <nav className="nav-logo">
-                    <img
-                        src={HKUST_35_LOGO_URL}
-                        alt="HKUST 35th Anniversary"
-                    />
+            <header className={'major-nav exhibition-nav' + (archive ? ' exhibition-nav--archive' : ' exhibition-nav--central')}>
+                <div className="nav-logo">
+                    <img src="/images/central/hkust-35-nav.webp" alt="HKUST 35" />
                     <div className="vertical" />
-                    <img
-                        src={HKUST_GZ_LOGO_URL}
-                        alt="HKUST GZ"
-                    />
+                    <img src="/images/central/hkust-gz-nav.webp" alt="HKUST(GZ)" />
+                </div>
+                <nav className="exhibition-nav__desktop">{navLinks}{language}</nav>
+                <button type="button" className="exhibition-menu" aria-label={l.menu} aria-expanded={open} onClick={() => setOpen(true)}><Menu /></button>
+            </header>
+            <Drawer placement="right" closable={false} onClose={() => setOpen(false)} open={open} width="min(84vw, 340px)"
+                styles={{ body: { background: '#0d233b', padding: '1.5rem' } }}>
+                <nav className="exhibition-drawer">
+                    <button type="button" onClick={() => setOpen(false)} aria-label={l.close}><X /></button>
+                    {navLinks}{language}
                 </nav>
-
-                {/* 桌面导航 */}
-                <nav className="nav">
-                    <ul className="nav__links">
-                        {renderLinks()}
-                        <li className="nav__link">
-                            <Select
-                                className="language-select"
-                                value={lang}
-                                variant="borderless"
-                                onChange={onLangChange}
-                                popupMatchSelectWidth={false}
-                                style={{
-                                    color: '#ffffff', /* 确保语言选择文字为白色 */
-                                    fontSize: '1.1rem', /* 增大字体大小 */
-                                }}
-                            >
-                                <Option value="en">English</Option>
-                                <Option value="zh-Hans">简体中文</Option>
-                                <Option value="zh-Hant">繁體中文</Option>
-                            </Select>
-                        </li>
-                    </ul>
-                </nav>
-
-                {/* 移动端汉堡按钮 */}
-                <button
-                    className="mobile-menu-btn"
-                    onClick={() => setDrawerOpen(true)}
-                    aria-label="Menu"
-                    style={{
-                        color: '#ffffff',
-                        fontSize: '2.5rem',  /* 增大字体 */
-                        padding: '1rem',     /* 增加点击区域 */
-                    }}
-                >
-                    <MenuOutlined />
-                </button>
-            </div>
-
-            {/* ===== Drawer（移动端侧边栏） ===== */}
-            <Drawer
-                placement="right"
-                closable
-                onClose={() => setDrawerOpen(false)}
-                open={drawerOpen}
-                styles={{
-                    body: { background: '#1f2029', padding: '1.2rem' },
-                    header: { display: 'none' },
-                }}
-            >
-                <ul style={{ /* 不变 */ }}>
-                    {renderLinks(true)}
-                    <li style={{ marginTop: '1rem' }}>
-                        <Select
-                            className="language-select"
-                            value={lang}
-                            onChange={(v) => {
-                                onLangChange(v);
-                                setDrawerOpen(false);
-                            }}
-                            style={{
-                                color: '#ffffff',    // 控制已选中的文字颜色
-                                fontSize: '1.5rem',  // 字体大小
-                            }}
-                            dropdownStyle={{
-                                backgroundColor: '#1f2029',  // 控制下拉框的背景颜色
-                                color: '#ffffff',    // 控制下拉框内文字颜色
-                            }}
-                            dropdownClassName="language-select-dropdown" // 加入类名
-                        >
-                            <Option value="en">English</Option>
-                            <Option value="zh-Hans">简体中文</Option>
-                            <Option value="zh-Hant">繁體中文</Option>
-                        </Select>
-
-
-
-                    </li>
-                </ul>
             </Drawer>
         </>
     );

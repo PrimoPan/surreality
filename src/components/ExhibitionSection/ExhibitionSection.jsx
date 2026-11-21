@@ -21,6 +21,7 @@ const areaTitles = {
 const getLegacyTitle = (titleEn, titleZh, lang) => {
     if (lang === 'en') return titleEn;
     if (typeof titleZh === 'string') return titleZh;
+    if (titleZh?.[lang]) return titleZh[lang];
     return t({ title_cn: titleZh?.['zh-Hans'] || titleZh?.cn || '' }, 'title', lang);
 };
 
@@ -33,16 +34,18 @@ const getAreaTitle = (campus, area, lang, titleEn, titleZh) => {
 
 const getArtworkImage = (item) => item.image_url || item.poster_url || item.local_image_url || '';
 
-export default function ExhibitionSection({ titleEn, titleZh, idRange, lang, campus, area }) {
+export default function ExhibitionSection({ titleEn, titleZh, idRange, lang, campus, area, overviewPath = '/info' }) {
     const nav = useNavigate();
     const [list, setList] = useState([]);
     const [open, setOpen] = useState(null);
 
     useEffect(() => {
+        let active = true;
         const isMrArea = campus && area;
         fetch(isMrArea ? '/data/mr-artworks-2026.json' : '/data/artworks.json')
             .then((r) => r.json())
             .then((all) => {
+                if (!active) return;
                 const slice = isMrArea
                     ? all.filter((x) => x.campus === campus && Number(x.area) === Number(area))
                     : all.filter((x) => {
@@ -50,9 +53,10 @@ export default function ExhibitionSection({ titleEn, titleZh, idRange, lang, cam
                         return x.id >= from && x.id <= to;
                     });
                 setList(slice);
-                if (slice.length) setOpen(slice[0].id);
+                setOpen(slice[0]?.id ?? null);
             })
             .catch(console.error);
+        return () => { active = false; };
     }, [idRange, campus, area]);
 
     const localeTitle = getAreaTitle(campus, area, lang, titleEn, titleZh);
@@ -90,7 +94,7 @@ export default function ExhibitionSection({ titleEn, titleZh, idRange, lang, cam
         },
     };
 
-    const goBackToOverview = () => nav('/info');
+    const goBackToOverview = () => nav(overviewPath);
     const backLabel = labels.back[lang] || labels.back.en;
     const mobileBackLabel = labels.mobileBack[lang] || labels.mobileBack.en;
     const collapseLabel = labels.collapse[lang] || labels.collapse.en;

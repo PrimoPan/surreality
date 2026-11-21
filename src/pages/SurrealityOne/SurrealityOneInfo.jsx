@@ -1,6 +1,6 @@
 // Info.jsx
 import React, { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../Info/Info.css';
 import { ChevronDown, Search, X } from 'lucide-react';
 import { Converter } from 'opencc-js';
@@ -83,46 +83,41 @@ const scoreSearchMatch = (item, query, lang) => {
     return bestScore;
 };
 
-const legacyAreaLabels = [
+export const archivedZones = [
     {
-        from: 1,
-        to: 2,
+        path: '/surreality-1-0/ocean',
+        poster: 'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster01.jpg',
+        idRange: [1, 2],
         label: { en: 'Area 1 · Ocean of Origins', 'zh-Hans': '展区 1 · 溯源之海', 'zh-Hant': '展區 1 · 溯源之海' },
     },
     {
-        from: 3,
-        to: 9,
+        path: '/surreality-1-0/garden',
+        poster: 'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster02.jpg',
+        idRange: [3, 9],
         label: { en: 'Area 2 · Digital Garden', 'zh-Hans': '展区 2 · 数字花园', 'zh-Hant': '展區 2 · 數字花園' },
     },
     {
-        from: 10,
-        to: 15,
+        path: '/surreality-1-0/realms',
+        poster: 'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster03.jpg',
+        idRange: [10, 15],
         label: { en: 'Area 3 · Symbiotic Realms', 'zh-Hans': '展区 3 · 共生意境', 'zh-Hant': '展區 3 · 共生意境' },
     },
     {
-        from: 16,
-        to: 21,
+        path: '/surreality-1-0/city',
+        poster: 'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster04.jpg',
+        idRange: [16, 21],
         label: { en: 'Area 4 · City of Illusions', 'zh-Hans': '展区 4 · 幻象浮城', 'zh-Hant': '展區 4 · 幻象浮城' },
     },
-    {
-        from: 22,
-        to: 31,
-        label: { en: 'VR Corner', 'zh-Hans': 'VR 角', 'zh-Hant': 'VR 角' },
-    },
+];
+const legacyAreaLabels = [
+    ...archivedZones,
+    { idRange: [22, 31], label: { en: 'VR Corner', 'zh-Hans': 'VR 角', 'zh-Hant': 'VR 角' } },
 ];
 
 const getSourceLabel = (item, lang) => {
-    const source = legacyAreaLabels.find(({ from, to }) => item.id >= from && item.id <= to);
+    const source = legacyAreaLabels.find(({ idRange: [from, to] }) => item.id >= from && item.id <= to);
     return source?.label[lang] || source?.label.en || '';
 };
-
-// 海报链接
-const posterLinks = [
-    'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster01.jpg',
-    'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster02.jpg',
-    'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster03.jpg',
-    'https://lingolift-1335262060.cos.ap-guangzhou.myqcloud.com/images/bg/poster/poster04.jpg',
-];
 
 // 文案
 const copy = {
@@ -441,8 +436,6 @@ function VRCornerSection({ lang, t }) {
 /* ---------- 整个 Info 页面 ---------- */
 export default function SurrealityOneInfo({ lang }) {
     const t = copy[lang] || copy['zh-Hans'];
-    const nav = useNavigate();
-    const goto = p => { nav(p); window.scrollTo(0, 0); };
 
     return (
         <div className="info-page surreality-one-info">
@@ -453,14 +446,10 @@ export default function SurrealityOneInfo({ lang }) {
 
                     <h2 className="info-poster-title">{t.areaTitle}</h2>
                     <div className="info-poster">
-                        {posterLinks.map((src, i) => (
-                            <div
-                                key={i}
-                                className="poster-item"
-                                onClick={() => goto(['/ocean','/garden','/realms','/city'][i])}
-                            >
-                                <img src={src} alt={`poster-${i+1}`} />
-                            </div>
+                        {archivedZones.map(({ path, poster, label }) => (
+                            <Link key={path} className="poster-item" to={path}>
+                                <img src={poster} alt={label[lang] || label.en} />
+                            </Link>
                         ))}
                     </div>
                 </div>

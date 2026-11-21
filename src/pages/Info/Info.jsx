@@ -1,6 +1,6 @@
 // Info.jsx
 import React, { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Info.css';
 import { ChevronDown, Search, X } from 'lucide-react';
 import { Converter } from 'opencc-js';
@@ -512,8 +512,6 @@ function VRCornerSection({ lang, t }) {
 /* ---------- 整个 Info 页面 ---------- */
 export default function Info({ lang }) {
     const t = copy[lang] || copy['zh-Hans'];
-    const nav = useNavigate();
-    const goto = p => { nav(p); window.scrollTo(0, 0); };
 
     return (
         <div className="info-page">
@@ -532,19 +530,11 @@ export default function Info({ lang }) {
                                 </h3>
                                 <div className="info-poster">
                                     {group.posters.map(item => (
-                                        <div
+                                        <Link
                                             key={item.id}
-                                            className={`poster-item${item.path ? ' poster-item--link' : ''}`}
-                                            onClick={item.path ? () => goto(item.path) : undefined}
-                                            onKeyDown={item.path ? (e) => {
-                                                if (e.key === 'Enter' || e.key === ' ') {
-                                                    e.preventDefault();
-                                                    goto(item.path);
-                                                }
-                                            } : undefined}
-                                            role={item.path ? 'button' : undefined}
-                                            tabIndex={item.path ? 0 : undefined}
-                                            aria-label={item.path ? `${item.title} ${t.learnMore}` : item.title}
+                                            className="poster-item poster-item--link"
+                                            to={`/surreality-2-0${item.path}`}
+                                            aria-label={`${item.title} ${t.learnMore}`}
                                         >
                                             <img
                                                 src={item.src}
@@ -552,7 +542,7 @@ export default function Info({ lang }) {
                                                 loading="eager"
                                                 decoding="async"
                                             />
-                                        </div>
+                                        </Link>
                                     ))}
                                 </div>
                             </section>

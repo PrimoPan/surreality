@@ -1,16 +1,49 @@
 /* Surreality About */
 
-.about-two-hero-wrapper .view-news-btn {
-    min-width: 10rem;
+.about-two-project {
+    padding: clamp(3rem, 8vw, 7rem) 1.5rem;
+    background: #101b29;
+    color: #e6edf5;
+    scroll-margin-top: 4rem;
+}
+
+.about-two-project-copy {
+    max-width: 48rem;
+    margin: 0 auto;
+}
+
+.about-two-project-copy h2 {
+    margin: 0 0 1.25rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    line-height: 1.15;
+}
+
+.about-two-project-copy p {
+    margin: 0.9em 0;
+    font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+    line-height: 1.7;
+}
+
+.about-two-project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    margin-top: 1.75rem;
+}
+
+.about-two-project-links a {
+    color: #a5d0f5;
+    text-underline-offset: 0.2em;
 }
 
 .about-two-team {
     position: relative;
     overflow: hidden;
     background:
-        radial-gradient(circle at 18% 10%, rgba(223, 125, 56, 0.12), transparent 26rem),
-        radial-gradient(circle at 86% 24%, rgba(242, 188, 142, 0.1), transparent 28rem),
-        #1f2029;
+        radial-gradient(circle at 18% 10%, rgba(113, 181, 228, 0.12), transparent 26rem),
+        radial-gradient(circle at 86% 24%, rgba(165, 208, 245, 0.1), transparent 28rem),
+        #111b2a;
     color: #e6e6e6;
     padding: clamp(4rem, 8vw, 7rem) 1.5rem clamp(5rem, 9vw, 8rem);
     scroll-snap-align: start;
@@ -21,7 +54,7 @@
     content: "";
     position: absolute;
     pointer-events: none;
-    border: 1px solid rgba(242, 188, 142, 0.1);
+    border: 1px solid rgba(165, 208, 245, 0.1);
     border-radius: 50%;
 }
 
@@ -38,8 +71,8 @@
     right: -24rem;
     bottom: -30rem;
     box-shadow:
-        0 0 0 1.25rem rgba(223, 125, 56, 0.035),
-        0 0 0 2.8rem rgba(242, 188, 142, 0.028);
+        0 0 0 1.25rem rgba(113, 181, 228, 0.035),
+        0 0 0 2.8rem rgba(165, 208, 245, 0.028);
 }
 
 .about-two-shell {
@@ -61,7 +94,7 @@
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #df7d38;
+    color: #87bdea;
 }
 
 .about-two-section-header h2 {
@@ -72,7 +105,7 @@
     font-weight: 800;
     letter-spacing: 0;
     color: #ffffff;
-    text-shadow: 0 0 22px rgba(223, 125, 56, 0.18);
+    text-shadow: 0 0 22px rgba(113, 181, 228, 0.18);
 }
 
 .about-two-featured {
@@ -135,11 +168,11 @@
 .about-two-profile-link--name:focus-visible .about-two-name-en,
 .about-two-profile-link--name:hover .about-two-name-zh,
 .about-two-profile-link--name:focus-visible .about-two-name-zh {
-    color: #f2bc8e;
+    color: #a5d0f5;
 }
 
 .about-two-profile-link:focus-visible {
-    box-shadow: 0 0 0 3px rgba(242, 188, 142, 0.32);
+    box-shadow: 0 0 0 3px rgba(165, 208, 245, 0.32);
 }
 
 .about-two-planner-branches {
@@ -194,8 +227,8 @@
     font-size: clamp(0.92rem, 1.35vw, 1.08rem);
     line-height: 1.28;
     font-weight: 600;
-    color: #f2bc8e;
-    text-shadow: 0 0 10px rgba(223, 125, 56, 0.2);
+    color: #a5d0f5;
+    text-shadow: 0 0 10px rgba(113, 181, 228, 0.2);
 }
 
 .about-two-name-en {
@@ -264,7 +297,7 @@
     font-family: 'Montserrat', sans-serif;
     font-size: clamp(2rem, 4vw, 3.2rem);
     font-weight: 700;
-    color: #df7d38;
+    color: #87bdea;
 }
 
 .about-two-thanks-list p {

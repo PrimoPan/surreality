@@ -1,0 +1,303 @@
+/* Surreality About */
+
+.archive-about-hero-wrapper .view-news-btn {
+    min-width: 10rem;
+}
+
+.archive-about-team {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 18% 10%, rgba(223, 125, 56, 0.12), transparent 26rem),
+        radial-gradient(circle at 86% 24%, rgba(242, 188, 142, 0.1), transparent 28rem),
+        #1f2029;
+    color: #e6e6e6;
+    padding: clamp(4rem, 8vw, 7rem) 1.5rem clamp(5rem, 9vw, 8rem);
+    scroll-snap-align: start;
+}
+
+.archive-about-team::before,
+.archive-about-team::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    border: 1px solid rgba(242, 188, 142, 0.1);
+    border-radius: 50%;
+}
+
+.archive-about-team::before {
+    width: 58rem;
+    height: 58rem;
+    top: -25rem;
+    left: -18rem;
+}
+
+.archive-about-team::after {
+    width: 70rem;
+    height: 70rem;
+    right: -24rem;
+    bottom: -30rem;
+    box-shadow:
+        0 0 0 1.25rem rgba(223, 125, 56, 0.035),
+        0 0 0 2.8rem rgba(242, 188, 142, 0.028);
+}
+
+.archive-about-shell {
+    position: relative;
+    z-index: 1;
+    width: min(1180px, 100%);
+    margin: 0 auto;
+}
+
+.archive-about-section-header {
+    text-align: center;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.archive-about-section-header p {
+    margin: 0 0 0.65rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #df7d38;
+}
+
+.archive-about-section-header h2 {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 5.2rem);
+    line-height: 0.98;
+    font-weight: 800;
+    letter-spacing: 0;
+    color: #ffffff;
+    text-shadow: 0 0 22px rgba(223, 125, 56, 0.18);
+}
+
+.archive-about-featured {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.archive-about-person-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0;
+    overflow: visible;
+    position: relative;
+    isolation: isolate;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.archive-about-director {
+    width: min(420px, 100%);
+}
+
+.archive-about-profile-link {
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+}
+
+.archive-about-profile-link--photo {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.archive-about-profile-link--name {
+    display: inline-block;
+    border-radius: 0.35rem;
+}
+
+.archive-about-profile-link--photo .archive-about-photo-frame,
+.archive-about-profile-link--name .archive-about-name-en,
+.archive-about-profile-link--name .archive-about-name-zh {
+    transition: transform 0.2s ease, color 0.2s ease, filter 0.2s ease;
+}
+
+.archive-about-profile-link:hover .archive-about-photo-frame,
+.archive-about-profile-link:focus-visible .archive-about-photo-frame {
+    transform: translateY(-3px);
+    filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.32));
+}
+
+.archive-about-profile-link--name:hover .archive-about-name-en,
+.archive-about-profile-link--name:focus-visible .archive-about-name-en,
+.archive-about-profile-link--name:hover .archive-about-name-zh,
+.archive-about-profile-link--name:focus-visible .archive-about-name-zh {
+    color: #f2bc8e;
+}
+
+.archive-about-profile-link:focus-visible {
+    box-shadow: 0 0 0 3px rgba(242, 188, 142, 0.32);
+}
+
+.archive-about-planner-branches {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 4rem);
+    width: min(980px, 100%);
+    margin-top: clamp(2rem, 5vw, 3.5rem);
+}
+
+.archive-about-planner {
+    min-height: 0;
+}
+
+.archive-about-photo-frame {
+    width: min(100%, 220px);
+    aspect-ratio: 1 / 1;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 50%;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.archive-about-director .archive-about-photo-frame {
+    width: min(100%, 240px);
+}
+
+.archive-about-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+    display: block;
+}
+
+.archive-about-planner .archive-about-photo-frame img {
+    object-position: center 15%;
+}
+
+.archive-about-person-info {
+    width: 100%;
+    padding-top: 1.25rem;
+    text-align: center;
+}
+
+.archive-about-role {
+    margin: 0 0 0.65rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.92rem, 1.35vw, 1.08rem);
+    line-height: 1.28;
+    font-weight: 600;
+    color: #f2bc8e;
+    text-shadow: 0 0 10px rgba(223, 125, 56, 0.2);
+}
+
+.archive-about-name-en {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.55rem, 2.35vw, 2.15rem);
+    line-height: 1;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.archive-about-name-zh {
+    margin-top: 0.35rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.12rem, 1.8vw, 1.55rem);
+    line-height: 1.08;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.archive-about-section-header--credits {
+    margin-bottom: clamp(1.5rem, 4vw, 3rem);
+}
+
+.archive-about-credits {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(3rem, 7vw, 7rem);
+    row-gap: clamp(3rem, 6vw, 5.5rem);
+}
+
+.archive-about-credit-group {
+    text-align: center;
+}
+
+.archive-about-credit-group h3 {
+    margin: 0 0 clamp(1rem, 2vw, 1.6rem);
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.12rem, 1.75vw, 1.55rem);
+    line-height: 1.16;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.archive-about-credit-names p {
+    margin: 0.22rem 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1rem, 1.55vw, 1.35rem);
+    line-height: 1.42;
+    font-weight: 400;
+    color: rgba(230, 230, 230, 0.86);
+}
+
+.archive-about-credit-names p + p {
+    font-size: clamp(0.94rem, 1.42vw, 1.22rem);
+    color: rgba(230, 230, 230, 0.76);
+}
+
+.archive-about-thanks {
+    margin: clamp(5rem, 9vw, 8rem) auto 0;
+    width: min(760px, 100%);
+    text-align: center;
+}
+
+.archive-about-thanks h2 {
+    margin: 0 0 1.35rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    color: #df7d38;
+}
+
+.archive-about-thanks-list p {
+    margin: 0.4rem 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+    line-height: 1.28;
+    color: rgba(255, 255, 255, 0.86);
+}
+
+@media (max-width: 920px) {
+    .archive-about-planner-branches,
+    .archive-about-credits {
+        grid-template-columns: 1fr;
+    }
+
+    .archive-about-photo-frame,
+    .archive-about-director .archive-about-photo-frame {
+        width: min(100%, 210px);
+    }
+}
+
+@media (max-width: 560px) {
+    .archive-about-team {
+        padding-inline: 1rem;
+    }
+
+    .archive-about-photo-frame,
+    .archive-about-director .archive-about-photo-frame {
+        width: min(100%, 190px);
+    }
+
+    .archive-about-credit-group {
+        text-align: left;
+    }
+}

@@ -7,12 +7,12 @@ const validAreas = {
     'hong-kong': new Set(['1', '2', '3']),
 };
 
-export default function MRExhibition({ lang }) {
+export default function MRExhibition({ lang, overviewPath = '/info' }) {
     const { campus, area } = useParams();
     const normalizedArea = String(area || '').replace('area-', '');
 
     if (!validAreas[campus]?.has(normalizedArea)) {
-        return <Navigate to="/info" replace />;
+        return <Navigate to={overviewPath} replace />;
     }
 
     return (
@@ -20,6 +20,7 @@ export default function MRExhibition({ lang }) {
             campus={campus}
             area={Number(normalizedArea)}
             lang={lang}
+            overviewPath={overviewPath}
         />
     );
 }

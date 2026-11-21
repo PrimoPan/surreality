@@ -168,7 +168,7 @@ export default function SurrealityOneHome({ lang }) {
                 <EditionPortalLink
                     lang={lang}
                     context="current"
-                    edition="SURREALITY 2.0"
+                    edition={{ en: 'SURREALITY · Central', 'zh-Hans': 'SURREALITY · 香港中环', 'zh-Hant': 'SURREALITY · 香港中環' }[lang]}
                     to="/"
                 />
             </section>
