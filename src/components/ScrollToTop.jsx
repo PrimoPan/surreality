@@ -14,7 +14,7 @@ export default function ScrollToTop() {
     useLayoutEffect(() => {
         const pathChanged = previousPath.current !== pathname;
         previousPath.current = pathname;
-        if (pathname === '/' && hash) {
+        if ((pathname === '/' && hash) || (pathname === '/about' && hash === '#team')) {
             const section = document.getElementById(hash.slice(1));
             if (section) {
                 const scrollToSection = () => section.scrollIntoView({ block: 'start', behavior: 'instant' });

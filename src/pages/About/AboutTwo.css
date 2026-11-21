@@ -37,253 +37,45 @@
     text-underline-offset: 0.2em;
 }
 
-.about-two-team {
-    position: relative;
-    overflow: hidden;
-    background:
-        radial-gradient(circle at 18% 10%, rgba(113, 181, 228, 0.12), transparent 26rem),
-        radial-gradient(circle at 86% 24%, rgba(165, 208, 245, 0.1), transparent 28rem),
-        #111b2a;
-    color: #e6e6e6;
-    padding: clamp(4rem, 8vw, 7rem) 1.5rem clamp(5rem, 9vw, 8rem);
+/* Current Central exhibition credits */
+.central-team {
+    padding: clamp(3rem, 6vw, 6rem) 5.5vw;
+    background: #0e253a;
+    color: #f5f8fc;
     scroll-snap-align: start;
 }
-
-.about-two-team::before,
-.about-two-team::after {
-    content: "";
-    position: absolute;
-    pointer-events: none;
-    border: 1px solid rgba(165, 208, 245, 0.1);
-    border-radius: 50%;
-}
-
-.about-two-team::before {
-    width: 58rem;
-    height: 58rem;
-    top: -25rem;
-    left: -18rem;
-}
-
-.about-two-team::after {
-    width: 70rem;
-    height: 70rem;
-    right: -24rem;
-    bottom: -30rem;
-    box-shadow:
-        0 0 0 1.25rem rgba(113, 181, 228, 0.035),
-        0 0 0 2.8rem rgba(165, 208, 245, 0.028);
-}
-
-.about-two-shell {
-    position: relative;
-    z-index: 1;
-    width: min(1180px, 100%);
-    margin: 0 auto;
-}
-
-.about-two-section-header {
-    text-align: center;
-    margin-bottom: clamp(2rem, 5vw, 4rem);
-}
-
-.about-two-section-header p {
-    margin: 0 0 0.65rem;
-    font-family: 'Poppins', sans-serif;
-    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+.central-team__inner { max-width: 1160px; margin: 0 auto; }
+.central-team__inner > h2 {
+    margin: 0 0 clamp(1.6rem, 4vw, 3rem);
+    font-size: clamp(2rem, 4vw, 3.8rem);
     font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #87bdea;
+    line-height: 1.15;
+    letter-spacing: -.025em;
 }
-
-.about-two-section-header h2 {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(2.4rem, 6vw, 5.2rem);
-    line-height: 0.98;
-    font-weight: 800;
-    letter-spacing: 0;
-    color: #ffffff;
-    text-shadow: 0 0 22px rgba(113, 181, 228, 0.18);
-}
-
-.about-two-featured {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: clamp(4rem, 8vw, 7rem);
-}
-
-.about-two-person-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 0;
-    overflow: visible;
-    position: relative;
-    isolation: isolate;
-    padding: 0;
-    background: transparent;
-    border: 0;
-    box-shadow: none;
-}
-
-.about-two-director {
-    width: min(420px, 100%);
-}
-
-.about-two-profile-link {
-    color: inherit;
-    text-decoration: none;
-    outline: none;
-}
-
-.about-two-profile-link--photo {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    border-radius: 50%;
-}
-
-.about-two-profile-link--name {
-    display: inline-block;
-    border-radius: 0.35rem;
-}
-
-.about-two-profile-link--photo .about-two-photo-frame,
-.about-two-profile-link--name .about-two-name-en,
-.about-two-profile-link--name .about-two-name-zh {
-    transition: transform 0.2s ease, color 0.2s ease, filter 0.2s ease;
-}
-
-.about-two-profile-link:hover .about-two-photo-frame,
-.about-two-profile-link:focus-visible .about-two-photo-frame {
-    transform: translateY(-3px);
-    filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.32));
-}
-
-.about-two-profile-link--name:hover .about-two-name-en,
-.about-two-profile-link--name:focus-visible .about-two-name-en,
-.about-two-profile-link--name:hover .about-two-name-zh,
-.about-two-profile-link--name:focus-visible .about-two-name-zh {
-    color: #a5d0f5;
-}
-
-.about-two-profile-link:focus-visible {
-    box-shadow: 0 0 0 3px rgba(165, 208, 245, 0.32);
-}
-
-.about-two-planner-branches {
-    position: relative;
+.central-team__group {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(1.5rem, 4vw, 4rem);
-    width: min(980px, 100%);
-    margin-top: clamp(2rem, 5vw, 3.5rem);
+    grid-template-columns: minmax(0, .75fr) minmax(0, 1.65fr);
+    gap: clamp(1.2rem, 4vw, 4rem);
+    align-items: center;
+    padding: clamp(1.2rem, 2.5vw, 2.1rem) 0;
+    border-top: 1px solid #55728b80;
 }
-
-.about-two-planner {
-    min-height: 0;
+.central-team__group h3 { margin: 0; font-weight: 600; font-size: clamp(1.1rem, 1.6vw, 1.5rem); line-height: 1.3; }
+.central-team__group h3 small,
+.central-team__name > span { display: block; color: #afc9df; font-weight: 400; line-height: 1.45; margin-top: .28rem; }
+.central-team__group h3 small { font-size: .92rem; }
+.central-team__group ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
+.central-team__group li { display: flex; align-items: center; gap: 1rem; min-width: 0; }
+.central-team__group img { width: clamp(3.5rem, 6vw, 5rem); height: auto; aspect-ratio: 1; object-fit: cover; object-position: center 22%; border-radius: 50%; }
+.central-team__name strong { font-size: clamp(1.06rem, 1.75vw, 1.55rem); line-height: 1.3; font-weight: 600; }
+.central-team__group a { color: inherit; text-decoration: none; }
+.central-team__group a:hover strong, .central-team__group a:focus-visible strong { text-decoration: underline; text-underline-offset: .16em; }
+@media (max-width: 780px) {
+    .central-team__group { grid-template-columns: 1fr; gap: 1rem; }
 }
-
-.about-two-photo-frame {
-    width: min(100%, 220px);
-    aspect-ratio: 1 / 1;
-    margin: 0;
-    overflow: hidden;
-    border-radius: 50%;
-    background: transparent;
-    border: 0;
-    box-shadow: none;
-}
-
-.about-two-director .about-two-photo-frame {
-    width: min(100%, 240px);
-}
-
-.about-two-photo-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 18%;
-    display: block;
-}
-
-.about-two-planner .about-two-photo-frame img {
-    object-position: center 15%;
-}
-
-.about-two-person-info {
-    width: 100%;
-    padding-top: 1.25rem;
-    text-align: center;
-}
-
-.about-two-role {
-    margin: 0 0 0.65rem;
-    font-family: 'Poppins', sans-serif;
-    font-size: clamp(0.92rem, 1.35vw, 1.08rem);
-    line-height: 1.28;
-    font-weight: 600;
-    color: #a5d0f5;
-    text-shadow: 0 0 10px rgba(113, 181, 228, 0.2);
-}
-
-.about-two-name-en {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(1.55rem, 2.35vw, 2.15rem);
-    line-height: 1;
-    font-weight: 800;
-    color: #ffffff;
-}
-
-.about-two-name-zh {
-    margin-top: 0.35rem;
-    font-family: 'Poppins', sans-serif;
-    font-size: clamp(1.12rem, 1.8vw, 1.55rem);
-    line-height: 1.08;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.about-two-section-header--credits {
-    margin-bottom: clamp(1.5rem, 4vw, 3rem);
-}
-
-.about-two-credits {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: clamp(3rem, 7vw, 7rem);
-    row-gap: clamp(3rem, 6vw, 5.5rem);
-}
-
-.about-two-credit-group {
-    text-align: center;
-}
-
-.about-two-credit-group h3 {
-    margin: 0 0 clamp(1rem, 2vw, 1.6rem);
-    font-family: 'Poppins', sans-serif;
-    font-size: clamp(1.12rem, 1.75vw, 1.55rem);
-    line-height: 1.16;
-    font-weight: 600;
-    color: #ffffff;
-}
-
-.about-two-credit-names p {
-    margin: 0.22rem 0;
-    font-family: 'Poppins', sans-serif;
-    font-size: clamp(1rem, 1.55vw, 1.35rem);
-    line-height: 1.42;
-    font-weight: 400;
-    color: rgba(230, 230, 230, 0.86);
-}
-
-.about-two-credit-names p + p {
-    font-size: clamp(0.94rem, 1.42vw, 1.22rem);
-    color: rgba(230, 230, 230, 0.76);
+@media (max-width: 560px) {
+    .central-team__group ul { grid-template-columns: 1fr; gap: 1.05rem; }
+    .central-team__group img { width: 3.7rem; }
 }
 
 .about-two-thanks {
@@ -306,31 +98,4 @@
     font-size: clamp(1.25rem, 2.2vw, 1.85rem);
     line-height: 1.28;
     color: rgba(255, 255, 255, 0.86);
-}
-
-@media (max-width: 920px) {
-    .about-two-planner-branches,
-    .about-two-credits {
-        grid-template-columns: 1fr;
-    }
-
-    .about-two-photo-frame,
-    .about-two-director .about-two-photo-frame {
-        width: min(100%, 210px);
-    }
-}
-
-@media (max-width: 560px) {
-    .about-two-team {
-        padding-inline: 1rem;
-    }
-
-    .about-two-photo-frame,
-    .about-two-director .about-two-photo-frame {
-        width: min(100%, 190px);
-    }
-
-    .about-two-credit-group {
-        text-align: left;
-    }
 }
