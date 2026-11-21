@@ -97,14 +97,21 @@ export default function CentralWorks({ lang = 'en' }) {
                             aria-label={copy.close} onClick={close}>
                             <X size={23} aria-hidden="true" />
                         </button>
-                        <div className="central-artwork-dialog__image">
-                            <img src={assetUrl(selected)} alt={centralArtworkText(selected, 'title', lang)} />
-                        </div>
-                        <div className="central-artwork-dialog__text">
-                            {selected.year && <p className="central-artwork-dialog__year">{selected.year}</p>}
-                            <h2 id="central-artwork-title">{centralArtworkText(selected, 'title', lang)}</h2>
-                            <p className="central-catalogue__artists">{centralArtworkText(selected, 'artist', lang)}</p>
-                            <p className="central-artwork-dialog__description">{centralArtworkText(selected, 'description', lang)}</p>
+                        <div className="central-artwork-dialog__body" tabIndex={0}
+                            role="region" aria-labelledby="central-artwork-title">
+                            <div className="central-artwork-dialog__image">
+                                <img src={assetUrl(selected)} alt={centralArtworkText(selected, 'title', lang)} />
+                            </div>
+                            <div className="central-artwork-dialog__text">
+                                {selected.year && <p className="central-artwork-dialog__year">{selected.year}</p>}
+                                <h2 id="central-artwork-title">{centralArtworkText(selected, 'title', lang)}</h2>
+                                <p className="central-catalogue__artists">{centralArtworkText(selected, 'artist', lang)}</p>
+                                <div className="central-artwork-dialog__description">
+                                    {centralArtworkText(selected, 'description', lang).split(/\n\n+/).map((paragraph, i) => (
+                                        <p key={i}>{paragraph}</p>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </>
                 )}

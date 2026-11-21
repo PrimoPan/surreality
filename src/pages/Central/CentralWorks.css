@@ -115,30 +115,41 @@
 html:has(.central-artwork-overlay) { overflow-y: hidden; }
 .central-artwork-dialog {
     position: relative;
-    display: grid;
-    grid-template-columns: 1.08fr 1fr;
     width: min(100%, 1040px);
     max-height: 88vh;
     max-height: 88dvh;
-    overflow-y: auto;
-    overscroll-behavior: contain;
+    overflow: hidden;
     background: #183a58;
     color: #f5f9ff;
     border: 1px solid #748baa66;
     border-radius: 10px;
     outline: 0;
 }
+.central-artwork-dialog__body {
+    display: grid;
+    grid-template-columns: 1fr 1.08fr;
+    max-height: inherit;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+.central-artwork-dialog__body:focus-visible {
+    outline: 2px solid #9bd0ff;
+    outline-offset: -3px;
+}
 .central-artwork-dialog__image {
     display: grid;
-    place-items: center;
+    place-items: start center;
     min-width: 0;
     min-height: 300px;
     background: #102b44;
 }
 .central-artwork-dialog__image img {
+    position: sticky;
+    top: 0;
     display: block;
     width: 100%;
     max-height: 80vh;
+    max-height: 80dvh;
     object-fit: contain;
 }
 .central-artwork-dialog__text {
@@ -160,9 +171,18 @@ html:has(.central-artwork-overlay) { overflow-y: hidden; }
     margin-top: 1.5rem;
     font-size: clamp(1rem, 1.25vw, 1.15rem);
     line-height: 1.75;
+    overflow-wrap: break-word;
+}
+.central-artwork-dialog__description p {
+    margin: 0;
+    white-space: pre-line;
+}
+.central-artwork-dialog__description p + p {
+    margin-top: 1em;
 }
 .central-artwork-dialog__close {
     position: absolute;
+    z-index: 1;
     top: .7rem;
     right: .7rem;
     display: grid;
@@ -182,9 +202,9 @@ html:has(.central-artwork-overlay) { overflow-y: hidden; }
     .central-catalogue { padding-inline: 1.2rem; }
     .central-catalogue__grid { gap: 2rem 1rem; }
     .central-catalogue__header { align-items: start; }
-    .central-artwork-dialog { display: block; }
+    .central-artwork-dialog__body { display: block; }
     .central-artwork-dialog__image { min-height: 0; }
-    .central-artwork-dialog__image img { height: 38vh; height: 38dvh; }
+    .central-artwork-dialog__image img { position: static; height: 38vh; height: 38dvh; }
     .central-artwork-dialog__text { padding: 1.5rem; }
 }
 @media (max-width: 480px) {

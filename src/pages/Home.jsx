@@ -11,7 +11,7 @@ import './Home.css';
 
 const featured = ['an-orbit-of-sound', 'a-memory-of-the-stars', 'light-takes-form']
     .map(id => works.find(work => work.id === id));
-const poster = '/images/central/harbour-poster.webp';
+const poster = '/images/central/harbour-poster.webp?v=556fd704';
 
 function FilmHero({ copy }) {
     const [filmOpen, setFilmOpen] = useState(false);
@@ -31,7 +31,7 @@ function FilmHero({ copy }) {
         if (previewEnabled && !filmOpen && inView) {
             if (!video.getAttribute('src')) {
                 const portrait = window.matchMedia('(max-width: 768px) and (orientation: portrait)').matches;
-                video.src = portrait ? '/video/central/harbour-preview-mobile.mp4' : '/video/central/harbour-preview.mp4';
+                video.src = portrait ? '/video/central/harbour-preview-mobile.mp4?v=556fd704' : '/video/central/harbour-preview.mp4?v=556fd704';
             }
             video.play().catch(() => { if (active) setPreviewEnabled(false); });
         } else {
@@ -64,7 +64,7 @@ function FilmHero({ copy }) {
             <Modal isOpen={filmOpen} onRequestClose={() => setFilmOpen(false)} contentLabel={copy.film}
                 className="central-film-dialog" overlayClassName="central-film-overlay">
                 <div className="central-film-bar">
-                    <p>{copy.credit}</p>
+                    <p>{copy.filmTitle}</p>
                     <button type="button" aria-label={copy.close} onClick={() => setFilmOpen(false)}><X /></button>
                 </div>
                 {filmOpen && <video src={filmUrl} controls autoPlay playsInline poster={poster} aria-label={copy.film} />}
